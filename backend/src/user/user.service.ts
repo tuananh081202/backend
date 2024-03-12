@@ -1,20 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { FilterUserDto } from './dto/filter-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-
+import * as fs from 'fs'
 
 @Injectable()
 export class UserService {
-   
-    constructor(
-        @InjectRepository(User) private UserRepository:Repository<User>
-    ){}
 
-    async create(CreateUserDto: CreateUserDto):Promise<User>{
+    constructor(
+        @InjectRepository(User) private UserRepository: Repository<User>
+    ) { }
+
+    async create(CreateUserDto: CreateUserDto): Promise<User> {
         return await this.UserRepository.save(CreateUserDto)
     }
 
@@ -61,15 +61,34 @@ export class UserService {
         return await this.UserRepository.findOneBy({ id })
     }
 
-    async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<UpdateResult> {
-        return await this.UserRepository.update(id, updateUserDto)
+    async update(id: number, UpdateUserDto: UpdateUserDto): Promise<UpdateResult> {
+        const user = await this.UserRepository.findOneBy({ id })
+        if (!user) {
+            throw new NotFoundException('Không cập nhật được nhân viên')
+        }
+        if (UpdateUserDto.image) {
+            const imagePath = user.image
+            if (fs.existsSync(imagePath)) {
+
+                fs.unlinkSync(imagePath);
+            }
+        }
+        return await this.UserRepository.update(id, UpdateUserDto)
     }
 
-    async deleteUser(id:number):Promise<DeleteResult>{
-        return await this.UserRepository.softDelete(id);
+    async deleteUser(id: number): Promise<DeleteResult> {
+        const user = await this.UserRepository.findOneBy({ id });
+        if (!user) {
+            throw new NotFoundException('Không xóa được nhân viên')
+        }
+        const imagePath = user.image;
+        if (fs.existsSync(imagePath)) {
 
+            fs.unlinkSync(imagePath);
+        }
+        return await this.UserRepository.softDelete({ id })
     }
 
-   
+
 
 }
