@@ -45,7 +45,7 @@ export class EmployeetypeService {
               'employeetype.id',
               'employeetype.MaLoai',
               'employeetype.LoaiNV',
-              'employeetype.decription',
+              'employeetype.description',
               'employeetype.createdBy',
               'employeetype.created_at',
               'employeetype.updated_at'
