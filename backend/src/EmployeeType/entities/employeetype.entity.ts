@@ -1,21 +1,15 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
-export class Position {
+export class EmployeeType {
     @PrimaryGeneratedColumn()
     id:number
 
     @Column()
-    maCV:string
+    MaLoai:string
 
     @Column()
-    namePosition:string
-
-    @Column()
-    degree:string
-
-    @Column()
-    salary:number
+    LoaiNV:string
 
     @Column()
     description:string
@@ -28,7 +22,9 @@ export class Position {
 
     @UpdateDateColumn()
     updated_at:Date
-    
+
     @DeleteDateColumn()
     deleted_at:Date
+
+
 }
