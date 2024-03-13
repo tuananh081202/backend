@@ -24,8 +24,8 @@ chức vụ :
 +bảng lương:stt,mã lương,tên nhân viên,chức vụ,lương tháng,ngày công,thực lãnh,ngày chấm,chi tiết,xóa
 +tính lương
 -quản lý công tác: 
-+tạo công tác:mã công tác,chọn nhân viên,ngày bắt đầu,ngày kết thúc,địa điểm công tác,mục đích công tác,ghi chú,người tạo,ngày tạo
-+danh sách công tác
++tạo công tác:mã công tác,mã nhân viên,ngày bắt đầu,ngày kết thúc,địa điểm công tác,mục đích công tác,ghi chú,người tạo,ngày tạo
++List danh sách công tác:stt,mã nhân viên,tên nhân viên,chức vụ,ngày bắt đầu,ngày kết thúc,địa điểm,mục đích,trạng thái,sửa,xóa
 -Nhóm nhân viên:
 +tạo nhóm:mã nhóm,tên nhóm,mô tả,người tạo ,ngày tạo
 +Danh sách nhóm:mã nv ,ảnh ,tên nhân viên,giới tính,năm sinh,chức vụ,ngày thêm,trạng thái

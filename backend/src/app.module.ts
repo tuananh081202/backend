@@ -8,10 +8,9 @@ import { AccountModule } from './account/account.module';
 import { AuthModule } from './auth/auth.module';
 import { PositionModule } from './position/position.module';
 import { EmployeetypeModule } from './EmployeeType/employeetype.module';
-
 import { DepartmentModule } from './department/department.module';
-
 import { SalaryModule } from './salary/salary.module';
+import { TripModule } from './trip/trip.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(dataSourceOptions),
@@ -22,8 +21,9 @@ import { SalaryModule } from './salary/salary.module';
     EmployeetypeModule,
     DepartmentModule,
     SalaryModule,
+    TripModule,
   ],
-  controllers: [AppController ],
-  providers: [AppService ],
+  controllers: [AppController,  ],
+  providers: [AppService,  ],
 })
 export class AppModule {}

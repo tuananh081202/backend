@@ -1,5 +1,6 @@
 import { Account } from "src/account/entities/account.entity";
 import { Salary } from "src/salary/entities/salary.entity";
+import { Trip } from "src/trip/entities/trip.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
@@ -43,5 +44,6 @@ export class User{
     @OneToMany(() => Salary, (salary) => salary.user)
     salary: Salary[];
 
-    
+    @OneToMany(() => Trip, (trip) => trip.user)
+    trip: Trip[];
 }

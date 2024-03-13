@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Salary } from "src/salary/entities/salary.entity";
+import { Trip } from "src/trip/entities/trip.entity";
 
 @Entity()
 export class Position {
@@ -35,4 +36,7 @@ export class Position {
 
     @OneToMany(() => Salary, (salary) => salary.position)
     salarys: Salary;
+
+    @OneToMany(() => Trip, (trip) => trip.position)
+    trip: Trip;
 }

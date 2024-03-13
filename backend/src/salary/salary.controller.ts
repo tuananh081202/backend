@@ -2,10 +2,11 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/
 import { SalaryService } from './salary.service';
 import { CreateSalaryDto } from './dto/create-salary.dto';
 import { Salary } from './entities/salary.entity';
-import { query } from 'express';
 import { FilterSalaryDto } from './dto/filter-salary.dto';
 import { UpdateSalaryDto } from './dto/update-salary.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Salary')
 @Controller('salary')
 export class SalaryController {
     constructor(private salaryService: SalaryService) { }
