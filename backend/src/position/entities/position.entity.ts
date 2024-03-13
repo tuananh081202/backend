@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Salary } from "src/salary/entities/salary.entity";
 
 @Entity()
 export class Position {
@@ -31,4 +32,7 @@ export class Position {
     
     @DeleteDateColumn()
     deleted_at:Date
+
+    @OneToMany(() => Salary, (salary) => salary.position)
+    salarys: Salary;
 }

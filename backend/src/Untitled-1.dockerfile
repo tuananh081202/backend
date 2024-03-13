@@ -19,7 +19,10 @@ chức vụ :
 +thêm mới nhân viên
 +danh sách nhân viên
 -quản lý phòng ban:thêm,xóa phòng ban,danh sách phòng ban
--quản lý lương:bảng tính lương,tính lương
+-quản lý lương:
++tạo bảng tính lương:mã lương,nhân viên,số ngày công,phụ cấp,tạm ứng,ngày tính lương,mô tả,người tạo,ngày tạo
++bảng lương:stt,mã lương,tên nhân viên,chức vụ,lương tháng,ngày công,thực lãnh,ngày chấm,chi tiết,xóa
++tính lương
 -quản lý công tác: 
 +tạo công tác:mã công tác,chọn nhân viên,ngày bắt đầu,ngày kết thúc,địa điểm công tác,mục đích công tác,ghi chú,người tạo,ngày tạo
 +danh sách công tác
