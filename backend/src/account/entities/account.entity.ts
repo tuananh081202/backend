@@ -23,6 +23,9 @@ export class Account{
     @Column({nullable:true ,default:null})
     refresh_token: string;
 
+    @Column({nullable:true ,default:null})
+    reset_password_token:string
+
     @Column()
     roles:string
 

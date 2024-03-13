@@ -1,9 +1,12 @@
-import { Body, Controller, Post ,UsePipes,ValidationPipe} from '@nestjs/common';
+import { Body, Controller, Patch, Post ,UsePipes,ValidationPipe} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { RegisterAccountDto } from './dto/register-account.dto';
 import { Account } from 'src/account/entities/account.entity';
 import { LoginAccountDto } from './dto/login-account.dto';
+import { RequestResetPasswordDto } from './dto/request-reset-password.dto';
+import {  ResetPasswordDto } from './dto/reset-password.dto';
+// import { ChangePasswordAccountDto } from './dto/changePassword-account.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -30,4 +33,20 @@ export class AuthController {
         console.log('refresh token api')
         return this.authService.refreshToken(refresh_token);
     }
+
+    // @Post('change-password')
+    // async changePassword(@Body() ChangePasswordAccountDto:ChangePasswordAccountDto):Promise<any>{
+    //     return await this.authService.changePassword(1,ChangePasswordAccountDto)
+    // }
+    @Patch('request-reset-password')
+    requestResetPassword(@Body() requestResetPasswordDto:RequestResetPasswordDto):Promise<void>{
+        return this.authService.requestResetPassword(requestResetPasswordDto)
+    }
+    
+    // @Patch('reset-password')
+    // resetPassword(@Body() resetPasswordDto:ResetPasswordDto):Promise<void>{
+    //     return this.authService.resetPassword(resetPasswordDto)
+        
+    // }
+    
 }

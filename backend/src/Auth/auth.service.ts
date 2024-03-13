@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -7,6 +7,11 @@ import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { RegisterAccountDto } from './dto/register-account.dto';
 import { LoginAccountDto } from './dto/login-account.dto';
+import { RequestResetPasswordDto } from './dto/request-reset-password.dto';
+// import { ChangePasswordAccountDto } from './dto/changePassword-account.dto';
+import {v4} from 'uuid'
+import { ResetPasswordDto } from './dto/reset-password.dto';
+
 
 @Injectable()
 export class AuthService {
@@ -84,4 +89,66 @@ export class AuthService {
         return hash;
 
     }
+
+    // async changePassword(userId: number, changePasswordDto: ChangePasswordAccountDto): Promise<any> {
+    //     try {
+    //       const account = await this.accountRepository.findOneOrFail({where:{id:userId}});
+    
+    //       // Validate current password
+    //       const isCurrentPasswordMatch = await bcrypt.compare(changePasswordDto.currentPassword, account.password);
+    //       if (!isCurrentPasswordMatch) {
+    //         throw new HttpException('Current password is incorrect', HttpStatus.UNAUTHORIZED);
+    //       }
+    
+    //       // Validate new password and confirm password
+    //       if (changePasswordDto.newPassword !== changePasswordDto.confirmPassword) {
+    //         throw new HttpException('New password and confirm password do not match', HttpStatus.BAD_REQUEST);
+    //       }
+    
+    //       // Hash the new password
+    //       const hashedNewPassword = await bcrypt.hash(changePasswordDto.newPassword, 10);
+    
+    //       // Update account with new password
+    //       account.password = hashedNewPassword;
+    //       await this.accountRepository.save(account);
+    //     } catch (error) {
+    //       if (error.name === 'EntityNotFound') {
+    //         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    //       } else {
+    //         // Handle other potential errors (e.g., database errors)
+    //         throw new HttpException('An error occurred during password change', HttpStatus.INTERNAL_SERVER_ERROR);
+    //       }
+    //     }
+    // }
+    async requestResetPassword(requestResetPasswordDto: RequestResetPasswordDto): Promise<void> {
+        try {
+          const account = await this.accountRepository.findOne({ where: { email: requestResetPasswordDto.email } });
+    
+          if (!account) {
+            throw new HttpException('Email not found', HttpStatus.NOT_FOUND);
+          }
+    
+          // Generate a secure random token (e.g., using UUID v4)
+          const resetToken = v4();
+    
+          // Update account with reset token and timestamp
+          account.reset_password_token = resetToken;
+          
+          await this.accountRepository.save(account);
+    
+          // Send password reset email to the user
+          // (This implementation is not included here, but you'll need to use an email service)
+          // ... send email notification with reset link ...
+    
+        } catch (error) {
+          // Handle errors appropriately (e.g., database errors)
+          throw new HttpException('An error occurred during password reset', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+      }
+    
+    
+
+   
+
+
 }
