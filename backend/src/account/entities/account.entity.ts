@@ -32,7 +32,7 @@ export class Account{
     @Column()
     status:number
 
-    @ManyToOne(() => User, user => user.account,{
+    @ManyToOne(() => User, (user) => user.account,{
         onDelete:'CASCADE'
     })
     user: User;

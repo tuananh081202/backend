@@ -1,3 +1,4 @@
+import {  GroupUser } from "src/GroupUser/entities/groupuser.entity";
 import { Account } from "src/account/entities/account.entity";
 import { Salary } from "src/salary/entities/salary.entity";
 import { Trip } from "src/trip/entities/trip.entity";
@@ -46,4 +47,7 @@ export class User{
 
     @OneToMany(() => Trip, (trip) => trip.user)
     trip: Trip[];
+
+    @OneToMany(() => GroupUser, (groupuser) => groupuser.user)
+    groupuser: GroupUser[];
 }

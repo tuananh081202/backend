@@ -38,6 +38,7 @@ export class AuthController {
     // async changePassword(@Body() ChangePasswordAccountDto:ChangePasswordAccountDto):Promise<any>{
     //     return await this.authService.changePassword(1,ChangePasswordAccountDto)
     // }
+    
     @Patch('request-reset-password')
     requestResetPassword(@Body() requestResetPasswordDto:RequestResetPasswordDto):Promise<void>{
         return this.authService.requestResetPassword(requestResetPasswordDto)

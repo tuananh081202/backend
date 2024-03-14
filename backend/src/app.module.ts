@@ -11,7 +11,7 @@ import { EmployeetypeModule } from './EmployeeType/employeetype.module';
 import { DepartmentModule } from './department/department.module';
 import { SalaryModule } from './salary/salary.module';
 import { TripModule } from './trip/trip.module';
-
+import { GroupuserModule } from './GroupUser/groupuser.module';
 @Module({
   imports: [TypeOrmModule.forRoot(dataSourceOptions),
     UserModule,
@@ -22,8 +22,9 @@ import { TripModule } from './trip/trip.module';
     DepartmentModule,
     SalaryModule,
     TripModule,
+    GroupuserModule,
   ],
-  controllers: [AppController,  ],
+  controllers: [AppController ],
   providers: [AppService,  ],
 })
 export class AppModule {}

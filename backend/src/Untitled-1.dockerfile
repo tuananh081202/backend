@@ -8,6 +8,7 @@ SERVICE:xử lý logic liên quan đến dữ liệu
 
 
 website quản lý nhân sự
+*ADMIN(QUẢN TRỊ VIÊN)
 -quản lý nhân viên
 chức vụ :
 +thêm chức vụ :mã chức vụ,tên chức vụ,lương ,mô tả,người tạo
@@ -25,6 +26,7 @@ chức vụ :
 +tính lương
 -quản lý công tác: 
 +tạo công tác:mã công tác,mã nhân viên,ngày bắt đầu,ngày kết thúc,địa điểm công tác,mục đích công tác,ghi chú,người tạo,ngày tạo
+(ngày công tác phải lớn hơn ngày hiện tại)
 +List danh sách công tác:stt,mã nhân viên,tên nhân viên,chức vụ,ngày bắt đầu,ngày kết thúc,địa điểm,mục đích,trạng thái,sửa,xóa
 -Nhóm nhân viên:
 +tạo nhóm:mã nhóm,tên nhóm,mô tả,người tạo ,ngày tạo
@@ -40,3 +42,18 @@ chức vụ :
 -thống kê
 +Danh sách nhân viên
 +Danh sách tài khoản
+
+*NHÂN VIÊN
+-quản lý phòng ban
+-lương cá nhân
++Thông tin nhân viên
++Bảng lương nhân viên
+-Lịch công tác:
++Danh sách công tác
+-Nhóm nhân viên:
++Danh sách nhóm nhân viên
+-Tài khoản:
++Thông tin tài khoản
++Thông tin cá nhân
++Đổi mật khẩu
++Đăng xuất   

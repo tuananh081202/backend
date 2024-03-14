@@ -7,7 +7,7 @@ import { FilterTripDto } from './dto/filter-trip.dto';
 import { Trip } from './entities/trip.entity';
 import { UpdateTripDto } from './dto/update-trip.dto';
 
-@ApiTags('Trip')
+@ApiTags('Công tác')
 @Controller('trip')
 export class TripController {
     constructor(private tripService:TripService){}
