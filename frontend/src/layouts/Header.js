@@ -10,11 +10,12 @@ const Header = () => {
         localStorage.removeItem('refresh_token');
         navigate('/login');//chuyển hướng đăng nhập sang trang an toàn 
     }
+    
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 
-                <Link to='/' className="navbar-brand ps-3" > Quản lý nhân sự </Link>
+                <Link to='/' className="navbar-brand ps-5" > Quản lý nhân sự </Link>
 
                 <button className="btn btn-link btn-sm order-6 order-lg-0 me-6 me-lg-3" id="sidebarToggle" ><i className="fa-solid fa-bars"></i></button>
 
@@ -32,7 +33,7 @@ const Header = () => {
 
                         <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><Link to='/profile' className="dropdown-item" ><i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile </Link></li>
-                            <li><Link to='/login' className="dropdown-item" ><i className="fa-solid fa-gears"></i> Settings </Link></li>
+                            <li><Link to='/login' className="dropdown-item" onClick={onHandleLogout}><i className="fa-solid fa-gears"></i> Settings </Link></li>
                             <li><Link to='/activitylog' className="dropdown-item" ><i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> Activity Log </Link></li>
                             <li><hr className="dropdown-divider" /></li>
                             <li><Link to='/login' className="dropdown-item" onClick={onHandleLogout}><i className="fa-solid fa-right-from-bracket"></i> Logout </Link></li>

@@ -3,6 +3,7 @@ import React from 'react'
 const Dashboard = () => {
     return (
         <div id="layoutSidenav_content">
+
             <main>
                 <div className="container-fluid px-4">
                     <h1 className="mt-4">Dashboard</h1>
@@ -556,6 +557,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
+              
             </main>
             <footer className="py-4 bg-light mt-auto">
                 <div className="container-fluid px-4">

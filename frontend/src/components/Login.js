@@ -72,7 +72,7 @@ const Login = () => {
                         )
                     }
                 } else {
-                    toast.error("Server is down.Please try again !", { position: "top-center" })
+                    toast.error("Máy chủ không hoạt động.Vui lòng thử lại !", { position: "top-center" })
                 }
             })
         }
@@ -87,24 +87,24 @@ const Login = () => {
                         <div className="row justify-content-center">
                             <div className="col-lg-5">
                                 <div className="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div className="card-header"><h3 className="text-center font-weight-light my-4">Login</h3></div>
+                                    <div className="card-header"><h3 className="text-center font-weight-light my-4">Đăng nhập</h3></div>
                                     <div className="card-body">
                                         <form>
                                             <div className="form-floating mb-3">
                                                 <input className="form-control" name="email" type="email" onChange={onChange} placeholder="name@example.com" />
-                                                <label >Email address</label>
+                                                <label >Nhập email</label>
                                                 {formErrors.email && <p style={{ color: 'red' }}>{formErrors.email}</p>}
 
                                             </div>
                                             <div className="form-floating mb-3">
                                                 <input className="form-control" type="password" name="password" onChange={onChange} placeholder="Password" />
-                                                <label >Password</label>
+                                                <label >Nhập mật khẩu</label>
                                                 {formErrors.password && <p style={{ color: 'red' }}>{formErrors.password}</p>}
 
                                             </div>
                                             <div className="form-check mb-3">
                                                 <input className="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
-                                                <label className="form-check-label" for="inputRememberPassword">Remember Password</label>
+                                                <label className="form-check-label" for="inputRememberPassword">Ghi nhớ mật khẩu </label>
                                             </div>
                                             <div className=" mt-4 mb-0">
                                                 <button className="btn btn-primary btn-block" type='button' onClick={onSubmit}>Login</button>
@@ -121,9 +121,9 @@ const Login = () => {
                                     </div>
 
                                     <div className="card-footer text-center py-3">
-                                        <a className="small" href="password.html">Forgot Password?</a>
+                                        <a className="small" href="password.html">Quên mật khẩu?</a>
                                         <hr />
-                                        <div className="small"><Link to='/register'> Need an account? Sign up!</Link></div>
+                                        <div className="small"><Link to='/register'> Cần một tài khoản? Đăng ký!</Link></div>
                                     </div>
                                 </div>
                             </div>
