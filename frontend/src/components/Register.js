@@ -2,75 +2,86 @@ import React from 'react'
 
 const Register = () => {
     return (
-        <div id='layoutAuthentication' className='bg-gradient-primary'>
-
-            <div id='layoutAuthentication_content'>
+        <div id="layoutAuthentication" className='bg-primary'>
+            <div id="layoutAuthentication_content">
                 <main>
                     <div className="container">
-
-                        <div className="card o-hidden border-0 shadow-lg my-5">
-                            <div className="card-body p-0">
-
-                                <div className="row">
-                                    <div className="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                                    <div className="col-lg-7">
-                                        <div className="p-5">
-                                            <div className="text-center">
-                                                <h1 className="h4 text-gray-900 mb-4">Create an Account!</h1>
-                                            </div>
-                                            <form className="user">
-                                                <div className="form-group row">
-                                                    <div className="col-sm-6 mb-3 mb-sm-0">
-                                                        <input type="text" className="form-control form-control-user" id="exampleFirstName"
-                                                            placeholder="First Name" />
-                                                    </div>
-                                                    <div className="col-sm-6">
-                                                        <input type="text" className="form-control form-control-user" id="exampleLastName"
-                                                            placeholder="Last Name" />
+                        <div className="row justify-content-center">
+                            <div className="col-lg-7">
+                                <div className="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div className="card-header"><h3 className="text-center font-weight-light my-4">Create an Account</h3></div>
+                                    <div className="card-body">
+                                        <form>
+                                            <div className="row mb-3">
+                                                <div className="col-md-6">
+                                                    <div className="form-floating mb-3 mb-md-0">
+                                                        <input className="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" />
+                                                        <label for="inputFirstName">First name</label>
                                                     </div>
                                                 </div>
-                                                <div className="form-group">
-                                                    <input type="email" className="form-control form-control-user" id="exampleInputEmail"
-                                                        placeholder="Email Address" />
-                                                </div>
-                                                <div className="form-group row">
-                                                    <div className="col-sm-6 mb-3 mb-sm-0">
-                                                        <input type="password" className="form-control form-control-user"
-                                                            id="exampleInputPassword" placeholder="Password" />
-                                                    </div>
-                                                    <div className="col-sm-6">
-                                                        <input type="password" className="form-control form-control-user"
-                                                            id="exampleRepeatPassword" placeholder="Repeat Password" />
+                                                <div className="col-md-6">
+                                                    <div className="form-floating">
+                                                        <input className="form-control" id="inputLastName" type="text" placeholder="Enter your last name" />
+                                                        <label for="inputLastName">Last name</label>
                                                     </div>
                                                 </div>
-                                                <a href="login.html" className="btn btn-primary btn-user btn-block">
-                                                    Register Account
-                                                </a>
-
-                                                <a href="index.html" className="btn btn-google btn-user btn-block">
-                                                    <i className="fab fa-google fa-fw"></i> Register with Google
-                                                </a>
-                                                <a href="index.html" className="btn btn-facebook btn-user btn-block">
-                                                    <i className="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                                </a>
-                                            </form>
-
-                                            <div className="text-center">
-                                                <a className="small" href="forgot-password.html">Forgot Password?</a>
                                             </div>
-                                            <div className="text-center">
-                                                <a className="small" href="login.html">Already have an account? Login!</a>
+                                            <div className="form-floating mb-3">
+                                                <input className="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                                <label for="inputEmail">Email address</label>
                                             </div>
-                                        </div>
+                                            <div className="row mb-3">
+                                                <div className="col-md-6">
+                                                    <div className="form-floating mb-3 mb-md-0">
+                                                        <input className="form-control" id="inputPassword" type="password" placeholder="Create a password" />
+                                                        <label for="inputPassword">Password</label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <div className="form-floating mb-3 mb-md-0">
+                                                        <input className="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
+                                                        <label for="inputPasswordConfirm">Confirm Password</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="mt-4 mb-0">
+                                                <div className="d-grid"><a className="btn btn-primary btn-user btn-block" href="login.html">Create Account</a></div>
+                                            </div>
+                                            <div className="mt-4 mb-0">
+                                                <div className="d-grid"><a className="btn btn-google btn-user btn-block" href="index.html"><i className="fab fa-google fa-fw">
+                                                    </i> Register with Google </a></div>
+                                            </div>
+                                            <div className="mt-2 mb-0">
+                                                <div className="d-grid"><a className="btn btn-facebook btn-user btn-block" href="index.html"><i className="fab fa-facebook-f fa-fw">
+                                                    </i> Register with Facebook </a></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div className="card-footer text-center py-3">
+                                        <div className="small"><a href="login.html">Have an account? Go to login</a></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </main>
             </div>
+            <div id="layoutAuthentication_footer">
+                <footer className="py-4 bg-light mt-auto">
+                    <div className="container-fluid px-4">
+                        <div className="d-flex align-items-center justify-content-between small">
+                            <div className="text-muted">Copyright &copy; Your Website 2024</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
+   
     )
 }
 

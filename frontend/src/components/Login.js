@@ -1,75 +1,149 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import * as actions from '../redux/actions'
+import requestApi from '../helpers/Api'
 
 const Login = () => {
-    return (
-        <div id='layoutAuthentication' className='bg-gradient-primary'>
+    const dispatch = useDispatch();
+    const [loginData, setLoginData] = useState({})
+    const [formErrors, setFormErrors] = useState({});
+    const [isSummited, setIsSummited] = useState(false);
+    const navigate = useNavigate();
+    const onChange = (event) => {
+        let target = event.target;
+        setLoginData({
+            ...loginData, [target.name]: target.value
+        })
+    }
 
-            <div id='layoutAuthentication_content'>
+    useEffect(() => {
+        if (isSummited) {
+            validateForm();
+        }
+
+    }, [loginData])
+
+    const validateForm = () => {
+        let isValid = true;
+        const errors = {}
+        if (loginData.email === '' || loginData.email === undefined) {
+            errors.email = "Please enter email"
+        } else {
+            let valid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(loginData.email);
+            if (!valid) {
+                errors.email = 'Email is not valid'
+            }
+        }
+        if (loginData.password === '' || loginData.password === undefined) {
+            errors.password = 'Please enter password'
+        }
+
+        if (Object.keys(errors).length > 0) {
+            setFormErrors(errors);
+            isValid = false
+        } else {
+            setFormErrors({});
+        }
+        return isValid;
+    }
+    const onSubmit = () => {
+        console.log(loginData)
+        let valid = validateForm();
+        if(valid){
+            console.log('request login api')
+      
+            dispatch(actions.controlLoading(true))
+            requestApi('/api/auth/login', 'POST', loginData).then((res) => {
+                console.log(res)
+                localStorage.setItem('access_token', res.data.access_token);
+                localStorage.setItem('refresh_token', res.data.refresh_token);
+                dispatch(actions.controlLoading(false))
+
+                navigate('/');
+            }).catch(err => {
+                dispatch(actions.controlLoading(false))
+                console.log(err)
+                if (typeof err.respone !== "undefined") {
+                    if (err.respone.status !== 201) {
+                        toast.error(err.respone.data.message, { position: "top-right" }
+
+                        )
+                    }
+                } else {
+                    toast.error("Server is down.Please try again !", { position: "top-center" })
+                }
+            })
+        }
+        setIsSummited(true);
+        
+    }
+    return (
+        <div id="layoutAuthentication" className='bg-primary'>
+            <div id="layoutAuthentication_content">
                 <main>
                     <div className="container">
-
                         <div className="row justify-content-center">
+                            <div className="col-lg-5">
+                                <div className="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div className="card-header"><h3 className="text-center font-weight-light my-4">Login</h3></div>
+                                    <div className="card-body">
+                                        <form>
+                                            <div className="form-floating mb-3">
+                                                <input className="form-control" name="email" type="email" onChange={onChange} placeholder="name@example.com" />
+                                                <label >Email address</label>
+                                                {formErrors.email && <p style={{ color: 'red' }}>{formErrors.email}</p>}
 
-                            <div className="col-xl-10 col-lg-12 col-md-9">
-
-                                <div className="card o-hidden border-0 shadow-lg my-5">
-                                    <div className="card-body p-0">
-                                        <div className="row">
-                                            <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                                            <div className="col-lg-6">
-                                                <div className="p-5">
-                                                    <div className="text-center">
-                                                        <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                                                    </div>
-                                                    <form className="user">
-                                                        <div className="form-group">
-                                                            <input type="email" className="form-control form-control-user"
-                                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                                placeholder="Enter Email Address..." />
-                                                        </div>
-                                                        <div className="form-group">
-                                                            <input type="password" className="form-control form-control-user"
-                                                                id="exampleInputPassword" placeholder="Password" />
-                                                        </div>
-                                                        <div className="form-group">
-                                                            <div className="custom-control custom-checkbox small">
-                                                                <input type="checkbox" className="custom-control-input" id="customCheck" />
-                                                                <label className="custom-control-label" for="customCheck">Remember
-                                                                    Me</label>
-                                                            </div>
-                                                        </div>
-                                                        <a href="index.html" className="btn btn-primary btn-user btn-block">
-                                                            Login
-                                                        </a>
-
-                                                        <a href="index.html" className="btn btn-google btn-user btn-block">
-                                                            <i className="fab fa-google fa-fw"></i> Login with Google
-                                                        </a>
-                                                        <a href="index.html" className="btn btn-facebook btn-user btn-block">
-                                                            <i className="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                                        </a>
-                                                    </form>
-
-                                                    <div className="text-center">
-                                                        <a className="small" href="forgot-password.html">Forgot Password?</a>
-                                                    </div>
-                                                    <div className="text-center">
-                                                        <a className="small" href="register.html">Create an Account!</a>
-                                                    </div>
-                                                </div>
                                             </div>
-                                        </div>
+                                            <div className="form-floating mb-3">
+                                                <input className="form-control" type="password" name="password" onChange={onChange} placeholder="Password" />
+                                                <label >Password</label>
+                                                {formErrors.password && <p style={{ color: 'red' }}>{formErrors.password}</p>}
+
+                                            </div>
+                                            <div className="form-check mb-3">
+                                                <input className="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
+                                                <label className="form-check-label" for="inputRememberPassword">Remember Password</label>
+                                            </div>
+                                            <div className=" mt-4 mb-0">
+                                                <button className="btn btn-primary btn-block" type='button' onClick={onSubmit}>Login</button>
+                                            </div>
+                                            <div className="mt-4 mb-0">
+                                                <div className="d-grid"><a className="btn btn-google btn-user btn-block" href="https://www.google.com.vn/?hl=vi"><i className="fab fa-google fa-fw">
+                                                </i> Login with Google </a></div>
+                                            </div>
+                                            <div className="mt-2 mb-0">
+                                                <div className="d-grid"><a className="btn btn-facebook btn-user btn-block" href="index.html"><i className="fab fa-facebook-f fa-fw">
+                                                </i> Login with Facebook </a></div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div className="card-footer text-center py-3">
+                                        <a className="small" href="password.html">Forgot Password?</a>
+                                        <hr />
+                                        <div className="small"><Link to='/register'> Need an account? Sign up!</Link></div>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-
-
                 </main>
+            </div>
+            <div id="layoutAuthentication_footer">
+                <footer className="py-4 bg-light mt-auto">
+                    <div className="container-fluid px-4">
+                        <div className="d-flex align-items-center justify-content-between small">
+                            <div className="text-muted">Copyright &copy; Your Website 2024</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
     )

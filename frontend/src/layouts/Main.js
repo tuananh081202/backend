@@ -7,7 +7,7 @@ const Main = () => {
   return (
     <div>
         <Header/>
-        <div class="content">
+        <div id='layoutSidenav'>
             <Sidebar/>
             <Outlet/>
         </div>
