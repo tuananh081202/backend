@@ -23,7 +23,10 @@ export class User{
 
     @Column()
     date_of_birth:Date
-
+    
+    @Column()
+    birthplace:string
+    
     @Column()
     CMND:number
 

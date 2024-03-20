@@ -38,6 +38,7 @@ export class UserService {
                 'user.gender',
                 'user.date_of_birth',
                 'user.CMND',
+                'user.birthplace',
                 'user.status',
                 'user.created_at',
                 'user.updated_at',

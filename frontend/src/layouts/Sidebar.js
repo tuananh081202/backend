@@ -29,8 +29,8 @@ const Sidebar = () => {
                             <nav className="sb-sidenav-menu-nested nav">
 
                                 <Link to='' className='nav-link'>Thống kê</Link>
-                                <Link to='' className='nav-link'>Danh sách sản phẩm</Link>
-                                <Link to='' className='nav-link'>Danh sách người dùng</Link>
+                                <Link to='' className='nav-link'>Danh sách nhân viên</Link>
+                                <Link to='' className='nav-link'>Danh sách tài khoản</Link>
 
                             </nav>
                         </div>
@@ -48,7 +48,7 @@ const Sidebar = () => {
                                 <Link to='' className='nav-link'>Trình độ</Link>
                                 <Link to='' className='nav-link'>Loại nhân viên</Link>
                                 <Link to='' className='nav-link'>Thêm mới nhân viên</Link>
-                                <Link to='' className='nav-link'>Danh sách nhân viên</Link>
+                                <Link to='/api/user' className='nav-link'>Danh sách nhân viên</Link>
 
                             </nav>
                         </div>
@@ -111,7 +111,7 @@ const Sidebar = () => {
                                 <Link to='' className="nav-link" > Thông tin cá nhân </Link>
                                 <Link to='' className="nav-link" > Thông tin tài khoản </Link>
                                 <Link to='/register' className="nav-link" > Đăng ký </Link>
-                                <Link to='' className="nav-link" > Danh sách tài khoản </Link>
+                                <Link to='/api/account' className="nav-link" > Danh sách tài khoản </Link>
                                 <Link to='' className='nav-link'> Đổi mật khẩu </Link>
                                 <Link to='/login' className='nav-link'> Đăng xuất </Link>
 

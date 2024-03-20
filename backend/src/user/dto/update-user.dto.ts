@@ -11,6 +11,8 @@ export class UpdateUserDto {
 
     CMND:number
 
+    birthplace:string
+
     date_range:Date
 
     issued_by:string

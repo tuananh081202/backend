@@ -11,6 +11,8 @@ export class CreateUserDto {
 
     CMND:number
 
+    birthplace:string
+
     date_range:Date
 
     issued_by:string
