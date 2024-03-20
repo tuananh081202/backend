@@ -311,6 +311,7 @@ svg {
 table {
   caption-side: bottom;
   border-collapse: collapse;
+  
 }
 
 caption {
@@ -334,6 +335,7 @@ th {
   border-color: inherit;
   border-style: solid;
   border-width: 0;
+  border: 3px solid rgb(228, 223, 223)
 }
 
 label {
@@ -11260,7 +11262,7 @@ body {
   border-color: #fff;
 }
 
-img {
+image {
   border-radius: 30px; /* Bo tròn tất cả các góc với bán kính 5px */
 }
 
@@ -11281,7 +11283,21 @@ img {
   }
 }
 
+footer {
+  background-color: #cfcac8;
+  color: #fff;
+  padding: 20px 0;
+}
 
+.social-links {
+  text-align: center;
+}
 
+.social-links a {
+  margin: 0 15px;
+  font-size: 40px;
+  color: #0a0402;
+  transition: color 0.2s ease-in-out;
+}
 
 

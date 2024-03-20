@@ -1,3 +1,5 @@
+import './App.css'
+import './css/styles.css'
 import { Route, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css"
 import Dashboard from "./components/Dashboard";
@@ -20,7 +22,7 @@ function App() {
 
           <Route path='/api/user' element={<UserList />} />
           <Route path='/api/user/add' element={<UserAdd />} />
-
+          
           <Route path='/api/account' element={<AccountList/>}/>
         </Route>
       </Route>

@@ -22,16 +22,16 @@ export class User{
     gender:string
 
     @Column()
-    date_of_birth:Date
+    date_of_birth:string
     
     @Column()
     birthplace:string
-    
+
     @Column()
     CMND:number
 
     @Column()
-    status:number
+    status:string
 
     @CreateDateColumn()
     created_at:Date

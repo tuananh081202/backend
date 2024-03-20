@@ -21,7 +21,7 @@ const Sidebar = () => {
                         <div className="sb-sidenav-menu-heading">Dữ liệu</div>
 
                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDashboard" aria-expanded="false" aria-controls="collapseDashboard">
-                            <div className="sb-nav-link-icon"><i class="fa-solid fa-gauge"></i></div>
+                            <div className="sb-nav-link-icon"><i className="fa-solid fa-gauge"></i></div>
                             Tổng quan
                             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                         </a>
@@ -38,7 +38,7 @@ const Sidebar = () => {
 
 
                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUser" aria-expanded="false" aria-controls="collapseUser">
-                            <div className="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                            <div className="sb-nav-link-icon"><i className="fa-solid fa-users"></i></div>
                             Quản lý nhân viên
                             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                         </a>
@@ -47,7 +47,7 @@ const Sidebar = () => {
                                 <Link to='' className='nav-link'>Chức vụ</Link>
                                 <Link to='' className='nav-link'>Trình độ</Link>
                                 <Link to='' className='nav-link'>Loại nhân viên</Link>
-                                <Link to='' className='nav-link'>Thêm mới nhân viên</Link>
+                                <Link to='/api/user/add' className='nav-link'>Thêm mới nhân viên</Link>
                                 <Link to='/api/user' className='nav-link'>Danh sách nhân viên</Link>
 
                             </nav>
@@ -77,7 +77,7 @@ const Sidebar = () => {
                             </nav>
                         </div>
                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseRating" aria-expanded="false" aria-controls="collapseRating">
-                            <div className="sb-nav-link-icon"><i class="fa-solid fa-folder"></i></div>
+                            <div className="sb-nav-link-icon"><i className="fa-solid fa-folder"></i></div>
                             Quản lý công tác
                             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                         </a>
@@ -89,7 +89,7 @@ const Sidebar = () => {
                             </nav>
                         </div>
                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCart" aria-expanded="false" aria-controls="collapseCart">
-                            <div className="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
+                            <div className="sb-nav-link-icon"><i className="fa-solid fa-users"></i></div>
                             Nhóm nhân viên
                             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                         </a>
@@ -102,7 +102,7 @@ const Sidebar = () => {
                         </div>
 
                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#CollapseAuth" aria-expanded="false" aria-controls="CollapseAuth">
-                            <div className='sb-nav-link-icon'><i class="fa-solid fa-user"></i> </div>
+                            <div className='sb-nav-link-icon'><i className="fa-solid fa-user"></i> </div>
                             Tài khoản
                             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                         </a>
@@ -111,7 +111,7 @@ const Sidebar = () => {
                                 <Link to='' className="nav-link" > Thông tin cá nhân </Link>
                                 <Link to='' className="nav-link" > Thông tin tài khoản </Link>
                                 <Link to='/register' className="nav-link" > Đăng ký </Link>
-                                <Link to='/api/account' className="nav-link" > Danh sách tài khoản </Link>
+                                <Link to='/account' className="nav-link" > Danh sách tài khoản </Link>
                                 <Link to='' className='nav-link'> Đổi mật khẩu </Link>
                                 <Link to='/login' className='nav-link'> Đăng xuất </Link>
 

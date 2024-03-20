@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux'
 import * as actions from '../../redux/actions'
 import { Button, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-//import { StarRating } from 'react-star-rating-component'; // Assuming you have a rating component
 import { CSVLink } from 'react-csv';
 
 const AccountList = () => {
@@ -42,7 +41,7 @@ const AccountList = () => {
         },
         {
             name: "Email",
-            element: row => row.user.email
+            element: row => row.email
         },
         {
             name: "Điện thoại",
@@ -56,11 +55,6 @@ const AccountList = () => {
             name: "Trạng thái",
             element: row => row.status 
         },
-        // {
-        //     name:"Rating",
-        //     element: row => row.rating
-        // },
-       
         {
             name: "Actions",
             element: row => (
@@ -144,7 +138,7 @@ const AccountList = () => {
                         <li className="breadcrumb-item active">Danh sách tài khoản</li>
                     </ol>
                     <div className='mb-3'>
-                        
+                        <Link className='btn btn-sm btn-success me-2' to='/api/user/add'><i className='fa fa-plus'></i>Thêm tài khoản</Link>
                         {selectedRows.length > 0 && <button type='button' className='btn btn-sm btn-danger' ><i className='fa fa-trash'></i>Delete</button>}
                         <CSVLink
                             filename={"product.csv"}

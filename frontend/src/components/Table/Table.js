@@ -5,11 +5,10 @@ import LiveSearch from './LiveSearch'
 const Table = (props) => {
     const { name, data, columns, currentPage, numOfPage, onPageChange, onChangeItemsPerPage, onKeySearch, onSelectedRows } = props
     const [selectedRows, setSelectedRows] = useState([])
-    const [sortBy, setSortBy] = useState({})
 
     useEffect(() => {
         console.log('selected rows =>', selectedRows)
-        onSelectedRows(setSelectedRows)
+        onSelectedRows(selectedRows)
     }, [selectedRows])
 
     const renderHeaders = () => {
@@ -19,40 +18,39 @@ const Table = (props) => {
 
 
     const renderData = () => {
-
-
+        return (
         data.map((item, index) => (
             <tr key={index}>
-                <td><input type='checkbox' checked={selectedRows.includes(String(item.id))} className='form-check-input' value={item.id} onChange={onClickCheckbox} /></td>
                 {columns.map((col, ind) => <td key={ind}>{col.element(item)}</td>)}
             </tr>
-        ));
+        ))
+      )
     };
 
-    const onClickCheckbox = (event) => {
-        let checked = event.target.checked;
-        let value = event.target.value;
+    // const onClickCheckbox = (event) => {
+    //     let checked = event.target.checked;
+    //     let value = event.target.value;
 
-        if (checked) {
-            if (!selectedRows.includes(value)) {
-                setSelectedRows([...selectedRows, value])
-            }
-        } else {
-            let index = selectedRows.indexOf(value)
-            const temp = [...selectedRows]
-            temp.splice(index, 1)
-            setSelectedRows(temp)
-        }
-    }
+    //     if (checked) {
+    //         if (!selectedRows.includes(value)) {
+    //             setSelectedRows([...selectedRows, value])
+    //         }
+    //     } else {
+    //         let index = selectedRows.indexOf(value)
+    //         const temp = [...selectedRows]
+    //         temp.splice(index, 1)
+    //         setSelectedRows(temp)
+    //     }
+    // }
 
-    const onSelectAll = (event) => {
-        if (event.target.checked) {
-            const temp = data.map(element => String(element.id))
-            setSelectedRows(temp)
-        } else {
-            setSelectedRows([])
-        }
-    }
+    // const onSelectAll = (event) => {
+    //     if (event.target.checked) {
+    //         const temp = data.map(element => String(element.id))
+    //         setSelectedRows(temp)
+    //     } else {
+    //         setSelectedRows([])
+    //     }
+    // }
 
     const renderPagination = () => {
         const pagination = []
@@ -90,9 +88,9 @@ const Table = (props) => {
 
 
     return (
+    
         <div className='card mb-4'>
             <div className='card-header'>
-                <i className='fas fa-table me-1'></i>
                 {name}
             </div>
             <div className='card-body'>
@@ -115,13 +113,10 @@ const Table = (props) => {
 
                     </div>
                 </div>
-                <table className='table table-striped table-bodered' cellPadding="0" width="100%">
+                <table className='table table-striped table-bodered' cellPadding="0" width="100%" border="1">
                     <thead>
                         <tr>
-                            <td>
-                                <input checked={selectedRows.length === data.length && data.length > 0 ? true : false} type='checkbox' className='form-check-input' onChange={onSelectAll} />
-                                {renderHeaders()}
-                            </td>
+                        {renderHeaders()}  
                         </tr>
                     </thead>
                     <tbody>
@@ -141,6 +136,7 @@ const Table = (props) => {
 
             </div>
         </div>
+    
     )
 }
 

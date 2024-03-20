@@ -7,7 +7,7 @@ export class UpdateUserDto {
 
     gender:string
 
-    date_of_birth:Date
+    date_of_birth:string
 
     CMND:number
 

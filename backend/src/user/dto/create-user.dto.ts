@@ -7,7 +7,7 @@ export class CreateUserDto {
 
     gender:string
 
-    date_of_birth:Date
+    date_of_birth:string
 
     CMND:number
 
@@ -21,5 +21,5 @@ export class CreateUserDto {
     
     household:string
 
-    status:number
+    status:string
 }
