@@ -1,5 +1,5 @@
 export class CreateUserDto {
-    maNv: string
+    maNV: string
 
     image:string
 
