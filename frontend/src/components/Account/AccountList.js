@@ -37,7 +37,7 @@ const AccountList = () => {
         },
         {
             name: "Mã NV",
-            element: row => row.user.maNV
+            element: row => row.user
         },
         {
             name: "Email",
@@ -132,10 +132,10 @@ const AccountList = () => {
         <div id="layoutSidenav_content">
             <main>
                 <div className="container-fluid px-4">
-                    <h1 className="mt-4">Tài khoản</h1>
+                    <h3 className="mt-4">Tài khoản</h3>
                     <ol className="breadcrumb mb-4">
-                        <li className="breadcrumb-item"><Link to='/'>Tổng quan</Link></li>
-                        <li className="breadcrumb-item active">Danh sách tài khoản</li>
+                        <li className="breadcrumb-item"><Link to='/'><small>Tổng quan</small></Link></li>
+                        <li className="breadcrumb-item active"><small>Danh sách tài khoản</small></li>
                     </ol>
                     <div className='mb-3'>
                         <Link className='btn btn-sm btn-success me-2' to='/api/user/add'><i className='fa fa-plus'></i>Thêm tài khoản</Link>

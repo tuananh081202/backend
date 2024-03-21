@@ -1,3 +1,6 @@
+import { EmployeeType } from "src/EmployeeType/entities/employeetype.entity"
+import { Position } from "src/position/entities/position.entity"
+
 export class UpdateUserDto {
     maNv: string
 
@@ -18,8 +21,14 @@ export class UpdateUserDto {
     issued_by:string
 
     nationality:string
+
+    selter:string
     
     household:string
     
-    
+    position!:Position
+
+    employeetype!:EmployeeType
+
+    status:string
 }

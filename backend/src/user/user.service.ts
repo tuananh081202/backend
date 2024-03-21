@@ -6,6 +6,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { FilterUserDto } from './dto/filter-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as fs from 'fs'
+import { stringify } from 'querystring';
 
 @Injectable()
 export class UserService {
@@ -27,7 +28,21 @@ export class UserService {
             const search = query.search;
             result.where('(user.maNV LIKE :search OR user.name LIKE :search OR user.CMND LIKE :search)', { search: `%${search}%` });
         }
-        result.orderBy('created_at', 'DESC')
+
+        if (query.position) {
+            const positionId = Number(query.search);
+            result.where('user.position= :positionId',{ positionId })
+        }
+
+        if (query.employeetype) {
+            const employeetypeId = Number(query.search);
+            result.where('user.employeetype= :employeetypeId',{ employeetypeId })
+        }
+        result
+            .leftJoinAndSelect('user.position', 'position')
+            .leftJoinAndSelect('user.employeetype', 'employeetype')
+            .orderBy('position.created_at', 'DESC')
+            .orderBy('employeetype.created_at', 'DESC')
             .skip(skip)
             .take(items_per_page)
             .select([
@@ -42,6 +57,22 @@ export class UserService {
                 'user.status',
                 'user.created_at',
                 'user.updated_at',
+                'position.id',
+                'position.maCV',
+                'position.namePosition',
+                'position.degree',
+                'position.salary',
+                'position.description',
+                'position.createdBy',
+                'position.created_at',
+                'position.updated_at',
+                'employeetype.id',
+                'employeetype.MaLoai',
+                'employeetype.LoaiNV',
+                'employeetype.description',
+                'employeetype.createdBy',
+                'employeetype.created_at',
+                'employeetype.updated_at',
             ])
         const [res, total] = await result.getManyAndCount();
         const lastPage = Math.ceil(total / items_per_page);
@@ -59,8 +90,48 @@ export class UserService {
     }
 
     async findOne(id: number): Promise<User> {
-        return await this.UserRepository.findOneBy({ id })
+        return await this.UserRepository.findOne({
+            where: { id },
+            relations: {
+                position: true,
+                employeetype:true,
+            },
+            select: {
+                id: true,
+                maNV: true,
+                image: true,
+                name: true,
+                gender: true,
+                date_of_birth: true,
+                birthplace: true,
+                CMND: true,
+                status: true,
+                created_at: true,
+                updated_at: true,
+                position: {
+                    id: true,
+                    maCV: true,
+                    namePosition: true,
+                    degree: true,
+                    salary: true,
+                    description: true,
+                    createdBy:true,
+                    created_at: true,
+                    updated_at: true,
+                },
+                employeetype:{
+                    id: true,
+                    MaLoai: true,
+                    description: true,                                   
+                    createdBy:true,
+                    created_at: true,
+                    updated_at: true,
+                }
+
+            }
+        });
     }
+
 
     async update(id: number, UpdateUserDto: UpdateUserDto): Promise<UpdateResult> {
         const user = await this.UserRepository.findOneBy({ id })

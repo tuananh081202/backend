@@ -12,6 +12,7 @@ import Layout from "./layouts/Layout";
 import UserList from "./components/User/UserList"; 
 import UserAdd from "./components/User/UserAdd";
 import AccountList from "./components/Account/AccountList";
+import UserUpdate from './components/User/UserUpdate';
 function App() {
   return (
     <Routes>
@@ -22,6 +23,7 @@ function App() {
 
           <Route path='/api/user' element={<UserList />} />
           <Route path='/api/user/add' element={<UserAdd />} />
+          <Route path='/api/user/edit/:id' element={<UserUpdate />} />
           
           <Route path='/api/account' element={<AccountList/>}/>
         </Route>

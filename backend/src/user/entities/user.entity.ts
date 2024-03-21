@@ -1,8 +1,10 @@
+import { EmployeeType } from "src/EmployeeType/entities/employeetype.entity";
 import {  GroupUser } from "src/GroupUser/entities/groupuser.entity";
 import { Account } from "src/account/entities/account.entity";
+import { Position } from "src/position/entities/position.entity";
 import { Salary } from "src/salary/entities/salary.entity";
 import { Trip } from "src/trip/entities/trip.entity";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class User{
@@ -53,4 +55,14 @@ export class User{
 
     @OneToMany(() => GroupUser, (groupuser) => groupuser.user)
     groupuser: GroupUser[];
+
+    @ManyToOne(() => Position, (position) => position.user,{
+        onDelete:'CASCADE'
+    })
+    position: Position;
+
+    @ManyToOne(() => EmployeeType, (employeetype) => employeetype.user,{
+        onDelete:'CASCADE'
+    })
+    employeetype: EmployeeType;
 }

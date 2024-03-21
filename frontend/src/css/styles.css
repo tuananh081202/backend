@@ -1781,9 +1781,7 @@ progress {
   padding: 0.25rem 0.25rem;
 }
 
-.table-bordered > :not(caption) > *, .datatable-table > :not(caption) > * {
-  border-width: 1px 0;
-}
+
 .table-bordered > :not(caption) > * > *, .datatable-table > :not(caption) > * > * {
   border-width: 0 1px;
 }
@@ -1798,6 +1796,10 @@ progress {
 .table-striped > tbody > tr:nth-of-type(odd) > * {
   --bs-table-accent-bg: var(--bs-table-striped-bg);
   color: var(--bs-table-striped-color);
+}
+
+.table-bordered > :not(caption) > *, .datatable-table > :not(caption) > * {
+  border-width: 1px 0;
 }
 
 .table-striped-columns > :not(caption) > tr > :nth-child(even) {
@@ -11300,4 +11302,6 @@ footer {
   transition: color 0.2s ease-in-out;
 }
 
-
+.table-bordered > :not(caption) > * > *, .datatable-table > :not(caption) > * > * {
+  border-width: 0 1px;
+}

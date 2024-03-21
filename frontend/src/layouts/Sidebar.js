@@ -111,7 +111,7 @@ const Sidebar = () => {
                                 <Link to='' className="nav-link" > Thông tin cá nhân </Link>
                                 <Link to='' className="nav-link" > Thông tin tài khoản </Link>
                                 <Link to='/register' className="nav-link" > Đăng ký </Link>
-                                <Link to='/account' className="nav-link" > Danh sách tài khoản </Link>
+                                <Link to='/api/account' className="nav-link" > Danh sách tài khoản </Link>
                                 <Link to='' className='nav-link'> Đổi mật khẩu </Link>
                                 <Link to='/login' className='nav-link'> Đăng xuất </Link>
 

@@ -61,8 +61,8 @@ const UserList = () => {
         {
             name: "Hành động",
             element: row => (
-                <>               
-                    <Link to={`/api/user/edit/${row.id}`} className='btn btn-sm btn-warning me-1' ><i className="fa fa-pencil"></i> Edit </Link>
+                <>
+                    <Link to={`/api/user/edit/${row.id}`} className='btn btn-sm btn-warning me-1'  ><i className="fa fa-pencil"  ></i> Edit </Link>
                     <button type='button' className='btn btn-sm btn-danger me-1' onClick={() => handleDelete(row.id)}><i className='fa fa-trash'></i> Delete</button>
                 </>
             )
@@ -91,7 +91,7 @@ const UserList = () => {
             setShowModal(false)
             dispatch(actions.controlLoading(false))
         })
-    
+
     }
 
     useEffect(() => {
@@ -108,11 +108,11 @@ const UserList = () => {
             dispatch(actions.controlLoading(false));
         })
     }, [itemsPerPage, currentPage, searchString, refresh])
-    
+
     const getUserExport = (_event, done) => {
         let result = []
         if (UserList && UserList.length > 0) {
-            result.push(['id', 'maNV', 'image', 'name','gender','date_of_birth','birthplace','CMND','status']);
+            result.push(['id', 'maNV', 'image', 'name', 'gender', 'date_of_birth', 'birthplace', 'CMND', 'status']);
             UserList.map(item => {
                 let arr = [];
 
@@ -143,7 +143,7 @@ const UserList = () => {
                         <li className="breadcrumb-item active"><small>Danh sách nhân viên</small></li>
                     </ol>
                     <div className='mb-3'>
-                        <Link className='btn btn-sm btn-success me-2' to='/api/user/add'><i className='fa fa-plus'></i>Thêm nhân viên</Link> 
+                        <Link className='btn btn-sm btn-success me-2' to='/api/user/add'><i className='fa fa-plus'></i>Thêm nhân viên</Link>
                         <CSVLink
                             filename={"user.csv"}
                             className="btn btn-sm btn-primary me-1"

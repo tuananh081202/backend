@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Salary } from "src/salary/entities/salary.entity";
 import { Trip } from "src/trip/entities/trip.entity";
+import { User } from "src/user/entities/user.entity";
 
 @Entity()
 export class Position {
@@ -39,4 +40,7 @@ export class Position {
 
     @OneToMany(() => Trip, (trip) => trip.position)
     trip: Trip;
+
+    @OneToMany(()=> User,(user)=>user.position)
+    user: User
 }

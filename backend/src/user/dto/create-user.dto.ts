@@ -1,3 +1,6 @@
+import { EmployeeType } from "src/EmployeeType/entities/employeetype.entity"
+import { Position } from "src/position/entities/position.entity"
+
 export class CreateUserDto {
     maNV: string
 
@@ -18,8 +21,18 @@ export class CreateUserDto {
     issued_by:string
 
     nationality:string
+
+    nation:string
     
+    religion:string
+
     household:string
+    
+    shelter:string
+    
+    position!:Position
+
+    employeetype!:EmployeeType
 
     status:string
 }
