@@ -12,7 +12,7 @@ export class UpdateAccountDto {
 
     roles:string ;
 
-    status:number;
+    status:string;
     
     @IsNotEmpty()
     user!:User

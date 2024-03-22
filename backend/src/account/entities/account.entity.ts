@@ -30,7 +30,7 @@ export class Account{
     roles:string
 
     @Column()
-    status:number
+    status:string
 
     @ManyToOne(() => User, (user) => user.account,{
         onDelete:'CASCADE'

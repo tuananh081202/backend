@@ -6,7 +6,7 @@ import * as actions from '../../redux/actions'
 import { Button, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { CSVLink } from 'react-csv';
-
+import { formatDateTime} from '../../helpers/common'
 const UserList = () => {
     const dispatch = useDispatch()
     const [user, setUser] = useState([])
@@ -44,7 +44,7 @@ const UserList = () => {
         },
         {
             name: "Ngày sinh",
-            element: row => row.date_of_birth
+            element: row => formatDateTime(row.date_of_birth)
         },
         {
             name: "Nơi sinh",
@@ -56,7 +56,7 @@ const UserList = () => {
         },
         {
             name: "Tình trạng",
-            element: row => row.status
+            element: row =>row.status
         },
         {
             name: "Hành động",

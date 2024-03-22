@@ -181,8 +181,8 @@ const UserUpdate = () => {
                                                 <strong><label className='required'>Trạng thái:</label></strong>
                                                 <select {...register('status')} className='form-select'>
                                                     <option value="">--Chọn trạng thái--</option>
-                                                    <option value='Đang hoạt động'>Đang làm việc</option>
-                                                    <option value='Không hoạt động'>Đã nghỉ việc</option>
+                                                    <option value='Đang làm việc'>Đang làm việc</option>
+                                                    <option value='Đã nghỉ việc'>Đã nghỉ việc</option>
                                                 </select>
                                             </div>
 
@@ -204,7 +204,7 @@ const UserUpdate = () => {
                                             </div>
                                             <div className='mb-3 mt-3'>
                                                 <strong><label className='form-label'>Ngày sinh:</label></strong>
-                                                <input {...register('date_of_birth', { required: 'Ngày sinh là bắt buộc.' })} type='text' className='form-control' placeholder='Nhập ngày sinh' />
+                                                <input {...register('date_of_birth', { required: 'Ngày sinh là bắt buộc.' })} type='date' className='form-control' placeholder='Nhập ngày sinh' />
                                                 {errors.date_of_birth && <p style={{ color: 'red' }}>{errors.date_of_birth.message}</p>}
                                             </div>
 

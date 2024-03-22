@@ -29,7 +29,7 @@ const Sidebar = () => {
                             <nav className="sb-sidenav-menu-nested nav">
 
                                 <Link to='' className='nav-link'>Thống kê</Link>
-                                <Link to='' className='nav-link'>Danh sách nhân viên</Link>
+                                <Link  to='' className='nav-link'>Danh sách nhân viên</Link>
                                 <Link to='' className='nav-link'>Danh sách tài khoản</Link>
 
                             </nav>
@@ -110,7 +110,7 @@ const Sidebar = () => {
                             <nav className="sb-sidenav-menu-nested nav">
                                 <Link to='' className="nav-link" > Thông tin cá nhân </Link>
                                 <Link to='' className="nav-link" > Thông tin tài khoản </Link>
-                                <Link to='/register' className="nav-link" > Đăng ký </Link>
+                                <Link to='/api/account/add' className="nav-link" >  Tạo tài khoản </Link>
                                 <Link to='/api/account' className="nav-link" > Danh sách tài khoản </Link>
                                 <Link to='' className='nav-link'> Đổi mật khẩu </Link>
                                 <Link to='/login' className='nav-link'> Đăng xuất </Link>
@@ -121,7 +121,7 @@ const Sidebar = () => {
                 </div>
                 <div className="sb-sidenav-footer">
                     <div className="small">Logged in as:</div>
-                    CRUD
+                    QLNS
                 </div>
             </nav>
         </div>

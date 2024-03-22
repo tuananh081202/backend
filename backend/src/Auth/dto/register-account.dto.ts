@@ -19,5 +19,5 @@ export class RegisterAccountDto {
     @IsNotEmpty()
     roles:string ;
 
-    status: number;
+    status: string;
 }

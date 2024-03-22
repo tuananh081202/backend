@@ -16,7 +16,7 @@ export class CreateAccountDto {
   
     roles:string ;
 
-    status: number;
+    status: string;
     
     @IsNotEmpty()
     user!:User

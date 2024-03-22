@@ -37,7 +37,7 @@ const AccountList = () => {
         },
         {
             name: "Mã NV",
-            element: row => row.user
+            element: row => row.user.maNV
         },
         {
             name: "Email",
@@ -56,12 +56,19 @@ const AccountList = () => {
             element: row => row.status 
         },
         {
-            name: "Actions",
+            name: "Sửa",
             element: row => (
                 <>
                     
-                    <Link to={`/api/account/edit/${row.id}`} className='btn btn-sm btn-warning me-1' ><i className="fa fa-pencil"></i> Edit </Link>
-                    <button type='button' className='btn btn-sm btn-danger me-1' onClick={() => handleDelete(row.id)}><i className='fa fa-trash'></i> Delete</button>
+                    <Link to={`/api/account/edit/${row.id}`} className='btn btn-warning me-1' ><i className="fa fa-pencil"></i> Edit </Link>
+                </>
+            )
+        },
+        {
+            name:"Xóa",
+            element: row =>(
+                <>
+                    <button type='button' className='btn btn-danger me-1' onClick={() => handleDelete(row.id)}><i className='fa fa-trash'></i> Delete</button>
                 </>
             )
         }
@@ -134,14 +141,14 @@ const AccountList = () => {
                 <div className="container-fluid px-4">
                     <h3 className="mt-4">Tài khoản</h3>
                     <ol className="breadcrumb mb-4">
-                        <li className="breadcrumb-item"><Link to='/'><small>Tổng quan</small></Link></li>
-                        <li className="breadcrumb-item active"><small>Danh sách tài khoản</small></li>
+                        <li className="breadcrumb-item"><Link to='/'>Tổng quan</Link></li>
+                        <li className="breadcrumb-item active">Danh sách tài khoản</li>
                     </ol>
                     <div className='mb-3'>
-                        <Link className='btn btn-sm btn-success me-2' to='/api/user/add'><i className='fa fa-plus'></i>Thêm tài khoản</Link>
-                        {selectedRows.length > 0 && <button type='button' className='btn btn-sm btn-danger' ><i className='fa fa-trash'></i>Delete</button>}
+                        {/* <Link className='btn btn-sm btn-success me-2' to='/api/account/add'><i className='fa fa-plus'></i>Thêm tài khoản</Link>
+                        {selectedRows.length > 0 && <button type='button' className='btn btn-sm btn-danger' ><i className='fa fa-trash'></i>Delete</button>} */}
                         <CSVLink
-                            filename={"product.csv"}
+                            filename={"account.csv"}
                             className="btn btn-sm btn-primary me-1"
                             data={account}
                             target="_blank"
@@ -159,7 +166,6 @@ const AccountList = () => {
                         onPageChange={setCurrentPage}
                         onChangeItemsPerPage={setItemsPerPage}
                         onKeySearch={(keyword) => {
-
                             console.log('keyword in user list comp=>', keyword)
                             setSearchString(keyword)
                         }}

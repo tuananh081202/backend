@@ -5,11 +5,14 @@ import { useDispatch } from 'react-redux'
 import * as actions from '../../redux/actions'
 import requestApi from '../../helpers/Api';
 import { toast } from 'react-toastify'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css";
 
 const UserAdd = () => {
   const dispatch = useDispatch()
   const { register, setValue, trigger, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate()
+  const [selectedDate, setSelectedDate] = useState(null)
   const [image, SetImage] = useState('')
   const [employeetype, SetEmployeeType] = useState([])
   const [position, SetPosition] = useState([])
@@ -71,6 +74,7 @@ const UserAdd = () => {
     }
   }
 
+
   return (
     <div id="layoutSidenav_content">
       <main>
@@ -108,7 +112,16 @@ const UserAdd = () => {
                       </div>
                       <div className='mb-3 mt-3'>
                         <strong><label className='required'>Ngày cấp:</label></strong>
-                        <input {...register('date_range', { required: 'Ngày cấp là bắt buộc.' })} type='text' className='form-control' placeholder='Nhập ngày cấp' />
+                        <input {...register('date_range',{required:'Ngày cấp là bắt buộc'})} type='date' className='form-control' placeholder='Nhập ngày cấp'/>
+                          {/* <DatePicker
+                            selected={selectedDate}
+                            onChange={date => setSelectedDate(date)}
+                            dateFormat='dd/MM/yyyy'
+                            isClearable
+                            showYearDropdown
+                            scrollableMonthYearDropdown
+                          /> */}
+                        
                         {errors.date_range && <p style={{ color: 'red' }}>{errors.date_range.message}</p>}
                       </div>
                       <div className='mb-3 mt-3'>
@@ -154,16 +167,16 @@ const UserAdd = () => {
                         <strong><label className='required'>Trạng thái:</label></strong>
                         <select {...register('status')} className='form-select'>
                           <option value="">--Chọn trạng thái--</option>
-                          <option value='Đang hoạt động'>Đang làm việc</option>
-                          <option value='Không hoạt động'>Đã nghỉ việc</option>
+                          <option value='Đang làm việc'>Đang làm việc</option>
+                          <option value='Đã nghỉ việc'>Đã nghỉ việc</option>
                         </select>
                       </div>
-                      
+
                     </div>
                     <div className='col-md-6'>
                       <div className='mb-3 mt-3'>
                         <strong><label className='form-label'>Ảnh 3x4(Nếu có):</label></strong>
-                        {image && <img style={{ width: '300px' }} src={image} className='mb-2' alt='...' />}
+                        {image && <img style={{ width: '0px' }} src={image} className='mb-2' alt='...' />}
                         <input type='file' name='image' {...register('image', { onChange: onImageChange })} className='form-control' accept='image/*' />
                         {errors.image && <p style={{ color: 'red' }}>{errors.image.message}</p>}
                       </div>
@@ -179,7 +192,7 @@ const UserAdd = () => {
                       </div>
                       <div className='mb-3 mt-3'>
                         <strong><label className='form-label'>Ngày sinh:</label></strong>
-                        <input {...register('date_of_birth', { required: 'Ngày sinh là bắt buộc.' })} type='text' className='form-control' placeholder='Nhập ngày sinh' />
+                        <input {...register('date_of_birth', { required: 'Ngày sinh là bắt buộc.' })} type='date' className='form-control' placeholder='Nhập ngày sinh' />
                         {errors.date_of_birth && <p style={{ color: 'red' }}>{errors.date_of_birth.message}</p>}
                       </div>
 
@@ -198,12 +211,12 @@ const UserAdd = () => {
                       <div className='mb-3 mt-3'>
                         <strong><label className='form-label'>Tạm trú:</label></strong>
                         <input {...register('shelter')} type='text' className='form-control' placeholder='Nhập hộ khẩu' />
-                        
+
                       </div>
 
                       <div className='mb-3 mt-3'>
                         <strong><label className='required'>Chức vụ:</label></strong>
-                        <select {...register('position', )} className='form-select' placeholder='Chọn chức vụ'>
+                        <select {...register('position',)} className='form-select' placeholder='Chọn chức vụ'>
                           <option value="">--Chọn chức vụ--</option>
                           {position.map(position => {
                             return <option key={position.id} value={position.id}>{position.namePosition}</option>
@@ -213,7 +226,7 @@ const UserAdd = () => {
 
                       <div className='mb-3 mt-3'>
                         <strong><label className='form-label'>Bằng cấp:</label></strong>
-                        <select {...register('position', )} className='form-select'>
+                        <select {...register('position',)} className='form-select'>
                           <option value="">--Chọn bằng cấp--</option>
                           {position.map(position => {
                             return <option key={position.id} value={position.id}>{position.degree}</option>
@@ -222,7 +235,7 @@ const UserAdd = () => {
                       </div>
 
 
-                      
+
                     </div>
 
 

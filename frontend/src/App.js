@@ -13,6 +13,8 @@ import UserList from "./components/User/UserList";
 import UserAdd from "./components/User/UserAdd";
 import AccountList from "./components/Account/AccountList";
 import UserUpdate from './components/User/UserUpdate';
+import AccountAdd from './components/Account/AccountAdd';
+import AccountUpdate from './components/Account/AccountUpdate';
 function App() {
   return (
     <Routes>
@@ -26,6 +28,9 @@ function App() {
           <Route path='/api/user/edit/:id' element={<UserUpdate />} />
           
           <Route path='/api/account' element={<AccountList/>}/>
+          <Route path='/api/account/add' element={<AccountAdd/>}/>
+          <Route path='/api/account/edit/:id' element={<AccountUpdate />} />
+
         </Route>
       </Route>
       <Route element={<PublicRoutes />}>

@@ -4,8 +4,9 @@ import { AuthService } from './auth.service';
 import { RegisterAccountDto } from './dto/register-account.dto';
 import { Account } from 'src/account/entities/account.entity';
 import { LoginAccountDto } from './dto/login-account.dto';
-import { RequestResetPasswordDto } from './dto/request-reset-password.dto';
-import {  ResetPasswordDto } from './dto/reset-password.dto';
+// import { RequestResetPasswordDto } from './dto/request-reset-password.dto';
+// import {  ResetPasswordDto } from './dto/reset-password.dto';
+import { ForgotPassworDto } from './dto/forgot-password.dto';
 // import { ChangePasswordAccountDto } from './dto/changePassword-account.dto';
 
 @ApiTags('Auth')
@@ -39,15 +40,19 @@ export class AuthController {
     //     return await this.authService.changePassword(1,ChangePasswordAccountDto)
     // }
     
-    @Patch('request-reset-password')
-    requestResetPassword(@Body() requestResetPasswordDto:RequestResetPasswordDto):Promise<void>{
-        return this.authService.requestResetPassword(requestResetPasswordDto)
-    }
+    // @Patch('request-reset-password')
+    // requestResetPassword(@Body() requestResetPasswordDto:RequestResetPasswordDto):Promise<void>{
+    //     return this.authService.requestResetPassword(requestResetPasswordDto)
+    // }
     
     // @Post('reset-password')
     // resetPassword(@Body() resetPasswordDto:ResetPasswordDto):Promise<void>{
     //     return this.authService.resetPassword(resetPasswordDto)
         
     // }
+    @Post('/forgotPassword')
+    async forgotPassword(@Body(new ValidationPipe()) forgotPassworDto:ForgotPassworDto):Promise<any>{
+
+    }
     
 }
