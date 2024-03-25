@@ -39,6 +39,7 @@ export class AccountService {
             const userId = Number(query.user);
             result.where('account.user = :userId', { userId })
         }
+        
         result
             .leftJoinAndSelect('account.user', 'user')
             .orderBy('user.created_at', 'DESC')

@@ -6,7 +6,7 @@ import * as actions from '../../redux/actions'
 import { Button, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { CSVLink } from 'react-csv';
-import { formatDateTime} from '../../helpers/common'
+import { formatDateTime } from '../../helpers/common'
 const UserList = () => {
     const dispatch = useDispatch()
     const [user, setUser] = useState([])
@@ -56,12 +56,14 @@ const UserList = () => {
         },
         {
             name: "Tình trạng",
-            element: row =>row.status
+            element: row => row.status
         },
         {
             name: "Hành động",
             element: row => (
                 <>
+                    <Link to={`/api/user/${row.id}`} className='btn btn-sm btn-info me-1'><i class="fa-solid fa-book"></i> Read </Link>
+
                     <Link to={`/api/user/edit/${row.id}`} className='btn btn-sm btn-warning me-1'  ><i className="fa fa-pencil"  ></i> Edit </Link>
                     <button type='button' className='btn btn-sm btn-danger me-1' onClick={() => handleDelete(row.id)}><i className='fa fa-trash'></i> Delete</button>
                 </>

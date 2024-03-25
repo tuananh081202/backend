@@ -11305,3 +11305,6 @@ footer {
 .table-bordered > :not(caption) > * > *, .datatable-table > :not(caption) > * > * {
   border-width: 0 1px;
 }
+
+
+

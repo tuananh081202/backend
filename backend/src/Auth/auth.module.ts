@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Account } from 'src/account/entities/account.entity';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
     imports:[
@@ -15,7 +16,18 @@ import { AuthService } from './auth.service';
             signOptions:{expiresIn:'1d'}
 
         }),
-        ConfigModule
+        ConfigModule.forRoot(),
+        MailerModule.forRoot({
+            transport: {
+              host: 'sandbox.smtp.mailtrap.io',
+              port: 465,
+              secure: false, // false for TLS; true for SSL
+              auth: {
+                user: '51c6e05f3ce109',
+                pass: '5f0abf96557d0b',
+              },
+            },
+          }),
     ],
     controllers:[AuthController],
     providers:[AuthService]

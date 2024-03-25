@@ -142,6 +142,7 @@ const AccountList = () => {
                     <h3 className="mt-4">Tài khoản</h3>
                     <ol className="breadcrumb mb-4">
                         <li className="breadcrumb-item"><Link to='/'>Tổng quan</Link></li>
+                        <li className="breadcrumb-item">Tài khoản</li>
                         <li className="breadcrumb-item active">Danh sách tài khoản</li>
                     </ol>
                     <div className='mb-3'>

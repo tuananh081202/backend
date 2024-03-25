@@ -7,11 +7,9 @@ import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { RegisterAccountDto } from './dto/register-account.dto';
 import { LoginAccountDto } from './dto/login-account.dto';
-// import { RequestResetPasswordDto } from './dto/request-reset-password.dto';
-// import { ChangePasswordAccountDto } from './dto/changePassword-account.dto';
-// import {v4} from 'uuid'
-// import { ResetPasswordDto } from './dto/reset-password.dto';
-import { ForgotPassworDto } from './dto/forgot-password.dto';
+import { ForgotPasswordDto } from './dto/forgot-password.dto';
+import { MailerService } from '@nestjs-modules/mailer';
+
 
 
 @Injectable()
@@ -20,7 +18,7 @@ export class AuthService {
     private accountRepository:Repository<Account>,
     private jwtService:JwtService,
     private configService:ConfigService,
-    // private mailerService:MailerService
+    private mailerService:MailerService
     ){}
     
     async register(registerAccountDto:RegisterAccountDto):Promise<Account>{
@@ -91,38 +89,70 @@ export class AuthService {
 
     }
 
-   
-    // async requestResetPassword(requestResetPasswordDto: RequestResetPasswordDto): Promise<void> {
-    //     try {
-    //       const account = await this.accountRepository.findOne({ where: { email: requestResetPasswordDto.email } });
-    
-    //       if (!account) {
-    //         throw new HttpException('Email not found', HttpStatus.NOT_FOUND);
-    //       }
-    
-    //       // Generate a secure random token (e.g., using UUID v4)
-    //       const resetToken = v4();
-    
-    //       // Update account with reset token and timestamp
-    //       account.reset_password_token = resetToken;
-          
-    //       await this.accountRepository.save(account);
-    
-    //       // Send password reset email to the user
-    //       // (This implementation is not included here, but you'll need to use an email service)
-    //       // ... send email notification with reset link ...
-    
-    //     } catch (error) {
-    //       // Handle errors appropriately (e.g., database errors)
-    //       throw new HttpException('An error occurred during password reset', HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
-    //   }
+    async forgotPassword(forgotPasswordDto: ForgotPasswordDto): Promise<any> {
+        const { email } = forgotPasswordDto;
+        const account = await this.accountRepository.findOne({ where:{ email} });
 
-      
-    
-    
+        if (!account) {
+            throw new HttpException('Email not found', HttpStatus.NOT_FOUND);
+        }
 
-   
+        const resetToken = await this.generateResetToken(account);
+        const resetLink = `${this.configService.get('APP_URL')}/reset-password?token=${resetToken}`;
+
+        // Gửi email xác nhận
+        await this.sendPasswordResetEmail(email, resetLink);
+    }
+
+    async resetPassword(resetToken: string, newPassword: string): Promise<any>{
+        const account = await this.accountRepository.findOne({ where:{resetToken} });
+
+        if (!account) {
+            throw new HttpException('Invalid reset token', HttpStatus.BAD_REQUEST);
+        }
+
+        // Hash mật khẩu mới
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        // Cập nhật mật khẩu và xoá resetToken
+        account.password = hashedPassword;
+        account.resetToken = null;
+        await this.accountRepository.save(account);
+    }
+
+    async validateUser(email: string, password: string): Promise<Account | null> {
+        const account = await this.accountRepository.findOne({ where:{email} });
+
+        if (account && bcrypt.compareSync(password, account.password)) {
+            return account;
+        }
+        return null;
+    }
+
+    private async generateResetToken(account: Account): Promise<string> {
+        // Tạo một reset token duy nhất
+        const resetToken = Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2);
+        
+        // Cập nhật reset token vào tài khoản
+        account.resetToken = resetToken;
+        await this.accountRepository.save(account);
+
+        return resetToken;
+    }
+
+    private async sendPasswordResetEmail(email: string, resetLink: string): Promise<void> {
+        // Gửi email thông báo đổi mật khẩu
+        await this.mailerService.sendMail({
+            to: email,
+            subject: 'Reset Password Request',
+            template: 'reset-password',
+            context: {
+                resetLink,
+            },
+        });
+    }
+
+
 
 
 }
