@@ -104,11 +104,50 @@ export class AuthService {
         await this.sendPasswordResetEmail(email, resetLink);
     }
 
-    async resetPassword(resetToken: string, newPassword: string): Promise<any>{
-        const account = await this.accountRepository.findOne({ where:{resetToken} });
+   
 
+    async validateUser(email: string, password: string): Promise<Account | null> {
+        const account = await this.accountRepository.findOne({ where:{email} });
+
+        if (account && bcrypt.compareSync(password, account.password)) {
+            return account;
+        }
+        return null;
+    }
+
+    private async sendPasswordResetEmail(email: string, resetToken: string): Promise<void> {
+        // Gửi email thông báo đổi mật khẩu
+        await this.mailerService.sendMail({
+            to: email,
+            subject: 'Reset Password Request',
+            template: 'reset-password',
+            context: {
+                resetToken,
+            },
+        });
+    }
+
+    private async generateResetToken(account: Account): Promise<string> {
+        // Tạo một reset token duy nhất
+        const resetToken = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+        
+        // Cập nhật reset token vào tài khoản
+        account.resetToken = resetToken;
+        await this.accountRepository.save(account);
+
+        return resetToken;
+    }
+
+    async resetPassword(resetToken: string, newPassword: string): Promise<any>{
+       
+        const account = await this.accountRepository.findOne({ where:{resetToken} });
+         
         if (!account) {
             throw new HttpException('Invalid reset token', HttpStatus.BAD_REQUEST);
+        }
+
+        if (!newPassword) {
+            throw new HttpException('Invalid new password', HttpStatus.BAD_REQUEST);
         }
 
         // Hash mật khẩu mới
@@ -120,37 +159,7 @@ export class AuthService {
         await this.accountRepository.save(account);
     }
 
-    async validateUser(email: string, password: string): Promise<Account | null> {
-        const account = await this.accountRepository.findOne({ where:{email} });
-
-        if (account && bcrypt.compareSync(password, account.password)) {
-            return account;
-        }
-        return null;
-    }
-
-    private async generateResetToken(account: Account): Promise<string> {
-        // Tạo một reset token duy nhất
-        const resetToken = Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2);
-        
-        // Cập nhật reset token vào tài khoản
-        account.resetToken = resetToken;
-        await this.accountRepository.save(account);
-
-        return resetToken;
-    }
-
-    private async sendPasswordResetEmail(email: string, resetLink: string): Promise<void> {
-        // Gửi email thông báo đổi mật khẩu
-        await this.mailerService.sendMail({
-            to: email,
-            subject: 'Reset Password Request',
-            template: 'reset-password',
-            context: {
-                resetLink,
-            },
-        });
-    }
+    
 
 
 

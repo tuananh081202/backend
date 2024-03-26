@@ -1,10 +1,11 @@
-import { Body, Controller, HttpCode, HttpStatus, Patch, Post ,UsePipes,ValidationPipe} from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpException, HttpStatus, Patch, Post ,UsePipes,ValidationPipe} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { RegisterAccountDto } from './dto/register-account.dto';
 import { Account } from 'src/account/entities/account.entity';
 import { LoginAccountDto } from './dto/login-account.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -35,8 +36,26 @@ export class AuthController {
     @Post('forgot-password')
     @HttpCode(HttpStatus.NO_CONTENT)
     async forgotPassword(@Body() forgotPasswordDto: ForgotPasswordDto): Promise<void> {
+        console.log('forgot-password')
+        console.log(forgotPasswordDto)
         await this.authService.forgotPassword(forgotPasswordDto);
     }
+
+    @Post('reset-password')
+    async resetPassword(@Body() resetPasswordDto: ResetPasswordDto): Promise<any> {
+        try {
+            const { resetToken, newPassword } = resetPasswordDto;
+            await this.authService.resetPassword(resetToken, newPassword);
+            console.log('reset-password api')
+            console.log(resetPasswordDto)
+            return { message: 'Password reset successfully' };
+
+        } catch (error) {
+            throw new HttpException(error.message || 'Failed to reset password', HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    
     
     
 }

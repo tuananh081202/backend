@@ -6,6 +6,9 @@ import { Account } from 'src/account/entities/account.entity';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { join } from 'path';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+
 
 @Module({
     imports:[
@@ -16,7 +19,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
             signOptions:{expiresIn:'1d'}
 
         }),
-        ConfigModule.forRoot(),
+        ConfigModule,
         MailerModule.forRoot({
             transport: {
               host: 'sandbox.smtp.mailtrap.io',
@@ -27,6 +30,17 @@ import { MailerModule } from '@nestjs-modules/mailer';
                 pass: '5f0abf96557d0b',
               },
             },
+            // defaults:{
+            //   from:'"Tuan Anh<tuananh8122k2@gmail.com>'
+            // },
+            // template:{
+            //   dir:join(__dirname,'src/templates/views'),
+            //   adapter: new HandlebarsAdapter(),
+            //   options:{
+            //     strict:true
+
+            //   }
+            // }
           }),
     ],
     controllers:[AuthController],
