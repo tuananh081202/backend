@@ -31,7 +31,7 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
               },
             },
             defaults:{
-              to:'"TuanAnh<tuananh8122k2@gmail.com>'
+              from:'TuanAnh<tuananh8122k2@gmail.com>'
             },
             template:{
               dir:join(__dirname,'views'),

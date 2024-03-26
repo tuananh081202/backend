@@ -94,10 +94,11 @@ export class AuthService {
         const account = await this.accountRepository.findOne({ where:{ email} });
 
         if (!account) {
-            throw new HttpException('Email not found', HttpStatus.NOT_FOUND);
+            throw new HttpException('Không tìm thấy email', HttpStatus.NOT_FOUND);
         }
 
         const resetToken = await this.generateResetToken(account);
+        
         const resetLink = `${this.configService.get('APP_URL')}/reset-password?token=${resetToken}`;
 
         // Gửi email xác nhận
@@ -109,7 +110,7 @@ export class AuthService {
 
         // Gửi email thông báo đổi mật khẩu
         await this.mailerService.sendMail({         
-            from: email,
+            to: email,
             subject: 'Reset Password Request',
             template: 'reset-password',
             context: {
@@ -129,7 +130,7 @@ export class AuthService {
 
         return resetToken;
     }
-
+    
     async resetPassword(resetToken: string, newPassword: string): Promise<any>{
        
         const account = await this.accountRepository.findOne({ where:{resetToken} });

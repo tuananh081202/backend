@@ -1,23 +1,24 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import axios from 'axios'
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const PasswordReset = () => {
-    const [email, setEmail] = useState('')
-    const [message, setMessage] = useState('');
-
-  
+    const [email, setEmail] = useState('');
+    const navigate = useNavigate()
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
-            
-            setMessage('Mật khẩu đã được gửi đến địa chỉ email .');
+            const response = await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
+            console.log('Token đã gửi đến email !!!', response.data);
+            toast.success('Token đã gửi đến email !!!', { position: 'top-center', autoClose: 2000 });
+            setTimeout(() => navigate('/login'), 1500);
         } catch (error) {
-            console.log('error',error)
-            setMessage('Đã xảy ra lỗi. Vui lòng thử lại sau.');
+            console.error('error', error);
+            toast.error('Đã xảy ra lỗi. Vui lòng thử lại sau.');
         }
     };
+
     return (
         <div id="layoutAuthentication" className='bg-primary'>
             <div id="layoutAuthentication_content">
@@ -30,17 +31,17 @@ const PasswordReset = () => {
                                     <div className="card-body">
                                         <div className="small mb-3 text-muted">Enter your email address and we will send you a link to reset your password.</div>
                                         <form onSubmit={handleSubmit}>
-                                            <div className="form-floating mb-3">  
-                                                <input className="form-control" type="email" value={email} placeholder="Vui lòng nhập email" onChange={(e) => setEmail(e.target.value)}  />
+                                            <div className="form-floating mb-3">
+                                                <input className="form-control" type="email" value={email} placeholder="Vui lòng nhập email" onChange={(e) => setEmail(e.target.value)} />
                                             </div>
                                             <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <Link to='/login'  >Return to login</Link>
-                                                <button className="btn btn-primary " type='submit' >Reset Password</button>
+                                                <Link to='/login'>Return to login</Link>
+                                                <button className="btn btn-primary" type='submit'>Reset Password</button>
                                             </div>
                                         </form>
                                     </div>
                                     <div className="card-footer text-center py-3">
-                                        <Link to='/register' >Need an account? Sign up!</Link>
+                                        <Link to='/register'>Need an account? Sign up!</Link>
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +53,7 @@ const PasswordReset = () => {
                 <footer className="py-4 bg-light mt-auto">
                     <div className="container-fluid px-4">
                         <div className="d-flex align-items-center justify-content-between small">
-                            <div className="text-muted">Copyright &copy; Your Website 2023</div>
+                            <div className="text-muted">Copyright &copy; Your Website 2024</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
@@ -63,7 +64,7 @@ const PasswordReset = () => {
                 </footer>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default PasswordReset
+export default PasswordReset;
