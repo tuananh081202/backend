@@ -12,6 +12,9 @@ import { DepartmentModule } from './department/department.module';
 import { SalaryModule } from './salary/salary.module';
 import { TripModule } from './trip/trip.module';
 import { GroupuserModule } from './GroupUser/groupuser.module';
+import { MailerModule } from '@nestjs-modules/mailer';
+
+
 @Module({
   imports: [TypeOrmModule.forRoot(dataSourceOptions),
     UserModule,
@@ -23,6 +26,7 @@ import { GroupuserModule } from './GroupUser/groupuser.module';
     SalaryModule,
     TripModule,
     GroupuserModule,
+    MailerModule
   ],
   controllers: [AppController ],
   providers: [AppService,  ],

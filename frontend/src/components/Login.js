@@ -121,7 +121,7 @@ const Login = () => {
                                     </div>
 
                                     <div className="card-footer text-center py-3">
-                                        <a className="small" href="password.html">Quên mật khẩu?</a>
+                                        <Link to='/resetpassword' className="small" >Quên mật khẩu?</Link>
                                         <hr />
                                         <div className="small"><Link to='/register'> Cần một tài khoản? Đăng ký!</Link></div>
                                     </div>

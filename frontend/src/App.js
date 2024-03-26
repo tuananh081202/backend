@@ -19,6 +19,7 @@ import DashboardUserList from './components/Dashboard/DashboardUserList';
 import DashboardAccountList from './components/Dashboard/DashboardAccountList';
 import Personal from './components/Account/Personal';
 import Account from './components/Account/Account';
+import PasswordReset from './components/PasswordReset';
 function App() {
   return (
     <Routes>
@@ -44,6 +45,7 @@ function App() {
       <Route element={<PublicRoutes />}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path='/resetpassword' element={<PasswordReset/>}/>
       </Route>
       </Route>
     </Routes>

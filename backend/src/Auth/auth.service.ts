@@ -101,27 +101,19 @@ export class AuthService {
         const resetLink = `${this.configService.get('APP_URL')}/reset-password?token=${resetToken}`;
 
         // Gửi email xác nhận
-        await this.sendPasswordResetEmail(email, resetLink);
+        await this.sendPasswordResetEmail(email, resetLink, resetToken);
     }
 
-   
+    public async sendPasswordResetEmail(email: string, resetLink: string , resetToken:string): Promise<void> {
 
-    async validateUser(email: string, password: string): Promise<Account | null> {
-        const account = await this.accountRepository.findOne({ where:{email} });
 
-        if (account && bcrypt.compareSync(password, account.password)) {
-            return account;
-        }
-        return null;
-    }
-
-    private async sendPasswordResetEmail(email: string, resetToken: string): Promise<void> {
         // Gửi email thông báo đổi mật khẩu
-        await this.mailerService.sendMail({
-            to: email,
+        await this.mailerService.sendMail({         
+            from: email,
             subject: 'Reset Password Request',
             template: 'reset-password',
             context: {
+                resetLink,
                 resetToken,
             },
         });
@@ -159,6 +151,15 @@ export class AuthService {
         await this.accountRepository.save(account);
     }
 
+    
+    async validateUser(email: string, password: string): Promise<Account | null> {
+        const account = await this.accountRepository.findOne({ where:{email} });
+
+        if (account && bcrypt.compareSync(password, account.password)) {
+            return account;
+        }
+        return null;
+    }
     
 
 

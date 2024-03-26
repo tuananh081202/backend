@@ -151,7 +151,7 @@ const Register = () => {
                                         </form>
                                     </div>
                                     <div className="card-footer text-center py-3">
-                                        <div className="small"><Link to='/admin/login'>Have an account? Go to login</Link></div>
+                                        <div className="small"><Link to='/login'>Have an account? Go to login</Link></div>
                                     </div>
                                 </div>
                             </div>

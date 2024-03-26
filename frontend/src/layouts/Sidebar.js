@@ -111,7 +111,7 @@ const Sidebar = () => {
                                 <Link to='/api/account/update' className="nav-link" > Thông tin tài khoản </Link>
                                 <Link to='/api/account/add' className="nav-link" >  Tạo tài khoản </Link>
                                 <Link to='/api/account' className="nav-link" > Danh sách tài khoản </Link>
-                                <Link to='' className='nav-link'> Đổi mật khẩu </Link>
+                                <Link to='/resetpassword' className='nav-link'> Đổi mật khẩu </Link>
                                 <Link to='/login' className='nav-link'> Đăng xuất </Link>
 
                             </nav>

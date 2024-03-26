@@ -30,17 +30,17 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
                 pass: '5f0abf96557d0b',
               },
             },
-            // defaults:{
-            //   from:'"Tuan Anh<tuananh8122k2@gmail.com>'
-            // },
-            // template:{
-            //   dir:join(__dirname,'src/templates/views'),
-            //   adapter: new HandlebarsAdapter(),
-            //   options:{
-            //     strict:true
+            defaults:{
+              to:'"TuanAnh<tuananh8122k2@gmail.com>'
+            },
+            template:{
+              dir:join(__dirname,'views'),
+              adapter: new HandlebarsAdapter(),
+              options:{
+                strict:true
 
-            //   }
-            // }
+              }
+            }
           }),
     ],
     controllers:[AuthController],
