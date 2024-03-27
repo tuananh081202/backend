@@ -1,10 +1,13 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { PositionService } from './position.service';
 import { FilterPositionDto } from './dto/filter-position.dto';
 import { CreatePositionDto } from './dto/create-position.dto';
 import { Position } from './entities/position.entity';
 import { UpdatePositionDto } from './dto/update-position.dto';
+import { extname } from 'path';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { storageConfig } from 'helpers/config';
 
 @ApiTags('Position')
 @Controller('position')
@@ -38,6 +41,35 @@ export class PositionController {
 
     async deletePosition(@Param('id') id: string) {
         return await this.positionService.delete(Number(id));
+    }
+
+    @Post('cke-upload')
+    @UseInterceptors(FileInterceptor('upload',{
+        storage: storageConfig('ckeditor'),
+        fileFilter:(req,file,cb) =>{
+            const ext = extname(file.originalname)
+            const allowedExtArr=['.jpg','.png','.jpeg'];
+            if(!allowedExtArr.includes(ext)){
+                req.fileValidationError = `Accept file ext are:${allowedExtArr.toString()}`;
+                cb(null,false);
+            }else{
+                const fileSize= parseInt(req.headers['content-length']);
+                if(fileSize > 1024* 1024 * 5){
+                    req.fileValidationError='File size is too large'
+                    cb(null,false);
+                }else{
+                    cb(null,true)
+                }
+            }
+        }
+    }))
+    ckeUpload(@Body() data: any,@UploadedFile() file:Express.Multer.File ){
+        console.log('data=>',data)
+        console.log(file)
+
+        return{
+            'url':`ckeditor/${file.filename}`
+        }
     }
 
 

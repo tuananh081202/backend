@@ -17,9 +17,12 @@ import AccountAdd from './components/Account/AccountAdd';
 import AccountUpdate from './components/Account/AccountUpdate';
 import DashboardUserList from './components/Dashboard/DashboardUserList';
 import DashboardAccountList from './components/Dashboard/DashboardAccountList';
-import Personal from './components/Account/Personal';
 import Account from './components/Account/Account';
 import PasswordReset from './components/PasswordReset';
+import PositionAdd from './components/Position/PositionAdd';
+import PositionList from './components/Position/PositionList';
+import PositionUpdate from './components/Position/PositionUpdate';
+import UserRead from './components/User/UserRead';
 function App() {
   return (
     <Routes>
@@ -33,13 +36,18 @@ function App() {
           <Route path='/api/user' element={<UserList />} />
           <Route path='/api/user/add' element={<UserAdd />} />
           <Route path='/api/user/edit/:id' element={<UserUpdate />} />
-          <Route path='/api/user/:id' element={<Personal />} />
+          <Route path='/api/user/:id' element={<UserRead />} />
+          
+          <Route path='/api/position' element ={<PositionAdd/>}/>
+          <Route path='/api/position/list' element={<PositionList/>}/>
+          <Route path='/api/position/edit/:id' element={<PositionUpdate/>}/>
 
           <Route path='/api/account' element={<AccountList/>}/>
           <Route path='/api/account/add' element={<AccountAdd/>}/>
           <Route path='/api/account/edit/:id' element={<AccountUpdate />} />
-          <Route path='/api/account/personal' element={<Personal/>}/>
           <Route path='/api/account/update' element={<Account/>}/>
+
+
         </Route>
       </Route>
       <Route element={<PublicRoutes />}>

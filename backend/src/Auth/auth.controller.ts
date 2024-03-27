@@ -6,7 +6,6 @@ import { Account } from 'src/account/entities/account.entity';
 import { LoginAccountDto } from './dto/login-account.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
-import { v4 as uuidv4 } from 'uuid';
 
 @ApiTags('Auth')
 @Controller('auth')

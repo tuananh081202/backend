@@ -17,8 +17,6 @@ const DashboardAccountList = () => {
     const [refresh, setRefresh] = useState(Date.now())
 
 
-
-
     const columns = [
         {
             name: "STT",
@@ -56,10 +54,6 @@ const DashboardAccountList = () => {
     ]
 
 
-
-
-
-
     useEffect(() => {
         dispatch(actions.controlLoading(true));
         let query = `?items_per_page=${itemsPerPage}&page=${currentPage}&search=${searchString}`;
@@ -74,7 +68,6 @@ const DashboardAccountList = () => {
             dispatch(actions.controlLoading(false));
         })
     }, [itemsPerPage, currentPage, searchString, refresh])
-
 
     return (
         <div id="layoutSidenav_content">

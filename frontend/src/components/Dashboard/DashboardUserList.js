@@ -56,7 +56,6 @@ const DashboardUserList = () => {
     ]
 
 
-
     // const requestDeleteApi = () => {
     //     requestApi(`/api/user/${deleteItem}`, 'DELETE', []).then(respone => {
     //         setShowModal(false)
@@ -112,9 +111,6 @@ const DashboardUserList = () => {
                     />
                 </div>
             </main>
-
-
-
         </div>
     )
 }

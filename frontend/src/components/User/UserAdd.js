@@ -233,12 +233,7 @@ const UserAdd = () => {
                           })}
                         </select>
                       </div>
-
-
-
                     </div>
-
-
                   </div>
                   <button type='button' onClick={handleSubmit(handleSubmitFormAdd)} className='btn btn-success'>Submit</button>
                 </form>

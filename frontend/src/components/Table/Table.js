@@ -18,8 +18,9 @@ const Table = (props) => {
 
 
     const renderData = () => {
+        const sortedData = data.sort((a,b) => a.id - b.id);
         return (
-        data.map((item, index) => (
+        sortedData.map((item, index) => (
             <tr key={index}>
                 {columns.map((col, ind) => <td key={ind}>{col.element(item)}</td>)}
             </tr>

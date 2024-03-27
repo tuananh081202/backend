@@ -31,11 +31,10 @@ const Sidebar = () => {
                                 <Link to='' className='nav-link'>Thống kê</Link>
                                 <Link  to='/dashboard/userlist' className='nav-link'>Danh sách nhân viên</Link>
                                 <Link to='/dashboard/accountlist' className='nav-link'>Danh sách tài khoản</Link>
+                                <Link to='/api/position/list' className='nav-link'>Danh sách chức vụ</Link>
 
                             </nav>
                         </div>
-
-
 
                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUser" aria-expanded="false" aria-controls="collapseUser">
                             <div className="sb-nav-link-icon"><i className="fa-solid fa-users"></i></div>
@@ -44,11 +43,11 @@ const Sidebar = () => {
                         </a>
                         <div className="collapse" id="collapseUser" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav className="sb-sidenav-menu-nested nav">
-                                <Link to='' className='nav-link'>Chức vụ</Link>
-                                <Link to='' className='nav-link'>Trình độ</Link>
+                                <Link to='/api/position' className='nav-link'>Chức vụ</Link>
                                 <Link to='' className='nav-link'>Loại nhân viên</Link>
                                 <Link to='/api/user/add' className='nav-link'>Thêm mới nhân viên</Link>
                                 <Link to='/api/user' className='nav-link'>Danh sách nhân viên</Link>
+                                <Link to='/api/user/id' className='nav-link'> Thông tin nhân viên</Link>
 
                             </nav>
                         </div>
@@ -108,12 +107,12 @@ const Sidebar = () => {
                         </a>
                         <div className="collapse" id="CollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav className="sb-sidenav-menu-nested nav">
+                                
                                 <Link to='/api/account/update' className="nav-link" > Thông tin tài khoản </Link>
                                 <Link to='/api/account/add' className="nav-link" >  Tạo tài khoản </Link>
                                 <Link to='/api/account' className="nav-link" > Danh sách tài khoản </Link>
-                                <Link to='/resetpassword' className='nav-link'> Đổi mật khẩu </Link>
-                                <Link to='/login' className='nav-link'> Đăng xuất </Link>
-
+                                {/* <Link to='/resetpassword' className='nav-link'> Đổi mật khẩu </Link>
+                                <Link to='/login' className='nav-link'> Đăng xuất </Link> */}
                             </nav>
                         </div>
                     </div>
