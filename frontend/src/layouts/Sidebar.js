@@ -29,9 +29,10 @@ const Sidebar = () => {
                             <nav className="sb-sidenav-menu-nested nav">
 
                                 <Link to='' className='nav-link'>Thống kê</Link>
-                                <Link  to='/dashboard/userlist' className='nav-link'>Danh sách nhân viên</Link>
+                                <Link to='/dashboard/userlist' className='nav-link'>Danh sách nhân viên</Link>
                                 <Link to='/dashboard/accountlist' className='nav-link'>Danh sách tài khoản</Link>
                                 <Link to='/api/position/list' className='nav-link'>Danh sách chức vụ</Link>
+                                <Link to='/api/employeetype' className='nav-link'>Danh sách loại NV</Link>
 
                             </nav>
                         </div>
@@ -44,37 +45,54 @@ const Sidebar = () => {
                         <div className="collapse" id="collapseUser" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav className="sb-sidenav-menu-nested nav">
                                 <Link to='/api/position' className='nav-link'>Chức vụ</Link>
-                                <Link to='' className='nav-link'>Loại nhân viên</Link>
+                                <Link to='/api/employeetype/add' className='nav-link'>Loại nhân viên</Link>
                                 <Link to='/api/user/add' className='nav-link'>Thêm mới nhân viên</Link>
                                 <Link to='/api/user' className='nav-link'>Danh sách nhân viên</Link>
                                 <Link to='/api/user/id' className='nav-link'> Thông tin nhân viên</Link>
 
                             </nav>
                         </div>
+                        <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseWorkTime" aria-expanded="false" aria-controls="collapseWorkTime">
+                            <div className="sb-nav-link-icon"><i class="fa-solid fa-business-time"></i></div>
+                            Thời gian làm việc
+                            <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                        </a>
+                        <div className="collapse" id="collapseWorkTime" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav className="sb-sidenav-menu-nested nav">
+                                <Link to='' className='nav-link'>Lịch làm việc</Link>
+                                <Link to='' className='nav-link'>Thời gian làm việc</Link>
+                                <Link to='' className='nav-link'>Thời gian nghỉ phép</Link>
+
+                            </nav>
+                        </div>
+
                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCategory" aria-expanded="false" aria-controls="collapseCategory">
                             <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
                             Quản lý phòng ban
+
                             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                         </a>
                         <div className="collapse" id="collapseCategory" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav className="sb-sidenav-menu-nested nav">
-                                <Link to='' className='nav-link'>Thêm phòng ban</Link>
-                                <Link to='' className='nav-link'>Danh sách phòng ban</Link>
+                                <Link to='/api/department' className='nav-link'>Phòng ban</Link>
+
+                                <Link to='/api/department/list' className='nav-link'>Danh sách phòng ban</Link>
 
                             </nav>
                         </div>
-                        <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProduct" aria-expanded="false" aria-controls="collapseProduct">
+                        <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSalary" aria-expanded="false" aria-controls="collapseSalary">
                             <div className="sb-nav-link-icon"><i className="fa-solid fa-money-bill"></i></div>
                             Quản lý lương
                             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                         </a>
-                        <div className="collapse" id="collapseProduct" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <div className="collapse" id="collapseSalary" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav className="sb-sidenav-menu-nested nav">
                                 <Link to='' className='nav-link'>Bảng  lương</Link>
                                 <Link to='' className='nav-link'>Tính lương</Link>
 
                             </nav>
                         </div>
+
                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseRating" aria-expanded="false" aria-controls="collapseRating">
                             <div className="sb-nav-link-icon"><i className="fa-solid fa-folder"></i></div>
                             Quản lý công tác
@@ -87,6 +105,7 @@ const Sidebar = () => {
 
                             </nav>
                         </div>
+
                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCart" aria-expanded="false" aria-controls="collapseCart">
                             <div className="sb-nav-link-icon"><i className="fa-solid fa-users"></i></div>
                             Nhóm nhân viên
@@ -100,6 +119,19 @@ const Sidebar = () => {
                             </nav>
                         </div>
 
+                        <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseStars" aria-expanded="false" aria-controls="collapseStars">
+                            <div className="sb-nav-link-icon"><i className="fa-solid fa-star"></i></div>
+                            Khen thưởng-Kỷ luật
+                            <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                        </a>
+                        <div className="collapse" id="collapseStars" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav className="sb-sidenav-menu-nested nav">
+                                <Link to='' className='nav-link'>Khen thưởng</Link>
+                                <Link to='' className='nav-link'>Kỷ luật</Link>
+
+                            </nav>
+                        </div>
+
                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#CollapseAuth" aria-expanded="false" aria-controls="CollapseAuth">
                             <div className='sb-nav-link-icon'><i className="fa-solid fa-user"></i> </div>
                             Tài khoản
@@ -107,7 +139,7 @@ const Sidebar = () => {
                         </a>
                         <div className="collapse" id="CollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav className="sb-sidenav-menu-nested nav">
-                                
+
                                 <Link to='/api/account/update' className="nav-link" > Thông tin tài khoản </Link>
                                 <Link to='/api/account/add' className="nav-link" >  Tạo tài khoản </Link>
                                 <Link to='/api/account' className="nav-link" > Danh sách tài khoản </Link>

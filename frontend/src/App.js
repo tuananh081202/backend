@@ -23,6 +23,11 @@ import PositionAdd from './components/Position/PositionAdd';
 import PositionList from './components/Position/PositionList';
 import PositionUpdate from './components/Position/PositionUpdate';
 import UserRead from './components/User/UserRead';
+import EmployeeTypeList from './components/EmployeeType/EmployeeTypeList';
+import EmployeeTypeAdd from './components/EmployeeType/EmployeeTypeAdd';
+import EmployeeTypeUpdate from './components/EmployeeType/EmployeeTypeUpdate';
+import DepartmentAdd from './components/Department/DepartmentAdd';
+import DepartmentList from './components/Department/DepartmentList';
 function App() {
   return (
     <Routes>
@@ -46,7 +51,14 @@ function App() {
           <Route path='/api/account/add' element={<AccountAdd/>}/>
           <Route path='/api/account/edit/:id' element={<AccountUpdate />} />
           <Route path='/api/account/update' element={<Account/>}/>
-
+           
+          <Route path='/api/employeetype' element={<EmployeeTypeList/>}/>
+          <Route path='/api/employeetype/add' element={<EmployeeTypeAdd/>}/>
+          <Route path='/api/employeetype/edit/:id' element={<EmployeeTypeUpdate/>}/>
+         
+          <Route path='/api/department' element = {<DepartmentAdd/>}/>
+          <Route path='/api/department/list' element = {<DepartmentList/>}/>
+ 
 
         </Route>
       </Route>

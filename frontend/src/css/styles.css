@@ -8162,7 +8162,7 @@ textarea.form-control-lg {
 
 .bg-info {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-info-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgb(12 136 255) !important;
 }
 
 .bg-warning {
@@ -11305,6 +11305,7 @@ footer {
 .table-bordered > :not(caption) > * > *, .datatable-table > :not(caption) > * > * {
   border-width: 0 1px;
 }
+
 
 
 

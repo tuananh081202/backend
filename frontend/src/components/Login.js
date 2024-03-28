@@ -80,13 +80,13 @@ const Login = () => {
         
     }
     return (
-        <div id="layoutAuthentication" className='bg-primary'>
+        <div id="layoutAuthentication" className='bg-primary '>
             <div id="layoutAuthentication_content">
                 <main>
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-lg-5">
-                                <div className="card shadow-lg border-0 rounded-lg mt-5">
+                                <div className="card shadow-lg border-0 rounded-lg mt-5  ">
                                     <div className="card-header"><h3 className="text-center font-weight-light my-4">Đăng nhập</h3></div>
                                     <div className="card-body">
                                         <form>

@@ -6,6 +6,7 @@ import Table from '../Table/Table'
 import requestApi from '../../helpers/Api'
 import * as actions from '../../redux/actions'
 import { CSVLink } from 'react-csv';
+import DescriptionCell from '../../helpers/DescriptionCell'
 
 const PositionList = () => {
     const dispatch = useDispatch()
@@ -40,7 +41,7 @@ const PositionList = () => {
         },
         {
             name: "Mô tả",
-            element: row => row.description
+            element: row =><DescriptionCell description={row.description}/>
         },
         {
             name: "Người tạo",

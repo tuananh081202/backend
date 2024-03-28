@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-import { formatDateTime } from '../../helpers/moment'
 import Table from '../Table/Table'
-import requestApi from '../../helpers/Api'
-import * as actions from '../../redux/actions'
-import { Button, Modal } from 'react-bootstrap';
-import { useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import DescriptionCell from '../../helpers/DescriptionCell'
-import CustomUploadAdapter from '../../helpers/CustomUploadAdapter'
-const PositionAdd = () => {
+import CustomUploadAdapter from '../../helpers/CustomUploadAdapter';
+import { useDispatch } from 'react-redux';
+import { formatDateTime } from '../../helpers/moment';
+import { Link, useNavigate } from 'react-router-dom';
+import requestApi from '../../helpers/Api';
+import * as actions from '../../redux/actions';
+import { useForm } from 'react-hook-form'
+import { Button, Modal } from 'react-bootstrap';
+import { toast } from 'react-toastify'
+import DescriptionCell from '../../helpers/DescriptionCell';
+const EmployeeTypeAdd = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [position, setPosition] = useState([])
-    const [numOfPage, setNumofPage] = useState(1)
-    const [currentPage, setCurrentPage] = useState(1)
+    const [employeetype, setEmployeeType] = useState([])
     const [itemsPerPage, setItemsPerPage] = useState(1)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [numOfPage, setNumofPage] = useState(1)
     const [searchString, setSearchString] = useState('')
     const [selectedRows, setSelectedRows] = useState([])
     const [deleteItem, setDeleteItem] = useState(null)
@@ -26,48 +26,41 @@ const PositionAdd = () => {
     const [showModal, setShowModal] = useState(false)
     const [refresh, setRefresh] = useState(Date.now())
     const { register, handleSubmit, setValue, trigger, formState: { errors } } = useForm();
+
     const columns = [
         {
-            name: "STT",
+            name: 'STT',
             element: row => row.id
         },
         {
-            name: "Mã chức vụ",
-            element: row => row.maCV
+            name: 'Mã loại',
+            element: row => row.MaLoai
         },
         {
-            name: "Tên vị trí",
-            element: row => row.namePosition
+            name: 'Loại nhân viên',
+            element: row => row.LoaiNV
         },
         {
-            name: "Bằng cấp",
-            element: row => row.degree
-        },
-        {
-            name: "Lương ngày",
-            element: row => row.salary
-        },
-        {
-            name: "Mô tả",
+            name: 'Mô tả',
             element: row => <DescriptionCell description={row.description} />
         },
         {
-            name: "Người tạo",
+            name: 'Người tạo',
             element: row => row.createdBy
         },
         {
-            name: "Ngày tạo",
+            name: 'Ngày tạo',
             element: row => formatDateTime(row.created_at)
         },
         {
-            name: "Ngày sửa",
+            name: 'Ngày sửa',
             element: row => formatDateTime(row.updated_at)
         },
         {
-            name: "Hành động",
+            name: 'Hành động',
             element: row => (
                 <>
-                    <Link to={`/api/position/edit/${row.id}`} className='btn btn-sm btn-warning me-1'  ><i className="fa fa-pencil"  ></i> Sửa </Link>
+                    <Link to={`/api/employeetype/edit/${row.id}`} className='btn btn-sm btn-warning me-1'  ><i className="fa fa-pencil"  ></i> Sửa </Link>
                     <button type='button' className='btn btn-sm btn-danger me-1' onClick={() => handleDelete(row.id)}><i className='fa fa-trash'></i> Xóa</button>
                 </>
             )
@@ -75,36 +68,36 @@ const PositionAdd = () => {
     ]
 
     const handleDelete = (id) => {
-        console.log('Single delete witd id=>', id)
+        console.log('Single delete with id', id)
         setShowModal(true)
         setDeleteItem(id)
         setDeleteType('single')
     }
 
     const requestDeleteApi = () => {
-        requestApi(`/api/position/${deleteItem}`, 'DELETE', []).then(respone => {
+        requestApi(`/api/employeetype/${deleteItem}`, 'DELETE', []).then(respone => {
             setShowModal(false)
             setRefresh(Date.now())
             dispatch(actions.controlLoading(false))
         }).catch(err => {
-            console.log(err)
-            setShowModal(false)
+            console.log('err=>', err)
             dispatch(actions.controlLoading(false))
         })
     }
 
     useEffect(() => {
-        dispatch(actions.controlLoading(true));
+        dispatch(actions.controlLoading(true))
         let query = `?items_per_page=${itemsPerPage}&page=${currentPage}&search=${searchString}`;
 
-        requestApi(`/api/position${query}`, 'GET', []).then(response => {
-            console.log("res=>", response)
-            setPosition(response.data.data);
-            setNumofPage(response.data.lastPage);
-            dispatch(actions.controlLoading(false));
+        requestApi(`/api/employeetype${query}`, 'GET', []).then(respone => {
+            console.log('res=>', respone)
+            setEmployeeType(respone.data.data)
+            setNumofPage(respone.data.lastPage)
+            dispatch(actions.controlLoading(false))
+
         }).catch(err => {
-            console.log(err)
-            dispatch(actions.controlLoading(false));
+            console.log('err=>', err)
+            dispatch(actions.controlLoading(false))
         })
     }, [itemsPerPage, currentPage, searchString, refresh])
 
@@ -112,11 +105,11 @@ const PositionAdd = () => {
         console.log('data form => ', data)
         dispatch(actions.controlLoading(true))
         try {
-            const res = await requestApi('/api/position/create', 'POST', data);
+            const res = await requestApi('/api/employeetype/create', 'POST', data);
             console.log('res =>', res)
             dispatch(actions.controlLoading(false))
-            toast.success('Thêm chức vụ thành công !!!', { position: 'top-center', autoClose: 2000 })
-            setTimeout(() => navigate('/api/position'), 3000)
+            toast.success('Thêm loại nhân viên thành công !!!', { position: 'top-center', autoClose: 2000 })
+            setTimeout(() => navigate('/api/employeetype'), 3000)
 
         } catch (error) {
             console.log('error=> ', error)
@@ -129,45 +122,36 @@ const PositionAdd = () => {
             return new CustomUploadAdapter(loader)
         }
     }
-
     return (
         <div id='layoutSidenav_content'>
             <main>
                 <div className='container-fluid px-4'>
-                    <h3 className='mt-4'>Chức vụ</h3>
+                    <h3 className='mt-4'>Loại nhân viên</h3>
                     <ol className='breadcrumb mb-4'>
-                        <li className='breadcrumb-item'><Link to='/'> Tổng quan </Link></li>
-                        <li className='breadcrumb-item'>Quản lý nhân viên</li>
-                        <li className='breadcrumb-item active'>hức vụ</li>
+                        <li className='breadcrumb-item'><Link to='/'>Tổng quan</Link> </li>
+                        <li className='breadcrumb-item'> Quản lý nhân viên </li>
+                        <li className='breadcrumb-item'>Loại nhân viên</li>
+                        <li className='breadcrumb-item active'>Thêm loại nhân viên</li>
                     </ol>
                     <div className='card mb-4'>
                         <div className='card-header'>
-                            <i className='fas fa-plus me-1'></i>
-                            Thêm chức vụ
+                            <i className='fas fa-plus me-1'> </i>
+                            Thêm loại nhân viên
+
                         </div>
                         <div className='card-body'>
                             <div className='row mb-3'>
                                 <form>
                                     <div className='col-md-6'>
                                         <div className='mb-3 mt-3'>
-                                            <label className='form-label'>Mã chức vụ:</label>
-                                            <input  {...register('maCV', { required: 'Mã chức vụ là bắt buộc' })} type='text' className='form-control' placeholder='Nhập mã chức vụ' />
-                                            {errors.maCV && <p style={{ color: 'red' }}>{errors.maCV.message}</p>}
+                                            <label className='form-label'>Mã loại NV</label>
+                                            <input {...register('MaLoai', { required: 'Mã loại là bắt buộc' })} type='text' className='form-control' placeholder='Nhập mã loại nhân viên' />
+                                            {errors.MaLoai && <p style={{ color: 'red' }}>{errors.MaLoai.message}</p>}
                                         </div>
                                         <div className='mb-3 mt-3'>
-                                            <label className='form-label'>Tên chức vụ:</label>
-                                            <input {...register('namePosition', { required: 'Tên chức vụ là bắt buộc.' })} type='text' className='form-control' placeholder='Nhập tên chức vụ' />
-                                            {errors.namePosition && <p style={{ color: 'red' }}>{errors.namePosition.message}</p>}
-                                        </div>
-                                        <div className='mb-3 mt-3'>
-                                            <label className='form-label'>Bằng cấp:</label>
-                                            <input {...register('degree', { required: 'Bằng cấp là bắt buộc.' })} type='text' className='form-control' placeholder='Nhập bằng cấp' />
-                                            {errors.degree && <p style={{ color: 'red' }}>{errors.degree.message}</p>}
-                                        </div>
-                                        <div className='mb-3 mt-3'>
-                                            <label className='form-label'>Lương ngày:</label>
-                                            <input {...register('salary')} type='text' className='form-control' placeholder='Nhập lương /ngày' />
-                                            {errors.namePosition && <p style={{ color: 'red' }}>{errors.namePosition.message}</p>}
+                                            <label className='form-label'>Loại NV</label>
+                                            <input {...register('LoaiNV', { required: 'Loại nhân viên là bắt buộc' })} type='text' className='form-control' placeholder='Nhập loại nhân viên' />
+                                            {errors.LoaiNV && <p style={{ color: 'red' }}>{errors.LoaiNV.message}</p>}
                                         </div>
                                         <div className='mb-3 mt-3'>
                                             <label className='form-label'>Mô tả:</label>
@@ -180,36 +164,37 @@ const PositionAdd = () => {
 
                                                 onChange={(event, editor) => {
                                                     const data = editor.getData()
-                                                    console.log('data=>', data)
-                                                    setValue('description', data)
+                                                    const sanitizedData = data.replace(/<\/?p>/g, '')//dữ liệu được làm sạch cập nhật vào form
+                                                    console.log('data=>', sanitizedData)
+                                                    setValue('description', sanitizedData)
                                                     trigger('description')
                                                 }}
+
                                                 config={{
-                                                    extraPlugins: [uploadPlugin]
+                                                    extraPlugins: [uploadPlugin],
+
+                                                    autoParagraph: false // Tắt tự động thêm thẻ `<p>`
                                                 }}
 
                                             />
 
                                         </div>
                                         <div className='mb-3 mt-3'>
-                                            <label className='form-label'>Người tạo:</label>
-                                            <input {...register('createdBy')} type='text' className='form-control' placeholder='Nhập người tạo' />
+                                            <label className='form-label'>Người tạo</label>
+                                            <input {...register('createdBy', { required: 'Người tạo là bắt buộc' })} type='text' className='form-control' placeholder='Nhập người tạo' />
                                             {errors.createdBy && <p style={{ color: 'red' }}>{errors.createdBy.message}</p>}
                                         </div>
 
-
-                                        <button type='button' onClick={handleSubmit(handleSubmitFormAdd)} className='btn btn-success'>Thêm chức vụ</button>
+                                        <button type='button' onClick={handleSubmit(handleSubmitFormAdd)} className='btn btn-success'>Thêm loại nhân viên</button>
 
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
-
                     <Table
-                        name="Danh sách chức vụ"
-                        data={position}
+                        name="Danh sách loại nhân viên"
+                        data={employeetype}
                         columns={columns}
                         numOfPage={numOfPage}
                         currentPage={currentPage}
@@ -225,8 +210,6 @@ const PositionAdd = () => {
                             setSelectedRows(rows)
                         }}
                     />
-
-
                 </div>
             </main>
             <Modal show={showModal} onHide={() => setShowModal(false)} size='sm'>
@@ -248,4 +231,4 @@ const PositionAdd = () => {
     )
 }
 
-export default PositionAdd
+export default EmployeeTypeAdd
