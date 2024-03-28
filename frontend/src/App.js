@@ -28,6 +28,7 @@ import EmployeeTypeAdd from './components/EmployeeType/EmployeeTypeAdd';
 import EmployeeTypeUpdate from './components/EmployeeType/EmployeeTypeUpdate';
 import DepartmentAdd from './components/Department/DepartmentAdd';
 import DepartmentList from './components/Department/DepartmentList';
+import DepartmentUpdate from './components/Department/DepartmentUpdate';
 function App() {
   return (
     <Routes>
@@ -58,7 +59,7 @@ function App() {
          
           <Route path='/api/department' element = {<DepartmentAdd/>}/>
           <Route path='/api/department/list' element = {<DepartmentList/>}/>
- 
+          <Route path='/api/department/edit/:id' element={<DepartmentUpdate/>}/>
 
         </Route>
       </Route>

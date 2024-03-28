@@ -138,7 +138,7 @@ const PositionAdd = () => {
                     <ol className='breadcrumb mb-4'>
                         <li className='breadcrumb-item'><Link to='/'> Tổng quan </Link></li>
                         <li className='breadcrumb-item'>Quản lý nhân viên</li>
-                        <li className='breadcrumb-item active'>hức vụ</li>
+                        <li className='breadcrumb-item active'>Chức vụ</li>
                     </ol>
                     <div className='card mb-4'>
                         <div className='card-header'>
