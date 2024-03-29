@@ -1,9 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 // import './css/styles.css'
 
 
 const Sidebar = () => {
+    const navigate = useNavigate()
+    const onHandleLogout = () => {
+        localStorage.removeItem('access_token');//xóa access token ra khỏi local storage
+        localStorage.removeItem('refresh_token');
+        navigate('/login');//chuyển hướng đăng nhập sang trang an toàn 
+    }
     return (
 
         <div id="layoutSidenav_nav">
@@ -87,7 +93,7 @@ const Sidebar = () => {
                         </a>
                         <div className="collapse" id="collapseSalary" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav className="sb-sidenav-menu-nested nav">
-                                <Link to='' className='nav-link'>Bảng  lương</Link>
+                                <Link to='' className='nav-link'>Bảng lương</Link>
                                 <Link to='' className='nav-link'>Tính lương</Link>
 
                             </nav>
@@ -133,7 +139,7 @@ const Sidebar = () => {
                         </div>
 
                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#CollapseAuth" aria-expanded="false" aria-controls="CollapseAuth">
-                            <div className='sb-nav-link-icon'><i className="fa-solid fa-user"></i> </div>
+                            <div className='sb-nav-link-icon'><i className="fa-solid fa-user"></i></div>
                             Tài khoản
                             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                         </a>
@@ -143,8 +149,8 @@ const Sidebar = () => {
                                 <Link to='/api/account/update' className="nav-link" > Thông tin tài khoản </Link>
                                 <Link to='/api/account/add' className="nav-link" >  Tạo tài khoản </Link>
                                 <Link to='/api/account' className="nav-link" > Danh sách tài khoản </Link>
-                                {/* <Link to='/resetpassword' className='nav-link'> Đổi mật khẩu </Link>
-                                <Link to='/login' className='nav-link'> Đăng xuất </Link> */}
+                                <Link to='/resetpassword' className='nav-link' onClick={onHandleLogout}> Đổi mật khẩu </Link>
+                                <Link to='/login' className='nav-link' onClick={onHandleLogout}> Đăng xuất </Link>
                             </nav>
                         </div>
                     </div>

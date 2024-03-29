@@ -35,4 +35,24 @@ export class SalaryController {
     async deleteSalary(@Param('id') id:string){
         return await this.salaryService.delete(Number(id))
     }
+
+    @Get('/calculate')
+    async calculateRealWage(
+        @Query('LuongThang') LuongThang: string,
+        @Query('NgayCong') NgayCong: string,
+      ): Promise<{ ThucLanh: number }> {
+        // Chuyển đổi dữ liệu nhập vào thành số
+        const monthlySalary = parseFloat(LuongThang);
+        const workingDays = parseFloat(NgayCong);
+    
+        // Kiểm tra xem liệu dữ liệu nhập vào có hợp lệ hay không
+        if (isNaN(monthlySalary) || isNaN(workingDays)) {
+          throw new Error('Invalid input data');
+        }
+    
+        // Tính toán lương thực lãnh
+        const ThucLanh = this.salaryService.calculateRealWage(monthlySalary, workingDays);
+        return { ThucLanh };
+      }
+    
 }

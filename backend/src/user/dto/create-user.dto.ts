@@ -16,7 +16,7 @@ export class CreateUserDto {
 
     birthplace:string
 
-    date_range:Date
+    date_range:string
 
     issued_by:string
 

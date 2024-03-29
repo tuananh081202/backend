@@ -135,4 +135,10 @@ export class SalaryService {
         return await this.salaryRepository.softDelete(id);
 
     }
+   
+    calculateRealWage(LuongThang: number, NgayCong: number): number {
+        const daysInMonth = 30; // Giả sử mỗi tháng có 30 ngày
+        return LuongThang * (NgayCong / daysInMonth);
+    }
+     
 }

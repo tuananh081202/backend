@@ -35,6 +35,27 @@ export class User{
     @Column()
     status:string
 
+    @Column()
+    date_range:string
+    
+    @Column()
+    issued_by:string
+    
+    @Column()
+    nationality:string
+    
+    @Column()
+    nation:string
+    
+    @Column()
+    religion:string
+
+    @Column()
+    household:string
+    
+    @Column()
+    shelter:string
+
     @CreateDateColumn()
     created_at:Date
 

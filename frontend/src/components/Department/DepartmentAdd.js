@@ -27,6 +27,7 @@ const DepartmentAdd = () => {
   const [showModal, setShowModal] = useState(false)
   const [refresh, setRefresh] = useState(Date.now())
   const { register, handleSubmit, setValue, trigger, formState: { errors } } = useForm();
+
   const columns = [
     {
       name: 'STT',
@@ -134,7 +135,7 @@ const DepartmentAdd = () => {
             <li className='breadcrumb-item'><Link>Tổng quan</Link></li>
             <li className='breadcrumb-item'>Quản lý phòng ban</li>
             <li className='breadcrumb-item active'>Phòng ban</li>
-            
+
           </ol>
           <div className='card mb-4'>
             <div className='card-header'>

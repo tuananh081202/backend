@@ -16,11 +16,15 @@ export class UpdateUserDto {
 
     birthplace:string
 
-    date_range:Date
+    date_range:string
 
     issued_by:string
 
     nationality:string
+
+    nation:string
+    
+    religion:string
 
     selter:string
     

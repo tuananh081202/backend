@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 
 const UserUpdate = () => {
     const dispatch = useDispatch()
-    const { register, setValue, trigger, handleSubmit, formState: { errors } } = useForm();
+    const { register, setValue, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate()
     const [image, SetImage] = useState('')
     const [employeetype, SetEmployeeType] = useState([])
@@ -46,7 +46,7 @@ const UserUpdate = () => {
 
                 const detailUser = await requestApi(`/api/user/${params.id}`, 'GET');
                 console.log("detailUser=>", detailUser)
-                const fields = ['maNV','image','name', 'gender', 'date_of_birth','birthplace','CMND', 'status'];
+                const fields = ['maNV','image','name', 'gender', 'date_of_birth','birthplace','CMND', 'status','date_range','issued_by','nationality','nation','religion','household','shelter'];
                 fields.forEach(field => {
 
                     setValue(field, detailUser.data[field])
@@ -133,9 +133,9 @@ const UserUpdate = () => {
                                                 <input {...register('CMND', { required: 'Số CMND là bắt buộc.' })} type='text' className='form-control' placeholder='Nhập CMND' />
                                                 {errors.CMND && <p style={{ color: 'red' }}>{errors.CMND.message}</p>}
                                             </div>
-                                            {/* <div className='mb-3 mt-3'>
+                                            <div className='mb-3 mt-3'>
                                                 <strong><label className='required'>Ngày cấp:</label></strong>
-                                                <input {...register('date_range', { required: 'Ngày cấp là bắt buộc.' })} type='text' className='form-control' placeholder='Nhập ngày cấp' />
+                                                <input {...register('date_range', { required: 'Ngày cấp là bắt buộc.' })} type='date' className='form-control' placeholder='Nhập ngày cấp' />
                                                 {errors.date_range && <p style={{ color: 'red' }}>{errors.date_range.message}</p>}
                                             </div>
                                             <div className='mb-3 mt-3'>
@@ -164,7 +164,7 @@ const UserUpdate = () => {
                                                 </select>
                                                 {errors.nation && <p style={{ color: 'red' }}>{errors.nation.message}</p>}
 
-                                            </div> */}
+                                            </div>
 
                                             <div className='mb-3 mt-3'>
                                                 <strong><label className='required'>Loại nhân viên:</label></strong>
@@ -214,7 +214,7 @@ const UserUpdate = () => {
                                                 {errors.birthplace && <p style={{ color: 'red' }}>{errors.birthplace.message}</p>}
                                             </div>
 
-                                            {/* <div className='mb-3 mt-3'>
+                                            <div className='mb-3 mt-3'>
                                                 <strong><label className='required'>Hộ khẩu:</label></strong>
                                                 <input {...register('household', { required: 'Hộ khẩu là bắt buộc.' })} type='text' className='form-control' placeholder='Nhập hộ khẩu' />
                                                 {errors.household && <p style={{ color: 'red' }}>{errors.household.message}</p>}
@@ -224,7 +224,7 @@ const UserUpdate = () => {
                                                 <strong><label className='form-label'>Tạm trú:</label></strong>
                                                 <input {...register('shelter')} type='text' className='form-control' placeholder='Nhập hộ khẩu' />
 
-                                            </div> */}
+                                            </div>
 
                                             <div className='mb-3 mt-3'>
                                                 <strong><label className='required'>Chức vụ:</label></strong>
@@ -237,7 +237,7 @@ const UserUpdate = () => {
                                                 {errors.position && <p style={{ color: 'red' }}>{errors.position.message}</p>}
                                             </div>
 
-                                            {/* <div className='mb-3 mt-3'>
+                                            <div className='mb-3 mt-3'>
                                                 <strong><label className='form-label'>Bằng cấp:</label></strong>
                                                 <select {...register('position', { required: 'chọn bằng cấp' })} className='form-select'>
                                                     <option value="">--Chọn bằng cấp--</option>
@@ -246,7 +246,7 @@ const UserUpdate = () => {
                                                     })}
                                                 </select>
                                                 {errors.position && <p style={{ color: 'red' }}>{errors.position.message}</p>}
-                                            </div> */}
+                                            </div>
 
 
 
