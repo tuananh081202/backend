@@ -1,14 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, In, Repository, UpdateResult } from 'typeorm';
 import { Salary } from './entities/salary.entity';
 import { CreateSalaryDto } from './dto/create-salary.dto';
 import { FilterSalaryDto } from './dto/filter-salary.dto';
 import { UpdateSalaryDto } from './dto/update-salary.dto';
+// import { Position } from 'src/position/entities/position.entity';
 
 @Injectable()
 export class SalaryService {
-    constructor(@InjectRepository(Salary) private salaryRepository: Repository<Salary>) { }
+    constructor(
+    @InjectRepository(Salary)
+    private salaryRepository: Repository<Salary>,
+    // @InjectRepository(Position)
+    // private readonly positionRepository: Repository<Position>,
+     ) { }
 
     async create(CreateSalaryDto: CreateSalaryDto): Promise<Salary> {
         return await this.salaryRepository.save(CreateSalaryDto)
@@ -46,6 +52,9 @@ export class SalaryService {
                 'salary.LuongThang',
                 'salary.NgayCong',
                 'salary.ThucLanh',
+                'salary.PhuCap',
+                'salary.TamUng',
+                'salary.NgayTinhLuong',
                 'salary.created_at',
                 'salary.updated_at',
                 'position.id',
@@ -97,6 +106,9 @@ export class SalaryService {
                 LuongThang: true,
                 NgayCong: true,
                 ThucLanh: true,
+                PhuCap: true,
+                TamUng:true,
+                NgayTinhLuong:true,
                 created_at: true,
                 updated_at: true,
                 position: {
@@ -135,10 +147,28 @@ export class SalaryService {
         return await this.salaryRepository.softDelete(id);
 
     }
+
+    // async getSalaryPerDay(id: number): Promise<number> {
+    //     try {
+    //       // Thực hiện truy vấn để lấy mức lương theo ngày từ bảng position
+    //       const position = await this.positionRepository.findOne({where:{id}});
+    
+    //       // Kiểm tra xem mức lương theo ngày có tồn tại không
+    //       if (!position || !position.salary) {
+    //         throw new Error('Salary per day not found');
+    //       }
+    
+    //       // Trả về mức lương theo ngày
+    //       return position.salary;
+    //     } catch (error) {
+    //       console.error('Error fetching salary per day:', error);
+    //       throw new Error('Internal server error');
+    //     }
+    //   }
+
+    
+    
    
-    calculateRealWage(LuongThang: number, NgayCong: number): number {
-        const daysInMonth = 30; // Giả sử mỗi tháng có 30 ngày
-        return LuongThang * (NgayCong / daysInMonth);
-    }
+    
      
 }

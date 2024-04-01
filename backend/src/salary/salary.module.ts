@@ -4,6 +4,7 @@ import { Salary } from './entities/salary.entity';
 import { ConfigModule } from '@nestjs/config';
 import { SalaryController } from './salary.controller';
 import { SalaryService } from './salary.service';
+import { Position } from 'src/position/entities/position.entity';
 
 @Module({
     imports:[

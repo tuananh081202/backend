@@ -36,23 +36,27 @@ export class SalaryController {
         return await this.salaryService.delete(Number(id))
     }
 
-    @Get('/calculate')
-    async calculateRealWage(
-        @Query('LuongThang') LuongThang: string,
-        @Query('NgayCong') NgayCong: string,
-      ): Promise<{ ThucLanh: number }> {
-        // Chuyển đổi dữ liệu nhập vào thành số
-        const monthlySalary = parseFloat(LuongThang);
-        const workingDays = parseFloat(NgayCong);
+    // @Post('calculate')
+    // async calculateSalary(@Body()  data: any): Promise<any> {
+    //   try {
+    //     const { NgayCong, PhuCap,TamUng, id } = data;
+  
+    //     // Lấy mức lương theo ngày từ bảng position
+    //     const salary = await this.salaryService.getSalaryPerDay(id);
+  
+    //     // Tính toán tổng lương
+    //     const totalSalary = parseFloat(NgayCong) * salary + parseFloat(PhuCap) - parseFloat(TamUng);
+  
+    //     // Trả về kết quả tính toán
+    //     return { totalSalary };
+    //   } catch (error) {
+    //     console.error('Error calculating total salary:', error);
+    //     throw new Error('Internal server error');
+    //   }
+    // }
+
+   
+   
     
-        // Kiểm tra xem liệu dữ liệu nhập vào có hợp lệ hay không
-        if (isNaN(monthlySalary) || isNaN(workingDays)) {
-          throw new Error('Invalid input data');
-        }
-    
-        // Tính toán lương thực lãnh
-        const ThucLanh = this.salaryService.calculateRealWage(monthlySalary, workingDays);
-        return { ThucLanh };
-      }
     
 }

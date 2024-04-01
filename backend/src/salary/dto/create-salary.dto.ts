@@ -21,7 +21,7 @@ export class CreateSalaryDto {
 
     TamUng: number
 
-    NgayTinhLuong: Date
+    NgayTinhLuong: string
 
     MoTa:string
 

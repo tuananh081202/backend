@@ -44,7 +44,7 @@ const PositionAdd = () => {
             element: row => row.degree
         },
         {
-            name: "Lương ngày",
+            name: "Lương ngày (VND)",
             element: row => row.salary
         },
         {
@@ -165,7 +165,7 @@ const PositionAdd = () => {
                                             {errors.degree && <p style={{ color: 'red' }}>{errors.degree.message}</p>}
                                         </div>
                                         <div className='mb-3 mt-3'>
-                                            <label className='form-label'>Lương ngày:</label>
+                                            <label className='form-label'>Lương ngày (VND):</label>
                                             <input {...register('salary')} type='text' className='form-control' placeholder='Nhập lương /ngày' />
                                             {errors.namePosition && <p style={{ color: 'red' }}>{errors.namePosition.message}</p>}
                                         </div>

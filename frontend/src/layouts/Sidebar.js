@@ -93,8 +93,8 @@ const Sidebar = () => {
                         </a>
                         <div className="collapse" id="collapseSalary" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav className="sb-sidenav-menu-nested nav">
-                                <Link to='' className='nav-link'>Bảng lương</Link>
-                                <Link to='' className='nav-link'>Tính lương</Link>
+                                <Link to='/api/salary' className='nav-link'>Bảng lương</Link>
+                                <Link to='/api/salary/add' className='nav-link'>Tính lương</Link>
 
                             </nav>
                         </div>

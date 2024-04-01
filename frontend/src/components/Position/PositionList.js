@@ -36,8 +36,8 @@ const PositionList = () => {
             element: row => row.degree
         },
         {
-            name: "Lương ngày",
-            element: row => row.salary
+            name: "Lương ngày (VND)",
+            element: row => row.salary 
         },
         {
             name: "Mô tả",

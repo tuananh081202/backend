@@ -21,7 +21,13 @@ export class Salary {
     ThucLanh: number
 
     @Column()
-    NgayChamCong: string
+    PhuCap: number
+    
+    @Column()
+    TamUng: number
+
+    @Column()
+    NgayTinhLuong: string
 
     @CreateDateColumn()
     created_at: Date
