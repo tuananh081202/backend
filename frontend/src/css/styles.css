@@ -11306,6 +11306,29 @@ footer {
   border-width: 0 1px;
 }
 
+.scheduled {
+  background-color: orange;
+  color: white;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.in-progress {
+  background-color: green;
+  color: white;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.completed {
+  background-color: gray;
+  color: white;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+
+
 
 
 

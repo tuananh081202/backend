@@ -11,16 +11,19 @@ export class Trip {
     MaCongTac:string
     
     @Column()
-    NgayBatDau:Date
+    NgayBatDau:string
 
     @Column()
-    NgayKetThuc:Date
+    NgayKetThuc:string
 
     @Column()
     DiaDiem:string
 
     @Column({default:'textlong'})
     MucDich:string
+
+    @Column()
+    TrangThai:string
 
     @CreateDateColumn()
     created_at:Date

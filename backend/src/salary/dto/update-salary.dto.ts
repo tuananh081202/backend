@@ -17,5 +17,15 @@ export class UpdateSalaryDto {
 
     ThucLanh:number
 
+    PhuCap: number
+
+    TamUng: number
+
+    NgayTinhLuong: string
+
+    description:string
+
+    NguoiTao:string
+
 
 }

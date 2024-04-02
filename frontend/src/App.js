@@ -32,6 +32,11 @@ import DepartmentUpdate from './components/Department/DepartmentUpdate';
 import DepartmentDetail from './components/Department/DepartmentDetail';
 import SalaryList from './components/Salary/SalaryList';
 import SalaryAdd from './components/Salary/SalaryAdd';
+import SalaryUpdate from './components/Salary/SalaryUpdate';
+import SalaryDetail from './components/Salary/SalaryDetail';
+import TripList from './components/Trip/TripList';
+import TripAdd from './components/Trip/TripAdd';
+import TripUpdate from './components/Trip/TripUpdate';
 function App() {
   return (
     <Routes>
@@ -67,6 +72,12 @@ function App() {
           
           <Route path='/api/salary' element = {<SalaryList/>}/>
           <Route path='/api/salary/add' element = {<SalaryAdd/>}/>
+          <Route path='/api/salary/edit/:id' element = {<SalaryUpdate/>}/>
+          <Route path='/api/salary/detail' element = {<SalaryDetail/>}/>
+
+          <Route path='/api/trip' element = {<TripList/>}/>
+          <Route path='/api/trip/add' element = {<TripAdd/>}/>
+          <Route path='/api/trip/edit/:id' element = {<TripUpdate/>}/>
         </Route>
       </Route>
       <Route element={<PublicRoutes />}>

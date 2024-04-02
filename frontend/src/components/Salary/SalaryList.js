@@ -58,7 +58,7 @@ const SalaryList = () => {
             name: "Xem",
             element: row => (
                 <>
-                    <Link to={`/api/salary/${row.id}`} className='btn btn-sm btn-info me-1'><i class="fa-solid fa-eye"></i></Link>
+                    <Link to={`/api/salary/detail`} className='btn btn-sm btn-info me-1'><i class="fa-solid fa-eye"></i></Link>
                 </>
             )
         },

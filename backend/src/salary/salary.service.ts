@@ -5,15 +5,15 @@ import { Salary } from './entities/salary.entity';
 import { CreateSalaryDto } from './dto/create-salary.dto';
 import { FilterSalaryDto } from './dto/filter-salary.dto';
 import { UpdateSalaryDto } from './dto/update-salary.dto';
-// import { Position } from 'src/position/entities/position.entity';
+import { Position } from 'src/position/entities/position.entity';
 
 @Injectable()
 export class SalaryService {
     constructor(
     @InjectRepository(Salary)
     private salaryRepository: Repository<Salary>,
-    // @InjectRepository(Position)
-    // private readonly positionRepository: Repository<Position>,
+    @InjectRepository(Position)
+    private readonly positionRepository: Repository<Position>,
      ) { }
 
     async create(CreateSalaryDto: CreateSalaryDto): Promise<Salary> {
@@ -28,7 +28,7 @@ export class SalaryService {
         if (query.search) {
             const search = query.search
             result
-                .where('(salary.MaLuong LIKE :search OR salary.LuongThanh LIKE :search )', { search: `%${search}` })
+                .where('(salary.MaLuong LIKE :search OR salary.LuongThang LIKE :search )', { search: `%${search}` })
         }
         if (query.position) {
             const positionId = Number(query.position)
@@ -42,7 +42,7 @@ export class SalaryService {
         result
             .leftJoinAndSelect('salary.position', 'position')
             .leftJoinAndSelect('salary.user', 'user')
-            .orderBy('position.create_at', 'DESC')
+            .orderBy('position.created_at', 'DESC')
             .orderBy('user.created_at', 'DESC')
             .skip(skip)
             .take(items_per_page)
@@ -55,6 +55,8 @@ export class SalaryService {
                 'salary.PhuCap',
                 'salary.TamUng',
                 'salary.NgayTinhLuong',
+                'salary.description',
+                'salary.NguoiTao',
                 'salary.created_at',
                 'salary.updated_at',
                 'position.id',
@@ -109,6 +111,8 @@ export class SalaryService {
                 PhuCap: true,
                 TamUng:true,
                 NgayTinhLuong:true,
+                description:true,
+                NguoiTao:true,
                 created_at: true,
                 updated_at: true,
                 position: {
@@ -148,23 +152,23 @@ export class SalaryService {
 
     }
 
-    // async getSalaryPerDay(id: number): Promise<number> {
-    //     try {
-    //       // Thực hiện truy vấn để lấy mức lương theo ngày từ bảng position
-    //       const position = await this.positionRepository.findOne({where:{id}});
+    async getSalaryPerDay(id: number): Promise<number> {
+        try {
+          // Thực hiện truy vấn để lấy mức lương theo ngày từ bảng position
+          const position = await this.positionRepository.findOne({ where: { id} });
     
-    //       // Kiểm tra xem mức lương theo ngày có tồn tại không
-    //       if (!position || !position.salary) {
-    //         throw new Error('Salary per day not found');
-    //       }
+          // Kiểm tra xem mức lương theo ngày có tồn tại không
+          if (!position || !position.salary) {
+            throw new Error('Salary per day not found');
+          }
     
-    //       // Trả về mức lương theo ngày
-    //       return position.salary;
-    //     } catch (error) {
-    //       console.error('Error fetching salary per day:', error);
-    //       throw new Error('Internal server error');
-    //     }
-    //   }
+          // Trả về mức lương theo ngày
+          return position.salary;
+        } catch (error) {
+          console.error('Error fetching salary per day:', error);
+          throw new Error('Internal server error');
+        }
+      }
 
     
     

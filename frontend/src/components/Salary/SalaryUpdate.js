@@ -1,44 +1,62 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-import * as actions from '../../redux/actions'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import requestApi from '../../helpers/Api';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
+import * as actions from '../../redux/actions'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import CustomUploadAdapter from '../../helpers/CustomUploadAdapter'
+import CustomUploadAdapter from '../../helpers/CustomUploadAdapter';
 
-const SalaryAdd = () => {
+const SalaryUpdate = () => {
     const dispatch = useDispatch()
-    const { register, setValue, trigger, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate()
+    const [salaryData, setSalaryData] = useState([])
+    const { register, handleSubmit, setValue, trigger, formState: { errors } } = useForm()
+    const params = useParams()
     const [user, setUser] = useState([])
     const [position, setPosition] = useState([])
-
-    const handleSubmitFormAdd = async (data) => {
+    const handleSubmitFormUpdate = async (data) => {
         console.log('data form=>', data)
-
         dispatch(actions.controlLoading(true))
         try {
-            //Gọi api lấy thông tin lương từ bảng position
-            const positionId = data.position
-            const respone = await requestApi(`/api/position/${positionId}`,'GET',data);
-            const salaryPerDay = respone.data.salary
-            //Tính tổng lương
             
-            const totalSalary = parseFloat(data.NgayCong) * salaryPerDay + parseFloat(data.PhuCap) - parseFloat(data.TamUng);
-            const res = await requestApi('/api/salary/create', 'POST',{ ...data, ThucLanh: totalSalary },'json' );
+            const res = await requestApi(`/api/salary/${params.id}`, 'PUT', data, 'json')
             console.log('res=>', res)
             dispatch(actions.controlLoading(false))
-            toast.success('Tính lương thành công !!!', { position: 'top-center', autoClose: 2000 })
+            toast.success('Cập nhật bảng lương thành công!!!', { position: 'top-center', autoClose: 2000 })
             setTimeout(() => navigate('/api/salary'), 3000)
         } catch (error) {
-            console.log('error=> ', error)
+            console.log('error', error)
             dispatch(actions.controlLoading(false))
+
         }
     }
+    useEffect(() => {
+        dispatch(actions.controlLoading(true))
+        try {
+            const renderData = async () => {
 
+                const detailSalary = await requestApi(`/api/salary/${params.id}`, 'GET');
+                console.log("detailSalary=>", detailSalary)
+                const fields = ['MaLuong', 'LuongThang', 'NgayCong', 'NgayTinhLuong'];
+                fields.forEach(field => {
+
+                    setValue(field, detailSalary.data[field])
+                })
+                setSalaryData({ ...detailSalary.data })
+                dispatch(actions.controlLoading(false))
+
+            }
+            renderData();
+        } catch (err) {
+            console.log('err=>', err)
+            dispatch(actions.controlLoading(false))
+        }
+    }, [])
 
     useEffect(() => {
         dispatch(actions.controlLoading(true))
@@ -69,20 +87,21 @@ const SalaryAdd = () => {
             return new CustomUploadAdapter(loader)
         }
     }
+
     return (
-        <div id="layoutSidenav_content">
+        <div id='layoutSidenav_content'>
             <main>
-                <div className="container-fluid px-4">
-                    <h3 className="mt-4">Tính lương</h3>
-                    <ol className="breadcrumb mb-4">
-                        <li className='breadcrumb-item'><Link to='/'><small>Tổng quan</small></Link></li>
-                        <li className='breadcrumb-item'><small>Tính lương</small></li>
-                        <li className="breadcrumb-item active"><small>Tính lương nhân viên</small></li>
+                <div className='container-fluid px-4'>
+                    <h3 className='mt-4'>Cập nhật lương</h3>
+                    <ol className='breadcrumb mb-4'>
+                        <li className='breadcrumb-item'><Link to='/'>Tổng quan</Link></li>
+                        <li className='breadcrumb-item'>Bảng lương</li>
+                        <li className='breadcrumb-item active'>Cập nhật lương</li>
                     </ol>
                     <div className='card mb-4'>
                         <div className='card-header'>
-
-                            Tính lương nhân viên &nbsp;    <small >Những ô nhập có dấu<strong className='required'></strong> là bắt buộc </small>
+                            <i className='fas fa-plus me-1'></i>
+                            Cập nhật lương
                         </div>
                         <div className='card-body'>
                             <div className='row mb-3'>
@@ -118,7 +137,7 @@ const SalaryAdd = () => {
                                             </div>
 
                                             <div className='mb-3 mt-3'>
-                                                <strong><label className='required'>Số ngày công: </label></strong>
+                                                <strong><label className='required'>Số ngày công:</label></strong>
                                                 <input  {...register('NgayCong', { required: 'Lương tháng là bắt buộc' })} type='text' className='form-control' placeholder='Nhập số ngày công' />
                                                 {errors.NgayCong && <p style={{ color: 'red' }}>{errors.NgayCong.message}</p>}
                                             </div>
@@ -193,7 +212,7 @@ const SalaryAdd = () => {
 
 
                                     </div>
-                                    <button type='button' onClick={handleSubmit(handleSubmitFormAdd)} className='btn btn-info'><i class="fa-solid fa-money-bill"></i> Tính lương nhân viên</button>
+                                    <button type='button' onClick={handleSubmit(handleSubmitFormUpdate)} className='btn btn-info'><i class="fa-solid fa-money-bill"></i> Cập nhật lương nhân viên</button>
                                 </form>
 
                             </div>
@@ -205,4 +224,4 @@ const SalaryAdd = () => {
     )
 }
 
-export default SalaryAdd
+export default SalaryUpdate

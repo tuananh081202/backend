@@ -36,24 +36,24 @@ export class SalaryController {
         return await this.salaryService.delete(Number(id))
     }
 
-    // @Post('calculate')
-    // async calculateSalary(@Body()  data: any): Promise<any> {
-    //   try {
-    //     const { NgayCong, PhuCap,TamUng, id } = data;
+    @Post('calculate')
+    async calculateSalary(@Body()  data: any): Promise<any> {
+      try {
+        const { NgayCong, PhuCap,TamUng, id } = data;
   
-    //     // Lấy mức lương theo ngày từ bảng position
-    //     const salary = await this.salaryService.getSalaryPerDay(id);
+        // Lấy mức lương theo ngày từ bảng position
+        const salary = await this.salaryService.getSalaryPerDay(id);
   
-    //     // Tính toán tổng lương
-    //     const totalSalary = parseFloat(NgayCong) * salary + parseFloat(PhuCap) - parseFloat(TamUng);
+        // Tính toán tổng lương
+        const totalSalary = parseFloat(NgayCong) * salary + parseFloat(PhuCap) - parseFloat(TamUng);
   
-    //     // Trả về kết quả tính toán
-    //     return { totalSalary };
-    //   } catch (error) {
-    //     console.error('Error calculating total salary:', error);
-    //     throw new Error('Internal server error');
-    //   }
-    // }
+        // Trả về kết quả tính toán
+        return { totalSalary };
+      } catch (error) {
+        console.error('Error calculating total salary:', error);
+        throw new Error('Internal server error');
+      }
+    }
 
    
    

@@ -8,7 +8,7 @@ import { Position } from 'src/position/entities/position.entity';
 
 @Module({
     imports:[
-        TypeOrmModule.forFeature([Salary]),
+        TypeOrmModule.forFeature([Salary,Position]),
         ConfigModule,
     ],
     controllers:[SalaryController],

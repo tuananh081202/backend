@@ -5,9 +5,9 @@ export class UpdateTripDto {
 
     MaCongTac:string
 
-    NgayBatDau:Date
+    NgayBatDau:string
 
-    NgayKetThuc:Date
+    NgayKetThuc:string
 
     DiaDiem:string
 
@@ -16,5 +16,7 @@ export class UpdateTripDto {
     position!:Position
 
     user!:User
+
+    TrangThai:string
 
 }

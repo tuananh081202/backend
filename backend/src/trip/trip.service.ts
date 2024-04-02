@@ -21,7 +21,7 @@ export class TripService {
         if (query.search) {
             const search = query.search
             result
-                .where('(trip.tenNV LIKE :search OR trip.id LIKE :search )', { search: `%${search}` })
+                .where('(trip.MaCongTac LIKE :search OR trip.id LIKE :search )', { search: `%${search}` })
         }
         if (query.position) {
             const positionId = Number(query.position)
@@ -46,6 +46,7 @@ export class TripService {
                 'trip.NgayKetThuc',
                 'trip.DiaDiem',
                 'trip.MucDich',
+                'trip.TrangThai',
                 'trip.created_at',
                 'trip.updated_at',
                 'position.id',
@@ -98,6 +99,7 @@ export class TripService {
                 NgayKetThuc: true,
                 DiaDiem: true,
                 MucDich: true,
+                TrangThai:true, 
                 created_at: true,
                 updated_at: true,
                 position: {

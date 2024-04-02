@@ -5,13 +5,15 @@ export class CreateTripDto {
 
     MaCongTac:string
 
-    NgayBatDau:Date
+    NgayBatDau:string
 
-    NgayKetThuc:Date
+    NgayKetThuc:string
 
     DiaDiem:string
 
     MucDich:string
+
+    TrangThai:string
 
     position!:Position
 

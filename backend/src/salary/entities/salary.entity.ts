@@ -29,6 +29,12 @@ export class Salary {
     @Column()
     NgayTinhLuong: string
 
+    @Column()
+    description: string
+
+    @Column()
+    NguoiTao: string
+
     @CreateDateColumn()
     created_at: Date
 
