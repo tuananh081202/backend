@@ -156,7 +156,7 @@ const TripList = () => {
                         <li className='breadcrumb-item active'>Danh sách công tác</li>
                     </ol>
                     <div className='mb-3'>
-                        <Link className='btn btn-sm btn-success me-2' to='/api/trip/add'><i class="fa-solid fa-plus"></i>Tạo công tác</Link>
+                        <Link className='btn btn-sm btn-success me-2' to='/api/trip/add'><i class="fa-solid fa-plus"></i> Tạo công tác </Link>
                         <CSVLink
                             filename={'trip.csv'}
                             className='btn btn-sm btn-primary me-1'
@@ -164,7 +164,7 @@ const TripList = () => {
                             target='_blank'
                             asyncOnClick={true}
                             onClick={(event, done) => getTripExport(event, done)}
-                        ><i className='fa-solid fa-file-arrow-down'></i>Xuất Excel</CSVLink>
+                        ><i className='fa-solid fa-file-arrow-down'></i> Xuất Excel </CSVLink>
 
                     </div>
                     <Table

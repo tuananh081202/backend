@@ -5,7 +5,7 @@ import { CreateGroupuserDto } from './dto/create-groupuser.dto';
 import { GroupUser } from './entities/groupuser.entity';
 import { FilterGroupUserDto } from './dto/filter-groupuser.dto';
 import { UpdateGroupuserDto } from './dto/update-groupuser.dto';
-import * as fs from 'fs'
+// import * as fs from 'fs'
 
 @Injectable()
 export class GroupuserService {
@@ -36,10 +36,13 @@ export class GroupuserService {
             .take(items_per_page)
             .select([
                 'groupuser.id',
-                'groupuser.MaNV',
+                'groupuser.MaNhom',
+                'groupuser.TenNhom',
                 'groupuser.image',
                 'groupuser.GioiTinh',
                 'groupuser.NamSinh',
+                'groupuser.MoTa',
+                'groupuser.createdBy',
                 'groupuser.status',
                 'groupuser.created_at',
                 'groupuser.updated_at',
@@ -78,10 +81,13 @@ export class GroupuserService {
             },
             select: {
                 id: true,
-                MaNV: true,
+                MaNhom:true,
+                TenNhom:true,
                 image: true,
                 GioiTinh: true,
                 NamSinh: true,
+                MoTa:true,
+                createdBy:true,
                 status: true,
                 created_at: true,
                 updated_at: true,
@@ -102,31 +108,31 @@ export class GroupuserService {
     }
 
     async update(id:number,UpdateGroupuserDto:UpdateGroupuserDto ):Promise<UpdateResult>{
-        const groupuser = await this.GroupUserRepository.findOneBy({id})
-        if(!groupuser){
-            throw new NotFoundException('Không cập nhật được !')
-        }
-        if(UpdateGroupuserDto.image){
-            const imagePath = groupuser.image
-            if(fs.existsSync(imagePath)){
+        // const groupuser = await this.GroupUserRepository.findOneBy({id})
+        // if(!groupuser){
+        //     throw new NotFoundException('Không cập nhật được !')
+        // }
+        // if(UpdateGroupuserDto.image){
+        //     const imagePath = groupuser.image
+        //     if(fs.existsSync(imagePath)){
 
-                fs.unlinkSync(imagePath);
-            }
-        }
-        return await this.GroupUserRepository.update(id ,UpdateGroupuserDto)
+        //         fs.unlinkSync(imagePath);
+        //     }
+        // }
+        return await this.GroupUserRepository.update(id, UpdateGroupuserDto)
     }
 
     async delete(id: number): Promise<DeleteResult>{
-        const groupuser = await this.GroupUserRepository.findOneBy({ id })
+        // const groupuser = await this.GroupUserRepository.findOneBy({ id })
 
-        if(!groupuser) {
-            throw new NotFoundException('Không xóa được nhóm nhân viên')
-        }
-        const imagePath = groupuser.image;
-        if( fs.existsSync(imagePath)) {
+        // if(!groupuser) {
+        //     throw new NotFoundException('Không xóa được nhóm nhân viên')
+        // }
+        // const imagePath = groupuser.image;
+        // if( fs.existsSync(imagePath)) {
 
-            fs.unlinkSync(imagePath)
-        }
+        //     fs.unlinkSync(imagePath)
+        // }
         return await this.GroupUserRepository.softDelete({id})
 
 

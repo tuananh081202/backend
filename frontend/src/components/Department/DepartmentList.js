@@ -168,7 +168,7 @@ const DepartmentList = () => {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-xl-3 col-md-6">
+                        <div className="col-xl-3 col-md-6" >
                             <div className="card bg-secondary text-white mb-4">
                                 <div className="card-body">Phòng hành chính</div>
                                 <div className="card-footer d-flex align-items-center justify-content-between">
@@ -176,6 +176,7 @@ const DepartmentList = () => {
                                     <div className="small text-white"><i className="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
+                            
                         </div>
                         <div className="col-xl-3 col-md-6">
                             <div className="card bg-info text-white mb-4">
@@ -229,7 +230,7 @@ const DepartmentList = () => {
                             </div>
                         </div>
                     </div>
-                    {/* <Table
+                    <Table
                         name="Danh sách phòng ban"
                         data={department}
                         columns={columns}
@@ -246,7 +247,7 @@ const DepartmentList = () => {
                             console.log('selected row in uselist=>', rows)
                             setSelectedRows(rows)
                         }}
-                    /> */}
+                    />
 
 
                 </div>

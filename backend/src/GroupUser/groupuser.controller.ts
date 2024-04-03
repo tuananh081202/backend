@@ -45,7 +45,7 @@ export class GroupuserController {
         return this.GroupuserService.create({ ...createGroupuserDto, image: file.destination + '/' + file.filename });
         
     }
-    
+
     @Get('')
     async findAll(@Query() query:FilterGroupUserDto):Promise<any>{
         return await this.GroupuserService.findAll(query)
@@ -57,33 +57,28 @@ export class GroupuserController {
     }
 
     @Put(':id')
-    @UseInterceptors(FileInterceptor('image', {
-        storage: storageConfig('groupuser'),
-        fileFilter: (req, file, cb) => {
-            const ext = extname(file.originalname);
-            const allowedExtArr = ['.jpg', '.pneg', '.png']
-            if (!allowedExtArr.includes(ext)) {
-                req.fileValidationError = `Accept file ext are:${allowedExtArr.toString()} `
-                cb(null, false)
-            } else {
-                const fileSize = parseInt(req.headers['content-length'])
-                if (fileSize > 1024 * 1024 * 5) {
-                    req.fileValidationError = 'File size is to large.Accpet file size is less than 5MB'
-                    cb(null, false)
-                } else {
-                    cb(null, true)
-                }
-            }
-        }
-    }))
-    async update(@Param('id') id: string, @Body() UpdateGroupuserDto: UpdateGroupuserDto, @Req() req: any, @UploadedFile() file: Express.Multer.File) {
-        if (req.fileValidationError) {
-            throw new BadRequestException(req.fileValidationError)
-        }
-        if (file) {
-            UpdateGroupuserDto.image = file.destination + '/' + file.filename
-        }
-        return this.GroupuserService.update(Number(id), UpdateGroupuserDto)
+    // @UseInterceptors(FileInterceptor('image', {
+    //     storage: storageConfig('groupuser'),
+    //     fileFilter: (req, file, cb) => {
+    //         const ext = extname(file.originalname);
+    //         const allowedExtArr = ['.jpg', '.pneg', '.png']
+    //         if (!allowedExtArr.includes(ext)) {
+    //             req.fileValidationError = `Accept file ext are:${allowedExtArr.toString()} `
+    //             cb(null, false)
+    //         } else {
+    //             const fileSize = parseInt(req.headers['content-length'])
+    //             if (fileSize > 1024 * 1024 * 5) {
+    //                 req.fileValidationError = 'File size is to large.Accpet file size is less than 5MB'
+    //                 cb(null, false)
+    //             } else {
+    //                 cb(null, true)
+    //             }
+    //         }    
+    //     }
+    // }))
+    async update(@Param('id') id: string, @Body() UpdateGroupuserDto: UpdateGroupuserDto) {
+        
+        return await this.GroupuserService.update(Number(id), UpdateGroupuserDto)
     }
     
     @Delete(':id')

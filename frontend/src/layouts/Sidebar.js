@@ -119,8 +119,8 @@ const Sidebar = () => {
                         </a>
                         <div className="collapse" id="collapseCart" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav className="sb-sidenav-menu-nested nav">
-                                <Link to='' className='nav-link'>Tạo nhóm</Link>
-                                <Link to='' className='nav-link'>Danh sách nhóm</Link>
+                                <Link to='/api/groupuser/create' className='nav-link'>Tạo nhóm</Link>
+                                <Link to='/api/groupuser' className='nav-link'>Danh sách nhóm</Link>
 
                             </nav>
                         </div>

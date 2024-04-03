@@ -37,6 +37,11 @@ import SalaryDetail from './components/Salary/SalaryDetail';
 import TripList from './components/Trip/TripList';
 import TripAdd from './components/Trip/TripAdd';
 import TripUpdate from './components/Trip/TripUpdate';
+import GroupUserList from './components/GroupUser/GroupUserList';
+import GroupUserCreate from './components/GroupUser/GroupUserCreate';
+import GroupUserUpdate from './components/GroupUser/GroupUserUpdate';
+import GroupAdd from './components/GroupUser/GroupAdd';
+
 function App() {
   return (
     <Routes>
@@ -78,6 +83,13 @@ function App() {
           <Route path='/api/trip' element = {<TripList/>}/>
           <Route path='/api/trip/add' element = {<TripAdd/>}/>
           <Route path='/api/trip/edit/:id' element = {<TripUpdate/>}/>
+
+          <Route path='/api/groupuser' element = {<GroupUserList/>}/>
+          <Route path='/api/groupuser/create' element = {<GroupUserCreate/>}/>
+          <Route path='/api/groupuser/add' element = {<GroupAdd/>}/>
+          <Route path='/api/groupuser/edit/:id' element = {<GroupUserUpdate/>}/>
+          
+
         </Route>
       </Route>
       <Route element={<PublicRoutes />}>

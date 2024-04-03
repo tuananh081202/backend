@@ -1,3 +1,4 @@
+import { CONFIGURABLE_MODULE_ID } from "@nestjs/common/module-utils/constants";
 import { User } from "src/user/entities/user.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
@@ -5,9 +6,12 @@ import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryG
 export class GroupUser {
     @PrimaryGeneratedColumn()
     id: number
+ 
+    @Column()
+    MaNhom:string
 
     @Column()
-    MaNV: string
+    TenNhom:string
 
     @Column()
     image: string
@@ -16,19 +20,19 @@ export class GroupUser {
     GioiTinh: string
 
     @Column()
-    NamSinh: Date
-
-    @CreateDateColumn()
-    created_at: Date
+    NamSinh: string
+    
+    @Column()
+    MoTa:string
+    
+    @Column()
+    createdBy:string
 
     @Column()
     status: string
 
-    @ManyToOne(() => User, (user) => user.groupuser,
-        {
-            onDelete: 'CASCADE'
-        })
-    user: User;
+    @CreateDateColumn()
+    created_at: Date
 
     @UpdateDateColumn()
     updated_at: Date
@@ -36,6 +40,11 @@ export class GroupUser {
     @DeleteDateColumn()
     deleted_at: Date
 
+    @ManyToOne(() => User, (user) => user.groupuser,
+    {
+        onDelete: 'CASCADE'
+    })
+    user: User;
 
 
 }

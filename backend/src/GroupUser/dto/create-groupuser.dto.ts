@@ -9,15 +9,13 @@ export class CreateGroupuserDto {
 
     createdBy:string
 
-    MaNV:string
-
     image:string
 
     user!:User
 
     GioiTinh:string
 
-    NamSinh:Date
+    NamSinh:string
 
     status:string
 

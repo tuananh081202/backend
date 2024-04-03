@@ -1,15 +1,13 @@
-import { User } from "src/user/entities/user.entity"
+// import { User } from "src/user/entities/user.entity"
 
 export class UpdateGroupuserDto {
-    MaNV: string
+    MaNhom:string
 
-    image: string
+    TenNhom:string
 
-    GioiTinh: string
+    MoTa:string
 
-    NamSinh: Date
-
-    status: string
-
-    user?:User
+    NguoiTao:string
+    
+    created_at:Date
 }
