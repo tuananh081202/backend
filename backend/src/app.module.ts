@@ -13,6 +13,7 @@ import { SalaryModule } from './salary/salary.module';
 import { TripModule } from './trip/trip.module';
 import { GroupuserModule } from './GroupUser/groupuser.module';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { RewardModule } from './reward/reward.module';
 
 
 @Module({
@@ -26,9 +27,10 @@ import { MailerModule } from '@nestjs-modules/mailer';
     SalaryModule,
     TripModule,
     GroupuserModule,
-    MailerModule
+    MailerModule,
+    RewardModule
   ],
   controllers: [AppController ],
-  providers: [AppService,  ],
+  providers: [AppService   ],
 })
 export class AppModule {}

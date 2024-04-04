@@ -4,6 +4,7 @@ import { Account } from "src/account/entities/account.entity";
 import { Position } from "src/position/entities/position.entity";
 import { Salary } from "src/salary/entities/salary.entity";
 import { Trip } from "src/trip/entities/trip.entity";
+import { Reward } from "src/reward/entities/reward.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
@@ -77,6 +78,9 @@ export class User{
     @OneToMany(() => GroupUser, (groupuser) => groupuser.user)
     groupuser: GroupUser[];
 
+    @OneToMany(()=> Reward, (reward) => reward.user)
+    reward: Reward[];
+
     @ManyToOne(() => Position, (position) => position.user,{
         onDelete:'CASCADE'
     })
@@ -86,4 +90,6 @@ export class User{
         onDelete:'CASCADE'
     })
     employeetype: EmployeeType;
+
+    
 }

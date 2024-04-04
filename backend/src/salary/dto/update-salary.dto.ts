@@ -16,6 +16,8 @@ export class UpdateSalaryDto {
 
     SoGioNghi: number
 
+    SoGioMuon:number;
+
     ThucLanh:number
 
     PhuCap: number

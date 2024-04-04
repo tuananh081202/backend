@@ -23,26 +23,34 @@ const SalaryAdd = () => {
         const LuongGio = parseFloat(data.LuongGio);
         const PhuCap = parseFloat(data.PhuCap);
         const TamUng = parseFloat(data.TamUng);
-        
+        const SoGioMuon = parseFloat(data.SoGioMuon); 
+
         // Kiểm tra xem các giá trị đã được chuyển đổi sang kiểu số chưa
         if (isNaN(SoGioLam) || isNaN(LuongGio) || isNaN(PhuCap) || isNaN(TamUng)) {
             // Nếu có một trong các giá trị không phải là số, trả về 0
             return 0;
         }
-        
+
+        //Tính tiền phạt nếu đi làm muộn
+        let latePenalty = 0;
+        if (SoGioMuon > 0) {
+            const lateMinutes = SoGioMuon * 60; // Chuyển đổi số giờ muộn sang phút
+            latePenalty = lateMinutes * 3000; // Giả sử phạt 3000 đồng cho mỗi phút muộn
+        }
+
         const SoGioLamThucTe = SoGioLam - SoGioNghi
         // Thực hiện tính toán
-        const totalSalary = LuongGio * SoGioLamThucTe + PhuCap - TamUng;
-        
+        const totalSalary = LuongGio * SoGioLamThucTe + PhuCap - TamUng -latePenalty
+
         // Kiểm tra xem kết quả có phải là số không
         if (isNaN(totalSalary)) {
             return 0;
         }
-        
+
         // Trả về kết quả
         return totalSalary;
     }
-    
+
     const handleSubmitFormAdd = async (data) => {
         console.log('data form=>', data)
 
@@ -52,7 +60,7 @@ const SalaryAdd = () => {
 
         dispatch(actions.controlLoading(true))
         try {
-            
+
             const res = await requestApi('/api/salary/create', 'POST', data, 'json');
             console.log('res=>', res)
             dispatch(actions.controlLoading(false))
@@ -151,6 +159,11 @@ const SalaryAdd = () => {
                                                 <strong><label className='required'>Số giờ nghỉ : </label></strong>
                                                 <input  {...register('SoGioNghi', { required: 'Số giờ nghỉ là bắt buộc' })} type='text' className='form-control' placeholder='Nhập số giờ nghỉ' />
                                                 {errors.SoGioNghi && <p style={{ color: 'red' }}>{errors.SoGioNghi.message}</p>}
+                                            </div>
+                                            <div className='mb-3 mt-3'>
+                                                <strong><label className='required'>Số giờ muộn : </label></strong>
+                                                <input  {...register('SoGioMuon')} type='text' className='form-control' placeholder='Nhập số giờ đi muộn' />
+                                                {errors.SoGioMuon && <p style={{ color: 'red' }}>{errors.SoGioMuon.message}</p>}
                                             </div>
                                             <div className='mb-3 mt-3'>
                                                 <strong><label className='required'>Lương giờ:</label></strong>

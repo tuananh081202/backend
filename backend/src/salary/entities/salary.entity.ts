@@ -20,6 +20,9 @@ export class Salary {
     @Column()
     SoGioNghi:number;
 
+    @Column()
+    SoGioMuon:number;
+
     @Column({ type: 'decimal', precision: 10, scale: 2 })
     PhuCap: number;
 

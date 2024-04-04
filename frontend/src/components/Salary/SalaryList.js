@@ -42,10 +42,14 @@ const SalaryList = () => {
             name:'Số giờ làm (Giờ)',
             element: row => row.SoGioLam
         },
-        // {
-        //     name:'Số giờ nghỉ (Giờ)',
-        //     element: row => row.SoGioNghi
-        // },
+        {
+            name:'Số giờ nghỉ (Giờ)',
+            element: row => row.SoGioNghi
+        },
+        {
+            name: "Số giờ muộn (Giờ)",
+            element: row => row.SoGioMuon
+        },
         {
             name: "Lương giờ (VND)",
             element: row => <div> {parseFloat(row.LuongGio).toLocaleString('vi-VN')}</div>

@@ -5,15 +5,13 @@ import { Salary } from './entities/salary.entity';
 import { CreateSalaryDto } from './dto/create-salary.dto';
 import { FilterSalaryDto } from './dto/filter-salary.dto';
 import { UpdateSalaryDto } from './dto/update-salary.dto';
-import { Position } from 'src/position/entities/position.entity';
 
 @Injectable()
 export class SalaryService {
     constructor(
     @InjectRepository(Salary)
     private salaryRepository: Repository<Salary>,
-    @InjectRepository(Position)
-    private readonly positionRepository: Repository<Position>,
+   
      ) { }
 
     async create(CreateSalaryDto: CreateSalaryDto): Promise<Salary> {
@@ -52,6 +50,7 @@ export class SalaryService {
                 'salary.LuongGio',
                 'salary.SoGioLam',
                 'salary.SoGioNghi',
+                'salary.SoGioMuon',
                 'salary.ThucLanh',
                 'salary.PhuCap',
                 'salary.TamUng',
@@ -109,6 +108,7 @@ export class SalaryService {
                 LuongGio: true,
                 SoGioLam: true,
                 SoGioNghi: true,
+                SoGioMuon:true,
                 ThucLanh: true,
                 PhuCap: true,
                 TamUng:true,

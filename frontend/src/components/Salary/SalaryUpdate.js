@@ -179,6 +179,12 @@ const SalaryUpdate = () => {
                                             </div>
 
                                             <div className='mb-3 mt-3'>
+                                                <strong><label className='required'>Số giờ muộn : </label></strong>
+                                                <input  {...register('SoGioMuon')} type='text' className='form-control' placeholder='Nhập số giờ đi muộn' />
+                                                {errors.SoGioMuon && <p style={{ color: 'red' }}>{errors.SoGioMuon.message}</p>}
+                                            </div>
+
+                                            <div className='mb-3 mt-3'>
                                                 <strong><label className='required'>Số giờ nghỉ : </label></strong>
                                                 <input  {...register('SoGioNghi', { required: 'Số giờ nghỉ là bắt buộc' })} type='text' className='form-control' placeholder='Nhập số giờ nghỉ' />
                                                 {errors.SoGioNghi && <p style={{ color: 'red' }}>{errors.SoGioNghi.message}</p>}

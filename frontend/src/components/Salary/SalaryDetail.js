@@ -49,6 +49,10 @@ const SalaryDetail = () => {
             element: row => row.SoGioNghi
         },
         {
+            name:"Số giờ muộn",
+            element: row => row.SoGioMuon
+        },
+        {
             name: "Phụ cấp (VND)",
             element: row => <div> {parseFloat(row.PhuCap).toLocaleString('vi-VN')}</div>
         },
