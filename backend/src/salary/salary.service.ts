@@ -28,7 +28,7 @@ export class SalaryService {
         if (query.search) {
             const search = query.search
             result
-                .where('(salary.MaLuong LIKE :search OR salary.LuongThang LIKE :search )', { search: `%${search}` })
+                .where('(salary.MaLuong LIKE :search OR salary.ThucLanh LIKE :search )', { search: `%${search}` })
         }
         if (query.position) {
             const positionId = Number(query.position)
@@ -49,8 +49,9 @@ export class SalaryService {
             .select([
                 'salary.id',
                 'salary.MaLuong',
-                'salary.LuongThang',
-                'salary.NgayCong',
+                'salary.LuongGio',
+                'salary.SoGioLam',
+                'salary.SoGioNghi',
                 'salary.ThucLanh',
                 'salary.PhuCap',
                 'salary.TamUng',
@@ -105,8 +106,9 @@ export class SalaryService {
             select: {
                 id: true,
                 MaLuong: true,
-                LuongThang: true,
-                NgayCong: true,
+                LuongGio: true,
+                SoGioLam: true,
+                SoGioNghi: true,
                 ThucLanh: true,
                 PhuCap: true,
                 TamUng:true,
@@ -152,27 +154,6 @@ export class SalaryService {
 
     }
 
-    async getSalaryPerDay(id: number): Promise<number> {
-        try {
-          // Thực hiện truy vấn để lấy mức lương theo ngày từ bảng position
-          const position = await this.positionRepository.findOne({ where: { id} });
-    
-          // Kiểm tra xem mức lương theo ngày có tồn tại không
-          if (!position || !position.salary) {
-            throw new Error('Salary per day not found');
-          }
-    
-          // Trả về mức lương theo ngày
-          return position.salary;
-        } catch (error) {
-          console.error('Error fetching salary per day:', error);
-          throw new Error('Internal server error');
-        }
-      }
-
-    
-    
    
-    
      
 }

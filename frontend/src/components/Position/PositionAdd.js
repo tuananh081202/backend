@@ -45,7 +45,8 @@ const PositionAdd = () => {
         },
         {
             name: "Lương ngày (VND)",
-            element: row => row.salary
+            element: row =><div style={{color: 'red'}}>{parseFloat(row.salary).toLocaleString('vi-VN')}</div>
+
         },
         {
             name: "Mô tả",

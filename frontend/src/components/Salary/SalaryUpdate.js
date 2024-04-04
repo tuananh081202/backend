@@ -19,9 +19,39 @@ const SalaryUpdate = () => {
     const params = useParams()
     const [user, setUser] = useState([])
     const [position, setPosition] = useState([])
+
+    const calculateSalary = (data) => {
+        // Chuyển đổi các trường cần thiết sang kiểu số
+        const SoGioLam = parseFloat(data.SoGioLam);
+        const SoGioNghi = parseFloat(data.SoGioNghi)
+        const LuongGio = parseFloat(data.LuongGio);
+        const PhuCap = parseFloat(data.PhuCap);
+        const TamUng = parseFloat(data.TamUng);
+        
+        // Kiểm tra xem các giá trị đã được chuyển đổi sang kiểu số chưa
+        if (isNaN(SoGioLam) || isNaN(LuongGio) || isNaN(PhuCap) || isNaN(TamUng)) {
+            // Nếu có một trong các giá trị không phải là số, trả về 0
+            return 0;
+        }
+        const SoGioLamThucTe = SoGioLam - SoGioNghi
+
+        // Thực hiện tính toán
+        const totalSalary = LuongGio * SoGioLamThucTe + PhuCap - TamUng;
+        
+        // Kiểm tra xem kết quả có phải là số không
+        if (isNaN(totalSalary)) {
+            return 0;
+        }
+        
+        // Trả về kết quả
+        return totalSalary;
+    }
     const handleSubmitFormUpdate = async (data) => {
         console.log('data form=>', data)
         dispatch(actions.controlLoading(true))
+        const netSalary = calculateSalary(data)
+
+        data.ThucLanh = netSalary;
         try {
             
             const res = await requestApi(`/api/salary/${params.id}`, 'PUT', data, 'json')
@@ -42,7 +72,7 @@ const SalaryUpdate = () => {
 
                 const detailSalary = await requestApi(`/api/salary/${params.id}`, 'GET');
                 console.log("detailSalary=>", detailSalary)
-                const fields = ['MaLuong', 'LuongThang', 'NgayCong', 'NgayTinhLuong'];
+                const fields = ['MaLuong', 'LuongGio', 'SoGioLam','SoGioNghi','PhuCap','TamUng', 'NgayTinhLuong'];
                 fields.forEach(field => {
 
                     setValue(field, detailSalary.data[field])
@@ -137,9 +167,21 @@ const SalaryUpdate = () => {
                                             </div>
 
                                             <div className='mb-3 mt-3'>
-                                                <strong><label className='required'>Số ngày công:</label></strong>
-                                                <input  {...register('NgayCong', { required: 'Lương tháng là bắt buộc' })} type='text' className='form-control' placeholder='Nhập số ngày công' />
-                                                {errors.NgayCong && <p style={{ color: 'red' }}>{errors.NgayCong.message}</p>}
+                                                <strong><label className='required'>Lương giờ:</label></strong>
+                                                <input  {...register('LuongGio', { required: 'Lương giờ là bắt buộc' })} type='text' className='form-control' placeholder='Nhập lương giờ' />
+                                                {errors.LuongGio && <p style={{ color: 'red' }}>{errors.LuongGio.message}</p>}
+                                            </div>
+
+                                            <div className='mb-3 mt-3'>
+                                                <strong><label className='form-label'>Số giờ làm:</label></strong>
+                                                <input  {...register('SoGioLam')} type='text' className='form-control' placeholder='Nhập số giờ làm/tháng' />
+                                                {errors.SoGioLam && <p style={{ color: 'red' }}>{errors.SoGioLam.message}</p>}
+                                            </div>
+
+                                            <div className='mb-3 mt-3'>
+                                                <strong><label className='required'>Số giờ nghỉ : </label></strong>
+                                                <input  {...register('SoGioNghi', { required: 'Số giờ nghỉ là bắt buộc' })} type='text' className='form-control' placeholder='Nhập số giờ nghỉ' />
+                                                {errors.SoGioNghi && <p style={{ color: 'red' }}>{errors.SoGioNghi.message}</p>}
                                             </div>
 
                                             <div className='mb-3 mt-3'>
@@ -149,15 +191,15 @@ const SalaryUpdate = () => {
                                             </div>
 
                                             <div className='mb-3 mt-3'>
-                                                <strong><label className='form-label'>Lương Tháng:</label></strong>
-                                                <input  {...register('LuongThang')} type='text' className='form-control' placeholder='Nhập lương tháng' />
-                                                {errors.LuongThang && <p style={{ color: 'red' }}>{errors.LuongThang.message}</p>}
-                                            </div>
-
-                                            <div className='mb-3 mt-3'>
                                                 <strong><label className='form-label'>Tạm ứng:</label></strong>
                                                 <input  {...register('TamUng')} type='text' className='form-control' placeholder='Nhập tạm ứng' />
                                                 {errors.TamUng && <p style={{ color: 'red' }}>{errors.TamUng.message}</p>}
+                                            </div>
+
+                                            <div className='mb-3 mt-3'>
+                                                <strong><label className='form-label'>Thực lãnh:</label></strong>
+                                                <input  {...register('ThucLanh')} type='text' className='form-control' placeholder='Nhập thực lãnh' />
+                                                {errors.ThucLanh && <p style={{ color: 'red' }}>{errors.ThucLanh.message}</p>}
                                             </div>
 
                                             <div className='mb-3 mt-3'>
@@ -166,11 +208,7 @@ const SalaryUpdate = () => {
                                                 {errors.NgayTinhLuong && <p style={{ color: 'red' }}>{errors.NgayTinhLuong.message}</p>}
                                             </div>
 
-                                            <div className='mb-3 mt-3'>
-                                                <strong><label className='form-label'>Thực lãnh:</label></strong>
-                                                <input  {...register('ThucLanh')} type='text' className='form-control' placeholder='Nhập thực lãnh' />
-                                                {errors.ThucLanh && <p style={{ color: 'red' }}>{errors.ThucLanh.message}</p>}
-                                            </div>
+                                           
 
                                             <div className='mb-3 mt-3'>
                                                 <label className='form-label'>Mô tả:</label>

@@ -9,11 +9,12 @@ export class UpdateSalaryDto {
     user!:User
 
     position!:Position
-    
-    @IsNotEmpty()
-    NgayCong: number
 
-    LuongThang:number
+    LuongGio:number
+
+    SoGioLam:number
+
+    SoGioNghi: number
 
     ThucLanh:number
 

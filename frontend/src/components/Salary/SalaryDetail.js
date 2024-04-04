@@ -33,28 +33,32 @@ const SalaryDetail = () => {
             element: row => row.user.name
         },
         {
-            name: "Lương theo ngày",
-            element: row => row.position.salary
+            name:"Chức vụ",
+            element: row => row.position.namePosition
+        },  
+        {
+            name: "Lương giờ (VND)",
+            element: row => <div> {parseFloat(row.LuongGio).toLocaleString('vi-VN')}</div>
+        },
+        { 
+            name: "Số giờ làm",
+            element: row => row.SoGioLam
         },
         {
-            name: "Ngày công",
-            element: row => row.NgayCong
-        },
-        {
-            name: "Lương tháng (VND)",
-            element: row => row.LuongThang
+            name: "Số giờ nghỉ",
+            element: row => row.SoGioNghi
         },
         {
             name: "Phụ cấp (VND)",
-            element: row => row.PhuCap
+            element: row => <div> {parseFloat(row.PhuCap).toLocaleString('vi-VN')}</div>
         },
         {
             name: "Tạm ứng (VND)",
-            element: row => row.TamUng
+            element: row => <div> {parseFloat(row.TamUng).toLocaleString('vi-VN')}</div>
         },
         {
             name: "Thực lãnh (VND)",
-            element: row =><div style={{ color: 'blue' }}>{row.ThucLanh}</div>
+            element: row =><div style={{ color: 'blue' }}>{parseFloat(row.ThucLanh).toLocaleString('vi-VN')}</div>
         },
         {
             name: "Ngày chấm",

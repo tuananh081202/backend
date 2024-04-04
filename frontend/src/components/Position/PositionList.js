@@ -37,7 +37,7 @@ const PositionList = () => {
         },
         {
             name: "Lương ngày (VND)",
-            element: row => row.salary 
+            element: row =><div style={{color: 'orange'}}>{parseFloat(row.salary).toLocaleString('vi-VN')}</div>
         },
         {
             name: "Mô tả",

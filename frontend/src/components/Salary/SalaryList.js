@@ -39,21 +39,29 @@ const SalaryList = () => {
             element: row => row.position.namePosition
         },
         {
-            name: "Lương tháng (VND)",
-            element: row => row.LuongThang
+            name:'Số giờ làm (Giờ)',
+            element: row => row.SoGioLam
         },
+        // {
+        //     name:'Số giờ nghỉ (Giờ)',
+        //     element: row => row.SoGioNghi
+        // },
         {
-            name: "Ngày công",
-            element: row => row.NgayCong
+            name: "Lương giờ (VND)",
+            element: row => <div> {parseFloat(row.LuongGio).toLocaleString('vi-VN')}</div>
         },
         {
             name: "Thực lãnh (VND)",
-            element: row =><div style={{ color: 'blue' }}>{row.ThucLanh}</div>
+            element: row =><div style={{ color: 'blue' }}>{parseFloat(row.ThucLanh).toLocaleString('vi-VN')}</div>
         },
         {
             name: "Ngày chấm",
             element: row => formatDateTime(row.NgayTinhLuong)
         },
+        // {
+        //     name:"Người tạo",
+        //     element: row => row.NguoiTao
+        // },
         {
             name: "Xem",
             element: row => (
@@ -118,14 +126,14 @@ const SalaryList = () => {
     const getSalaryExport = (_event, done) => {
         let result = []
         if (SalaryList && SalaryList.length > 0) {
-            result.push(['id', 'MaLuong', 'LuongThang', 'NgayCong', 'ThucLanh', 'NgayCham']);
+            result.push(['id', 'MaLuong', 'LuongGio', 'SoGioLam', 'ThucLanh', 'NgayCham']);
             SalaryList.map(item => {
                 let arr = [];
 
                 arr[0] = item.id
                 arr[1] = item.MaLuong
-                arr[2] = item.LuongThang
-                arr[3] = item.NgayCong
+                arr[2] = item.LuongGio
+                arr[3] = item.SoGioLam
                 arr[4] = item.ThucLanh
                 arr[5] = item.NgayCham
 

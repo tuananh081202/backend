@@ -10,21 +10,24 @@ export class Salary {
 
     @Column()
     MaLuong: string
-
-    @Column()
-    LuongThang: number
-
-    @Column()
-    NgayCong: number
-
-    @Column()
-    ThucLanh: number
-
-    @Column()
-    PhuCap: number
     
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
+    LuongGio: number;
+
     @Column()
-    TamUng: number
+    SoGioLam: number;
+
+    @Column()
+    SoGioNghi:number;
+
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
+    PhuCap: number;
+
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
+    ThucLanh: number;
+
+    @Column({ type: 'decimal', precision: 10, scale: 2 })
+    TamUng: number;
 
     @Column()
     NgayTinhLuong: string
