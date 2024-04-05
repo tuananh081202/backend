@@ -11,5 +11,11 @@ export class UpdateRewardDto {
 
     SoTien: number
 
+    NgayKhenThuong: string
+
+    MoTa: string
+
+    NguoiTao: string
+
     user! :User
 }

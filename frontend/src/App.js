@@ -41,6 +41,8 @@ import GroupUserList from './components/GroupUser/GroupUserList';
 import GroupUserCreate from './components/GroupUser/GroupUserCreate';
 import GroupUserUpdate from './components/GroupUser/GroupUserUpdate';
 import GroupAdd from './components/GroupUser/GroupAdd';
+import RewardList from './components/Reward/RewardList';
+import RewardUpdate from './components/Reward/RewardUpdate';
 
 function App() {
   return (
@@ -88,6 +90,9 @@ function App() {
           <Route path='/api/groupuser/create' element = {<GroupUserCreate/>}/>
           <Route path='/api/groupuser/add' element = {<GroupAdd/>}/>
           <Route path='/api/groupuser/edit/:id' element = {<GroupUserUpdate/>}/>
+
+          <Route path='/api/reward' element = {<RewardList/>}/>
+          <Route path='/api/reward/edit/:id' element = {<RewardUpdate/>}/>
           
 
         </Route>

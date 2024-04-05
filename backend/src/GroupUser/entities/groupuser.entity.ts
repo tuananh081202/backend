@@ -1,4 +1,3 @@
-import { CONFIGURABLE_MODULE_ID } from "@nestjs/common/module-utils/constants";
 import { User } from "src/user/entities/user.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 

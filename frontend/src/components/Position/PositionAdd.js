@@ -76,7 +76,7 @@ const PositionAdd = () => {
     ]
 
     const handleDelete = (id) => {
-        console.log('Single delete witd id=>', id)
+        console.log('Single delete with id=>', id)
         setShowModal(true)
         setDeleteItem(id)
         setDeleteType('single')

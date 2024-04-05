@@ -5,7 +5,9 @@ import { Reward } from './entities/reward.entity';
 import { query } from 'express';
 import { FilterRewardDto } from './dto/filter-reward.dto';
 import { UpdateRewardDto } from './dto/update-reward.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Reward')
 @Controller('reward')
 export class RewardController {
     constructor(private readonly rewardService: RewardService){}

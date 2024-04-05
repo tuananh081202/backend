@@ -1,19 +1,22 @@
-import { User } from "src/user/entities/user.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { User } from "src/user/entities/user.entity";
 
 @Entity()
-export class Reward {
+export class Kyluat {
     @PrimaryGeneratedColumn()
-    id: number
+    id:number
 
     @Column()
-    MaKhenThuong:string
+    MaKyLuat:string
 
     @Column()
-    TenKhenThuong: string
+    TenKyLuat:string
 
     @Column()
-    NgayQuyetDinh: string
+    NgayQuyetDinh:string
+
+    @Column()
+    TenLoai: string
 
     @Column()
     HinhThuc: string
@@ -22,25 +25,27 @@ export class Reward {
     SoTien: number
 
     @Column()
-    NgayKhenThuong: string
+    NgayKyLuat: string
 
     @Column()
-    MoTa:string
+    MoTa: string
 
-    @Column()
-    NguoiTao:string
+    @Column({default:'Admin'})
+    NguoiTao: string
 
     @CreateDateColumn()
     created_at: Date
 
     @UpdateDateColumn()
-    updated_at: Date
+    updated_at:Date
 
     @DeleteDateColumn()
     deleted_at:Date
 
-    @ManyToOne(()=> User,(user) => user.reward,{
+    @ManyToOne(()=> User,(user) => user.kyluat,
+    {
         onDelete:'CASCADE'
     })
     user: User;
+
 }

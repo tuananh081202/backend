@@ -6,6 +6,7 @@ import { Salary } from "src/salary/entities/salary.entity";
 import { Trip } from "src/trip/entities/trip.entity";
 import { Reward } from "src/reward/entities/reward.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Kyluat } from "src/kyluat/entities/kyluat.entity";
 
 @Entity()
 export class User{
@@ -90,6 +91,9 @@ export class User{
         onDelete:'CASCADE'
     })
     employeetype: EmployeeType;
+
+    @OneToMany(()=> Kyluat, (kyluat) => kyluat.user)
+    kyluat: Kyluat[];
 
     
 }

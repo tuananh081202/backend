@@ -1,52 +1,62 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Reward } from './entities/reward.entity';
+import { Kyluat } from './entities/kyluat.entity';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
-import { CreateRewardDto } from './dto/create-reward.dto';
-import { UpdateRewardDto } from './dto/update-reward.dto';
-import { FilterRewardDto } from './dto/filter-reward.dto';
+import { CreateKyLuatDto } from './dto/create-kyluat.dto';
+import { UpdateKyLuatDto } from './dto/update-kyluat.dto';
+import { FilterKyLuatDto } from './dto/filter-kyluat.dto';
 
 @Injectable()
-export class RewardService {
-    constructor(@InjectRepository(Reward) private rewardRepository: Repository<Reward>) { }
+export class KyluatService {
+    constructor(@InjectRepository(Kyluat) private KyLuatRepository:Repository<Kyluat>){}
+    
 
-    async create(createRewardDto: CreateRewardDto): Promise<Reward> {
-        return await this.rewardRepository.save(createRewardDto)
+    async create (createKyLuatDto:CreateKyLuatDto):Promise<Kyluat>{
+        return await this.KyLuatRepository.save(createKyLuatDto)
     }
 
-    async findAll(query: FilterRewardDto): Promise<any> {
+    async update (id:number,updateKyLuatDto: UpdateKyLuatDto):Promise<UpdateResult>{
+        return await this.KyLuatRepository.update(id,updateKyLuatDto)
+    }   
+
+    async delete (id:number):Promise<DeleteResult>{
+        return await this.KyLuatRepository.softDelete(id)
+    }
+
+    async findAll(query: FilterKyLuatDto): Promise<any> {
         const items_per_page = Number(query.items_per_page) || 10;
         const page = Number(query.page) || 1;
         const skip = (page - 1) * items_per_page;
-        let result = await this.rewardRepository.createQueryBuilder('reward');
+        let result = await this.KyLuatRepository.createQueryBuilder('kyluat');
         if (query.search) {
             const search = query.search;
-            result.where('(reward.MaKhenThuong LIKE :search OR reward.TenKhenThuong LIKE :search )', { search: `%${search}%` });
+            result.where('(kyluat.MaKyLuat LIKE :search OR kyluat.TenKyLuat LIKE :search )', { search: `%${search}%` });
         }
 
         if (query.user) {
             const userId = Number(query.search);
-            result.where('reward.user= :userId', { userId })
+            result.where('kyluat.user= :userId', { userId })
         }
 
         result
 
-            .leftJoinAndSelect('reward.user', 'user')
+            .leftJoinAndSelect('kyluat.user', 'user')
             .orderBy('user.created_at', 'DESC')
             .skip(skip)
             .take(items_per_page)
             .select([
-                'reward.id',
-                'reward.MaKhenThuong',
-                'reward.TenKhenThuong',
-                'reward.NgayQuyetDinh',
-                'reward.HinhThuc',
-                'reward.SoTien',
-                'reward.NgayKhenThuong',
-                'reward.MoTa',
-                'reward.NguoiTao',
-                'reward.created_at',
-                'reward.updated_at',
+                'kyluat.id',
+                'kyluat.MaKyLuat',
+                'kyluat.TenKyLuat',
+                'kyluat.NgayQuyetDinh',
+                'kyluat.TenLoai',
+                'kyluat.HinhThuc',
+                'kyluat.SoTien',
+                'kyluat.NgayKyLuat',
+                'kyluat.MoTa',
+                'kyluat.NguoiTao',
+                'kyluat.created_at',
+                'kyluat.updated_at',
                 'user.id',
                 'user.maNV',
                 'user.image',
@@ -83,20 +93,21 @@ export class RewardService {
         };
     }
 
-    async findOne(id: number): Promise<Reward> {
-        return await this.rewardRepository.findOne({
+    async findOne(id: number): Promise<Kyluat> {
+        return await this.KyLuatRepository.findOne({
             where: { id },
             relations: {
                 user: true,
             },
             select: {
                 id: true,
-                MaKhenThuong: true,
-                TenKhenThuong: true,
+                MaKyLuat: true,
+                TenKyLuat: true,
                 NgayQuyetDinh: true,
+                TenLoai: true,
                 HinhThuc: true,
                 SoTien: true,
-                NgayKhenThuong: true,
+                NgayKyLuat: true,
                 MoTa:true,
                 NguoiTao:true,
                 created_at: true,
@@ -126,11 +137,4 @@ export class RewardService {
     }
 
 
-    async update(id: number, updateRewardDto: UpdateRewardDto): Promise<UpdateResult> {
-        return await this.rewardRepository.update(id, updateRewardDto)
-    }
-
-    async delete(id: number): Promise<DeleteResult> {
-        return await this.rewardRepository.softDelete(id)
-    }
 }
