@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpException, HttpStatus, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpException, HttpStatus, Patch, Post, SetMetadata, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { RegisterAccountDto } from './dto/register-account.dto';
@@ -13,6 +13,7 @@ export class AuthController {
     constructor(private authService: AuthService) { }
 
     @Post('register')
+    @SetMetadata('isPublic',true)   
     register(@Body() registerAccountDto: RegisterAccountDto): Promise<Account> {
         console.log('register api')
         console.log(registerAccountDto)
@@ -20,6 +21,7 @@ export class AuthController {
     }
 
     @Post('login')
+    @SetMetadata('isPublic',true)
     @UsePipes(ValidationPipe)
     login(@Body() loginAccountDto: LoginAccountDto): Promise<any> {
         console.log('login api');
@@ -28,12 +30,14 @@ export class AuthController {
     }
 
     @Post('refresh_token')
+    @SetMetadata('isPublic',true)
     refresh_token(@Body() { refresh_token }): Promise<any> {
         console.log('refresh token api')
         return this.authService.refreshToken(refresh_token);
     }
 
     @Post('forgot-password')
+    
     async forgotPassword(@Body() forgotPasswordDto: ForgotPasswordDto): Promise<any> {
         try {
             const { email } = forgotPasswordDto;

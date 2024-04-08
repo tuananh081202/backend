@@ -46,7 +46,6 @@ const RewardList = () => {
         {
             name:"Tên nhân viên",
             element: row => row.user.name
-
         },
         {
             name: "Ngày quyết định",

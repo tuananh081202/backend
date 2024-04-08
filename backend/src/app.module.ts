@@ -15,13 +15,21 @@ import { GroupuserModule } from './GroupUser/groupuser.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { RewardModule } from './reward/reward.module';
 import { KyluatModule } from './kyluat/kyluat.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './Auth/roles.guard';
+import { AuthGuard } from './Auth/auth.guard';
+import { Account } from './account/entities/account.entity';
+import { ConfigModule } from '@nestjs/config';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot(dataSourceOptions),
+  imports: [
+
+  TypeOrmModule.forRoot(dataSourceOptions),
     UserModule,
     AccountModule,
     AuthModule,
+    ConfigModule.forRoot(),
     PositionModule,
     EmployeetypeModule,
     DepartmentModule,
@@ -30,9 +38,19 @@ import { KyluatModule } from './kyluat/kyluat.module';
     GroupuserModule,
     MailerModule,
     RewardModule,
-    KyluatModule
+    KyluatModule,
+  TypeOrmModule.forFeature([Account]) 
   ],
-  controllers: [AppController,  ],
-  providers: [AppService   ],
+  controllers: [AppController],
+  providers: [AppService, 
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard
+    },
+    {
+      provide:APP_GUARD,
+      useClass: RolesGuard
+    }
+  ],
 })
 export class AppModule {}

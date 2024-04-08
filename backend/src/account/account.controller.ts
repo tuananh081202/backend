@@ -1,20 +1,24 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Query, Req, SetMetadata, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { CreateAccountDto } from './dto/create-account.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { storageConfig } from 'helpers/config';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { extname } from 'path';
-import { query } from 'express';
 import { Account } from './entities/account.entity';
 import { FilterAccountDto } from './dto/filter-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
+// import { AuthGuard } from 'src/Auth/auth.guard';
+import { Roles } from 'src/Auth/decorator/roles.decorator';
 
+@ApiBearerAuth()
 @ApiTags('Account')
 @Controller('account')
 export class AccountController {
     constructor (private accountService:AccountService){}
-
+    
+    // @UseGuards(AuthGuard)
+    @Roles('Admin')
     @Post('create')
     @UseInterceptors(FileInterceptor('avatar', {
         storage: storageConfig('account'),
@@ -45,17 +49,23 @@ export class AccountController {
         return this.accountService.create({ ...createAccountDto, avatar: file.destination + '/' + file.filename });
         
     }
-
+    @Roles('Admin')
+    // @UseGuards(AuthGuard)
+    // @SetMetadata('roles',['Admin'])
     @Get('')
     findAll(@Query() query:FilterAccountDto):Promise<Account>{
         return this.accountService.findAll(query)
     }
 
+    // @UseGuards(AuthGuard)
+    @Roles('Admin')
     @Get(':id')
     findOne(@Param('id') id:string):Promise<Account>{
         return this.accountService.findOne(Number(id))
     }
 
+    // @UseGuards(AuthGuard)
+    @Roles('Admin')
     @Put(':id')
     @UseInterceptors(FileInterceptor('avatar', {
         storage: storageConfig('account'),
@@ -86,7 +96,8 @@ export class AccountController {
         return this.accountService.update(Number(id), UpdateAccountDto)
     }
 
-    
+    // @UseGuards(AuthGuard)
+    @Roles('Admin')
     @Delete(':id')
     async deleteAccount(@Param('id') id: string) {
         return await this.accountService.deleteAccount(Number(id));

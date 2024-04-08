@@ -1,6 +1,6 @@
 import './App.css'
 import './css/styles.css'
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes,Router } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css"
 import Dashboard from "./components/Dashboard";
 import Register from "./components/Register";
@@ -43,8 +43,12 @@ import GroupUserUpdate from './components/GroupUser/GroupUserUpdate';
 import GroupAdd from './components/GroupUser/GroupAdd';
 import RewardList from './components/Reward/RewardList';
 import RewardUpdate from './components/Reward/RewardUpdate';
-
+import DanhSachKyLuat from './components/KyLuat/DanhSachKyLuat';
+import CapNhatKyLuat from './components/KyLuat/CapNhatKyLuat';
+import PageNotFound from './layouts/PageNotFound';
+import ProtectedRoute from './layouts/ProtectedRoute';
 function App() {
+  
   return (
     <Routes>
       <Route element={<Layout/>}>
@@ -93,8 +97,10 @@ function App() {
 
           <Route path='/api/reward' element = {<RewardList/>}/>
           <Route path='/api/reward/edit/:id' element = {<RewardUpdate/>}/>
+        
+          <Route path='/api/kyluat' element = {<DanhSachKyLuat/>}/>
+          <Route path='/api/kyluat/edit/:id' element ={<CapNhatKyLuat/>}/>
           
-
         </Route>
       </Route>
       <Route element={<PublicRoutes />}>
@@ -103,8 +109,10 @@ function App() {
         <Route path='/resetpassword' element={<PasswordReset/>}/>
       </Route>
       </Route>
+      <Route path='*' element={<PageNotFound/>}/>
     </Routes>
   );
 }
 
 export default App;
+

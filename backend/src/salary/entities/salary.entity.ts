@@ -36,7 +36,7 @@ export class Salary {
     NgayTinhLuong: string
 
     @Column()
-    description: string
+    MoTa: string
 
     @Column()
     NguoiTao: string

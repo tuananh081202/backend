@@ -133,7 +133,7 @@ const Sidebar = () => {
                         <div className="collapse" id="collapseStars" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav className="sb-sidenav-menu-nested nav">
                                 <Link to='/api/reward' className='nav-link'>Khen thưởng</Link>
-                                <Link to='' className='nav-link'>Kỷ luật</Link>
+                                <Link to='/api/kyluat' className='nav-link'>Kỷ luật</Link>
 
                             </nav>
                         </div>

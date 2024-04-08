@@ -26,7 +26,7 @@ export class UpdateSalaryDto {
 
     NgayTinhLuong: string
 
-    description:string
+    MoTa:string
 
     NguoiTao:string
 

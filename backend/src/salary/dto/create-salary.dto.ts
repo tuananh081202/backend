@@ -26,7 +26,7 @@ export class CreateSalaryDto {
 
     NgayTinhLuong: string
 
-    description:string
+    MoTa:string
 
     NguoiTao:string
 }

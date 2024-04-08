@@ -8,6 +8,7 @@ import { User } from './entities/user.entity';
 import { FilterUserDto } from './dto/filter-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/Auth/decorator/roles.decorator';
 
 @ApiTags('User')
 @Controller('user')
@@ -44,7 +45,8 @@ export class UserController {
         return this.userService.create({ ...createUserDto, image: file.destination + '/' + file.filename });
         
     }
-
+    
+    @Roles('Admin')
     @Get('')
     findAll(@Query() query:FilterUserDto):Promise<User>{
         return this.userService.findAll(query)
