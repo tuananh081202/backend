@@ -1,6 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import requestApi from '../helpers/Api'
+import * as actions from '../redux/actions'
+import { useDispatch } from 'react-redux';
+import { CSVLink } from 'react-csv';
+
 
 const Dashboard = () => {
+    const dispatch = useDispatch()
+    const [DashboardData, setDashboardData] = useState({});
+    const [salary,setSalary] = useState([])
+    useEffect(() => {
+        const promiseUser = requestApi('/api/user', 'GET')
+        const promisePosition = requestApi('/api/position', 'GET')
+        const promiseEmployeeType = requestApi('/api/employeetype', 'GET')
+        const promiseDepartment = requestApi('/api/department', 'GET')
+        const promiseTrip = requestApi('/api/trip', 'GET')
+        const promiseGroupUser = requestApi('/api/groupuser', 'GET')
+        dispatch(actions.controlLoading(true))
+        Promise.all([promiseUser, promisePosition, promiseEmployeeType, promiseDepartment, promiseTrip, promiseGroupUser]).then(res => {
+            console.log('res=>', res)
+            setDashboardData({
+                ...DashboardData, totalUser: res[0].data.total, totalPosition: res[1].data.total, totalEmployeeType: res[2].data.total, totalDepartment: res[3].data.total, totalTrip: res[4].data.total, totalGroupUser: res[5].data.total
+            })
+            dispatch(actions.controlLoading(false))
+
+        }).catch(error => {
+            console.log("error=>", error)
+            dispatch(actions.controlLoading(false))
+        })
+
+
+    }, [])
     return (
         <div id="layoutSidenav_content">
 
@@ -12,42 +43,102 @@ const Dashboard = () => {
                         <li className='breadcrumb-item'>Thống kê</li>
                     </ol>
                     <div className="row">
-                        <div className="col-xl-3 col-md-6">
-                            <div className="card bg-primary text-white mb-4">
-                                <div className="card-body">Primary Card</div>
-                                <div className="card-footer d-flex align-items-center justify-content-between">
-                                    <a className="small text-white stretched-link" >View Details</a>
-                                    <div className="small text-white"><i className="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-md-6">
-                            <div className="card bg-warning text-white mb-4">
-                                <div className="card-body">Warning Card</div>
-                                <div className="card-footer d-flex align-items-center justify-content-between">
-                                    <a className="small text-white stretched-link" href="#">View Details</a>
-                                    <div className="small text-white"><i className="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-xl-3 col-md-6">
+                        <div className="col-xl-3 col-md-6 custom-font">
                             <div className="card bg-success text-white mb-4">
-                                <div className="card-body">Success Card</div>
+                                <div className="card-body"><i className="fa-solid fa-user"></i> Tổng số nhân viên
+
+                                    {DashboardData.totalUser && (<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
+                                        {DashboardData.totalUser}
+                                    </span>)}</div>
                                 <div className="card-footer d-flex align-items-center justify-content-between">
-                                    <a className="small text-white stretched-link" href="#">View Details</a>
+                                    <Link to='/api/user' className="small text-white stretched-link" >Danh sách nhân viên</Link>
                                     <div className="small text-white"><i className="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-xl-3 col-md-6">
-                            <div className="card bg-danger text-white mb-4">
-                                <div className="card-body">Danger Card</div>
+                        <div className="col-xl-3 col-md-6 custom-font">
+                            <div className="card bg-warning text-white mb-4">
+                                <div className="card-body"><i className="fa-solid fa-user"></i> Tổng số chức vụ
+
+                                    {DashboardData.totalPosition && (<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
+                                        {DashboardData.totalPosition}
+                                    </span>)}</div>
+
                                 <div className="card-footer d-flex align-items-center justify-content-between">
-                                    <a className="small text-white stretched-link" href="#">View Details</a>
+                                    <Link to='/api/position' className="small text-white stretched-link" >Danh sách chức vụ</Link>
                                     <div className="small text-white"><i className="fas fa-angle-right"></i></div>
                                 </div>
                             </div>
                         </div>
+                        <div className="col-xl-3 col-md-6 custom-font">
+                            <div className="card bg-danger text-white mb-4 ">
+                                <div className="card-body"><i className="fa-solid fa-user-group"></i> Tổng số loại nhân viên
+                                    {DashboardData.totalEmployeeType && (<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
+                                        {DashboardData.totalEmployeeType}
+                                    </span>)}</div>
+
+                                <div className="card-footer d-flex align-items-center justify-content-between">
+                                    <Link to='/api/employeetype' className="small text-white stretched-link" >Danh sách loại nhân viên</Link>
+                                    <div className="small text-white"><i className="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-xl-3 col-md-6 custom-font">
+                            <div className="card bg-primary text-white mb-4 ">
+                                <div className="card-body"><i class="fas fa-columns"></i> Tổng số phòng ban
+                                    {DashboardData.totalDepartment && (<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
+                                        {DashboardData.totalDepartment}
+                                    </span>)}</div>
+
+                                <div className="card-footer d-flex align-items-center justify-content-between">
+                                    <Link to='/api/department' className="small text-white stretched-link" >Danh sách phòng ban</Link>
+                                    <div className="small text-white"><i className="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-xl-3 col-md-6 custom-font">
+                            <div className="card bg-dark text-white mb-4 ">
+                                <div className="card-body"><i class="fa-solid fa-folder"></i> Tổng số công tác
+                                    {DashboardData.totalTrip && (<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
+                                        {DashboardData.totalTrip}
+                                    </span>)}</div>
+
+                                <div className="card-footer d-flex align-items-center justify-content-between">
+                                    <Link to='/api/trip' className="small text-white stretched-link" >Danh sách công tác</Link>
+                                    <div className="small text-white"><i className="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-xl-3 col-md-6 custom-font">
+                            <div className="card bg-warning text-white mb-4 ">
+                                <div className="card-body"><i className="fa-solid fa-user-group"></i> Tổng số nhóm nhân viên
+                                    {DashboardData.totalGroupUser && (<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
+                                        {DashboardData.totalGroupUser}
+                                    </span>)}</div>
+
+                                <div className="card-footer d-flex align-items-center justify-content-between">
+                                    <Link to='/api/groupuser' className="small text-white stretched-link" >Danh sách nhóm nhân viên</Link>
+                                    <div className="small text-white"><i className="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-xl-3 col-md-6 custom-font">
+                            <div className="card bg-success text-white mb-4 ">
+                                <div className="card-body">
+                                    <i className="fas fa-file-excel"></i> Xuất Excel
+                                    <CSVLink data={salary} filename={"salary.csv"} className="text-white">
+                                        
+                                    </CSVLink>
+
+                                </div>
+
+                                <div className="card-footer d-flex align-items-center justify-content-between">
+                                    <Link to='/api/salary' className="small text-white stretched-link" >Danh sách lương</Link>
+                                    <div className="small text-white"><i className="fas fa-angle-right"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div className="row">
                         <div className="col-xl-6">
@@ -558,7 +649,7 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
-              
+
             </main>
             <footer className="py-4 bg-light mt-auto">
                 <div className="container-fluid px-4">

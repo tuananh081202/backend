@@ -1,16 +1,20 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, SetMetadata } from '@nestjs/common';
 import { EmployeetypeService } from './employeetype.service';
 import { FilterEmployeetypeDto } from './dto/filter-employeetype.dto';
 import { CreateEmployeeTypeDto } from './dto/create-employeetype.dto';
 import { EmployeeType } from './entities/employeetype.entity';
 import { UpdateEmployeeTypeDto } from './dto/update-employeetype.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/Auth/decorator/roles.decorator';
 
 @ApiTags('EmployeeType')
 @Controller('employeetype')
 export class EmployeetypeController {
 
     constructor(private readonly employeeTypeService: EmployeetypeService) { }
+    
+    // @Roles('Admin')
+    @SetMetadata('isPublic',true)
 
     @Get()
     async findAll(@Query() query: FilterEmployeetypeDto): Promise<any> {

@@ -9,6 +9,7 @@ import { RegisterAccountDto } from './dto/register-account.dto';
 import { LoginAccountDto } from './dto/login-account.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { MailerService } from '@nestjs-modules/mailer';
+import { AccountDetails } from './entities/types';
 
 
 
@@ -153,14 +154,32 @@ export class AuthService {
     }
 
     
-    async validateUser(email: string, password: string): Promise<Account | null> {
-        const account = await this.accountRepository.findOne({ where:{email} });
+    // async validateUser(email: string, password: string): Promise<Account | null> {
+    //     const account = await this.accountRepository.findOne({ where:{email} });
 
-        if (account && bcrypt.compareSync(password, account.password)) {
-            return account;
-        }
-        return null;
+    //     if (account && bcrypt.compareSync(password, account.password)) {
+    //         return account;
+    //     }
+    //     return null;
+    // }
+
+    async validateAccount(details: AccountDetails){
+        console.log('AuthService')
+        console.log(details)
+        const account = await this.accountRepository.findOneBy({email: details.email})
+        console.log(account)
+        if(account) return account
+        console.log('User not found.creating....')
+        const newAccount = this.accountRepository.create(details)
+        return this.accountRepository.save(newAccount)
     }
+
+    async findAccount(id: number) {
+        const account = await this.accountRepository.findOneBy({id})
+        return account
+    }
+
+
     
 
 

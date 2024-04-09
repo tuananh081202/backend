@@ -1,10 +1,11 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import * as actions from '../redux/actions'
 import requestApi from '../helpers/Api'
-
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode"
 const Login = () => {
     const dispatch = useDispatch();
     const [loginData, setLoginData] = useState({})
@@ -51,9 +52,9 @@ const Login = () => {
     const onSubmit = () => {
         console.log(loginData)
         let valid = validateForm();
-        if(valid){
+        if (valid) {
             console.log('request login api')
-      
+
             dispatch(actions.controlLoading(true))
             requestApi('/api/auth/login', 'POST', loginData).then((res) => {
                 console.log(res)
@@ -77,7 +78,7 @@ const Login = () => {
             })
         }
         setIsSummited(true);
-        
+
     }
     return (
         <div id="layoutAuthentication" className='bg-primary '>
@@ -110,12 +111,21 @@ const Login = () => {
                                                 <button className="btn btn-primary btn-block" type='button' onClick={onSubmit}>Login</button>
                                             </div>
                                             <div className="mt-4 mb-0">
-                                                <div className="d-grid"><a className="btn btn-google btn-user btn-block" href="https://www.google.com.vn/?hl=vi"><i className="fab fa-google fa-fw">
-                                                </i> Login with Google </a></div>
+                                                <div className="d-grid">
+                                                    <GoogleLogin
+                                                        onSuccess={(credentialResponse) => {
+                                                            const decoded = jwtDecode(credentialResponse?.credential);
+                                                            console.log(decoded);
+                                                        }}
+                                                        onError={() => {
+                                                            console.log('Login Failed');
+                                                        }}
+                                                    />
+                                                </div>
                                             </div>
                                             <div className="mt-2 mb-0">
                                                 <div className="d-grid"><a className="btn btn-facebook btn-user btn-block" href="index.html"><i className="fab fa-facebook-f fa-fw">
-                                                </i> Login with Facebook </a></div>
+                                                </i> Đăng nhập bằng Facebook </a></div>
                                             </div>
                                         </form>
                                     </div>

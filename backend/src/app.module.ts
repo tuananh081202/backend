@@ -20,6 +20,7 @@ import { RolesGuard } from './Auth/roles.guard';
 import { AuthGuard } from './Auth/auth.guard';
 import { Account } from './account/entities/account.entity';
 import { ConfigModule } from '@nestjs/config';
+import { PassportModule } from '@nestjs/passport';
 
 
 @Module({
@@ -39,7 +40,8 @@ import { ConfigModule } from '@nestjs/config';
     MailerModule,
     RewardModule,
     KyluatModule,
-  TypeOrmModule.forFeature([Account]) 
+  TypeOrmModule.forFeature([Account]) ,
+  PassportModule.register({session:true})
   ],
   controllers: [AppController],
   providers: [AppService, 

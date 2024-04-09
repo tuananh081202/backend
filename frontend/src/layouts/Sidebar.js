@@ -58,7 +58,7 @@ const Sidebar = () => {
 
                             </nav>
                         </div>
-                        <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseWorkTime" aria-expanded="false" aria-controls="collapseWorkTime">
+                        {/* <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseWorkTime" aria-expanded="false" aria-controls="collapseWorkTime">
                             <div className="sb-nav-link-icon"><i class="fa-solid fa-business-time"></i></div>
                             Thời gian làm việc
                             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
@@ -70,7 +70,7 @@ const Sidebar = () => {
                                 <Link to='' className='nav-link'>Thời gian nghỉ phép</Link>
 
                             </nav>
-                        </div>
+                        </div> */}
 
                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseCategory" aria-expanded="false" aria-controls="collapseCategory">
                             <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>

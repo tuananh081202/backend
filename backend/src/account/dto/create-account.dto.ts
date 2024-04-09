@@ -1,4 +1,4 @@
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty, IsString, MinLength } from "class-validator";
 import { User } from "src/user/entities/user.entity";
 
 export class CreateAccountDto {
@@ -6,8 +6,14 @@ export class CreateAccountDto {
  
     email: string;
 
+    @IsNotEmpty()
+    @IsString()
+    @MinLength(7)
     password: string;
 
+    @IsNotEmpty()
+    @IsString()
+    @MinLength(7)
     repeatPassword: string;
 
     phoneNumber: number;

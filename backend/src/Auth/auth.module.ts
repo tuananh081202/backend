@@ -8,6 +8,8 @@ import { AuthService } from './auth.service';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { join } from 'path';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { GoogleStrategy } from './utils/GoogleStrategy';
+import { SessionSerializer } from './utils/Serializer';
 
 
 @Module({
@@ -44,6 +46,14 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
           }),
     ],
     controllers:[AuthController],
-    providers:[AuthService]
+    providers:[AuthService,
+      GoogleStrategy,
+      SessionSerializer,
+      {
+        provide:'AUTH_SERVICE',
+        useClass: AuthService,
+      },
+    
+    ]
 })
 export class AuthModule {}

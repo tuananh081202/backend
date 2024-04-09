@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, HttpException, HttpStatus, Patch, Post, SetMetadata, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpException, HttpStatus, Patch, Post, Req, SetMetadata, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { RegisterAccountDto } from './dto/register-account.dto';
@@ -6,6 +6,8 @@ import { Account } from 'src/account/entities/account.entity';
 import { LoginAccountDto } from './dto/login-account.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
+import { GoogleAuthGuard } from './utils/Guards';
+import { Request } from 'express';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -35,9 +37,10 @@ export class AuthController {
         console.log('refresh token api')
         return this.authService.refreshToken(refresh_token);
     }
-
-    @Post('forgot-password')
     
+    @Post('forgot-password')
+    @SetMetadata('isPublic',true)
+
     async forgotPassword(@Body() forgotPasswordDto: ForgotPasswordDto): Promise<any> {
         try {
             const { email } = forgotPasswordDto;
@@ -51,6 +54,7 @@ export class AuthController {
     }
 
     @Post('reset-password')
+    @SetMetadata('isPublic',true)
     async resetPassword(@Body() resetPasswordDto: ResetPasswordDto): Promise<any> {
         try {
             const { resetToken, newPassword } = resetPasswordDto;
@@ -61,6 +65,30 @@ export class AuthController {
 
         } catch (error) {
             throw new HttpException(error.message || 'Failed to reset password', HttpStatus.BAD_REQUEST);
+        }
+    }
+    @SetMetadata('isPublic',true)
+    @Get('google/login')
+    @UseGuards(GoogleAuthGuard)
+    handleLogin(){
+        return {msg: 'google authentication'};
+    }
+
+    @Get('google/redirect')
+    @SetMetadata('isPublic',true)
+    @UseGuards(GoogleAuthGuard)
+    handleRedirect(){
+        return {msg: 'OK'}
+    }
+
+    @Get('status')
+    @SetMetadata('isPublic',true)
+    account(@Req() request: Request) {
+        console.log(request.user)
+        if(request.user){
+            return {msg: 'Authenticated'}
+        } else {
+            return {msg: 'Not Authenticated'}
         }
     }
 
