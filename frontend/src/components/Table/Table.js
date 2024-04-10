@@ -114,7 +114,7 @@ const Table = (props) => {
 
                     </div>
                 </div>
-                <table className='table table-striped table-bodered' cellPadding="0" width="100%" border="1">
+                <table className='table table-striped table-bordered table-hover' cellPadding="0" width="100%" border="1">
                     <thead>
                         <tr>
                         {renderHeaders()}  

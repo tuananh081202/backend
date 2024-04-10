@@ -254,7 +254,7 @@ const RewardList = () => {
                     </div>
 
                     <Table
-                        name="Danh sách chức vụ"
+                        name="Danh sách khen thưởng"
                         data={reward}
                         columns={columns}
                         numOfPage={numOfPage}

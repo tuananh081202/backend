@@ -30,7 +30,7 @@ async function bootstrap() {
   app.use(passport.session())
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-  app.enableCors();
+  app.enableCors(); 
   app.useStaticAssets(join(__dirname, '../../'));
   await app.listen(5000);
 

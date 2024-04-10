@@ -46,9 +46,8 @@ import RewardUpdate from './components/Reward/RewardUpdate';
 import DanhSachKyLuat from './components/KyLuat/DanhSachKyLuat';
 import CapNhatKyLuat from './components/KyLuat/CapNhatKyLuat';
 import PageNotFound from './layouts/PageNotFound';
-import ProtectedRoute from './layouts/ProtectedRoute';
-function App() {
-  
+// import ProtectedRoute from './layouts/ProtectedRoute';
+function App () {   
   return (
     <Routes>
       <Route element={<Layout/>}>
@@ -59,14 +58,19 @@ function App() {
           <Route path='/dashboard/accountlist' element={<DashboardAccountList/>}/>
 
           <Route path='/api/user' element={<UserList />} />
-          <Route path='/api/user/add' element={<UserAdd />} />
+          <Route path='/api/user/add' element={<UserAdd />} />  
           <Route path='/api/user/edit/:id' element={<UserUpdate />} />
           <Route path='/api/user/:id' element={<UserRead />} />
-          
+
           <Route path='/api/position' element ={<PositionAdd/>}/>
           <Route path='/api/position/list' element={<PositionList/>}/>
           <Route path='/api/position/edit/:id' element={<PositionUpdate/>}/>
-
+        
+          <Route path='/api/department' element = {<DepartmentAdd/>}/>
+          <Route path='/api/department/list' element = {<DepartmentList/>}/>
+          <Route path='/api/department/edit/:id' element={<DepartmentUpdate/>}/>
+          <Route path='/api/department/:id' element={<DepartmentDetail/>}/>
+          
           <Route path='/api/account' element={<AccountList/>}/>
           <Route path='/api/account/add' element={<AccountAdd/>}/>
           <Route path='/api/account/edit/:id' element={<AccountUpdate />} />
@@ -76,10 +80,7 @@ function App() {
           <Route path='/api/employeetype/add' element={<EmployeeTypeAdd/>}/>
           <Route path='/api/employeetype/edit/:id' element={<EmployeeTypeUpdate/>}/>
          
-          <Route path='/api/department' element = {<DepartmentAdd/>}/>
-          <Route path='/api/department/list' element = {<DepartmentList/>}/>
-          <Route path='/api/department/edit/:id' element={<DepartmentUpdate/>}/>
-          <Route path='/api/department/:id' element={<DepartmentDetail/>}/>
+          
           
           <Route path='/api/salary' element = {<SalaryList/>}/>
           <Route path='/api/salary/add' element = {<SalaryAdd/>}/>

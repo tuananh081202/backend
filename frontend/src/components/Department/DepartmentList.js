@@ -118,25 +118,26 @@ const DepartmentList = () => {
 
     }, [])
 
-    // const getDepartmentExport = (_event, done) => {
-    //     let result = []
-    //     if (DepartmentList && DepartmentList.length > 0) {
-    //         result.push(['id', 'maPB', 'tenPB', 'description', 'createdBy', 'created_at', 'updated_at']);
-    //         DepartmentList.map(item => {
-    //             let arr = [];
-    //             arr[0] = item.id
-    //             arr[1] = item.maPB
-    //             arr[2] = item.tenPB
-    //             arr[3] = item.description
-    //             arr[4] = item.createdBy
-    //             arr[5] = item.created_at
-    //             arr[6] = item.updated_at
-    //             result.push(arr)
-    //         })
-    //         setDataExport(result);
-    //         done();
-    //     }
-    // }
+    const getDepartmentExport = (_event, done) => {
+        let result = []
+        if (DepartmentList && DepartmentList.length > 0) {
+            result.push(['id', 'maPB', 'tenPB', 'description', 'createdBy', 'created_at', 'updated_at']);
+            DepartmentList.map(item => {
+                let arr = [];
+                arr[0] = item.id
+                arr[1] = item.maPB
+                arr[2] = item.tenPB
+                arr[3] = item.description
+                arr[4] = item.createdBy
+                arr[5] = item.created_at
+                arr[6] = item.updated_at
+                result.push(arr)
+            })
+            setDataExport(result);
+            done();
+        }
+    }
+
     return (
         <div id="layoutSidenav_content">
 
@@ -153,15 +154,15 @@ const DepartmentList = () => {
                         <div className='card-body'>
                             <div className='row mb-3'>
                                 <form>
-                                    <Link className='btn btn-lg btn-success me-2' to='/api/department/'><i className='fa fa-plus'></i>Thêm phòng ban</Link>
-                                    {/* <CSVLink
+                                    <Link className='btn btn-lg btn-primary me-2' to='/api/department/'><i className='fa fa-plus'></i> Thêm phòng ban </Link>
+                                    <CSVLink
                                         filename={"department.csv"}
-                                        className="btn btn-lg btn-primary me-2"
+                                        className="btn btn-lg btn-success me-2"
                                         data={department}
                                         target="_blank"
                                         asyncOnClick={true}
                                         onClick={(event, done) => getDepartmentExport(event, done)}
-                                    ><i className='fa-solid fa-file-arrow-down'></i> Xuất Excel </CSVLink> */}
+                                    ><i className='fa-solid fa-file-arrow-down'></i> Xuất Excel </CSVLink>
                                 </form>
 
                             </div>

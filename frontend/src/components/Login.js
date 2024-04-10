@@ -108,7 +108,7 @@ const Login = () => {
                                                 <label className="form-check-label" for="inputRememberPassword">Ghi nhớ mật khẩu </label>
                                             </div>
                                             <div className=" mt-4 mb-0">
-                                                <button className="btn btn-primary btn-block" type='button' onClick={onSubmit}>Login</button>
+                                                <button className="btn btn-primary btn-block btn-lg" type='button' onClick={onSubmit}>Login</button>
                                             </div>
                                             <div className="mt-4 mb-0">
                                                 <div className="d-grid">

@@ -268,7 +268,7 @@ const DanhSachKyLuat = () => {
                         </div>
                     </div>
                     <Table
-                        name="Danh sách chức vụ"
+                        name="Danh sách kỷ luật"
                         data={kyluat}
                         columns={columns}
                         numOfPage={numOfPage}
