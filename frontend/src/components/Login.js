@@ -6,6 +6,7 @@ import * as actions from '../redux/actions'
 import requestApi from '../helpers/Api'
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode"
+
 const Login = () => {
     const dispatch = useDispatch();
     const [loginData, setLoginData] = useState({})
@@ -81,7 +82,7 @@ const Login = () => {
 
     }
     return (
-        <div id="layoutAuthentication" className='bg-primary '>
+        <div id="layoutAuthentication" className='bg-primary animate-bg'>
             <div id="layoutAuthentication_content">
                 <main>
                     <div className="container">
@@ -108,7 +109,7 @@ const Login = () => {
                                                 <label className="form-check-label" for="inputRememberPassword">Ghi nhớ mật khẩu </label>
                                             </div>
                                             <div className=" mt-4 mb-0">
-                                                <button className="btn btn-primary btn-block btn-lg" type='button' onClick={onSubmit}>Login</button>
+                                                <button className="btn btn-primary btn-block btn-lg" type='button' onClick={onSubmit}>Đăng nhập</button>
                                             </div>
                                             <div className="mt-4 mb-0">
                                                 <div className="d-grid">
@@ -120,11 +121,15 @@ const Login = () => {
                                                         onError={() => {
                                                             console.log('Login Failed');
                                                         }}
+
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="mt-2 mb-0">
-                                                <div className="d-grid"><a className="btn btn-facebook btn-user btn-block" href="index.html"><i className="fab fa-facebook-f fa-fw">
+
+
+
+                                            <div className="mt-4 mb-0">
+                                                <div className="d-grid"><a className="btn btn-facebook btn-user btn-block btn-lg" href=""><i className="fab fa-facebook-f fa-fw">
                                                 </i> Đăng nhập bằng Facebook </a></div>
                                             </div>
                                         </form>
@@ -144,8 +149,9 @@ const Login = () => {
             <div id="layoutAuthentication_footer">
                 <footer className="py-4 bg-light mt-auto">
                     <div className="container-fluid px-4">
-                        <div className="d-flex align-items-center justify-content-between small">
-                            <div className="text-muted">Copyright &copy; Your Website 2024</div>
+                        <div className="d-flex align-items-center justify-content-between ">
+                            <div className="text-muted">Copyright &copy; Github: Đặng Tuấn Anh</div>
+                            <span><Link to='https://github.com/tuananh081202/backend.git'><i class="fa-brands fa-github"></i> Github </Link></span>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;

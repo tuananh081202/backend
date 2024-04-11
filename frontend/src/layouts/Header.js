@@ -15,9 +15,10 @@ const Header = () => {
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 
-                <Link to='/' className="navbar-brand ps-5" > Quản lý nhân sự </Link>
-
                 <button className="btn btn-link btn-sm order-6 order-lg-0 me-6 me-lg-3" id="sidebarToggle" ><i className="fa-solid fa-bars"></i></button>
+                <div className="navbar-brand ps-5 d-flex justify-content-center custom-font" > QUẢN LÝ NHÂN SỰ </div>
+
+                
 
                 <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                     <div className="input-group">

@@ -29,19 +29,19 @@ const Register = () => {
         const errors = {}
         
         if (registerData.email === '' || registerData.email === undefined) {
-            errors.email = "Please enter email"
+            errors.email = "Vui lòng nhập email"
         } else {
             let valid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(registerData.email);
             if (!valid) {
-                errors.email = 'Email is not valid'
+                errors.email = 'Email không hợp lệ'
             }
         }
         if (registerData.password === '' || registerData.password === undefined) {
-            errors.password = 'Password must be at least 8 characters'
+            errors.password = 'Mật khẩu phải có ít nhất 8 ký tự'
         }
         
         if (registerData.password !== registerData.repeatPassword) {
-            errors.repeatPassword = 'Password don\'t match'
+            errors.repeatPassword = 'Mật khẩu không đúng'
         }
 
         if (Object.keys(errors).length > 0) {
@@ -81,39 +81,39 @@ const Register = () => {
         setIsSummited(true)
     }
     return (
-        <div id="layoutAuthentication" className='bg-primary'>
+        <div id="layoutAuthentication" className='bg-primary animate-bg'>
             <div id="layoutAuthentication_content">
                 <main>
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-lg-7">
                                 <div className="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div className="card-header"><h3 className="text-center font-weight-light my-4">Create Account</h3></div>
+                                    <div className="card-header"><h3 className="text-center font-weight-light my-4">Tạo tài khoản</h3></div>
                                     <div className="card-body">
                                         <form>      
                                             <div className="form-floating mb-3">
-                                                <input className="form-control" type="text" name='fullName' onChange={onChange} placeholder="Enter your full name" />
-                                                <label>Full name</label>
+                                                <input className="form-control" type="text" name='fullName' onChange={onChange} placeholder="Nhập họ tên của bạn" />
+                                                <label>Họ tên</label>
                                                 {formErrors.fullName && <p style={{ color: 'red' }}>{formErrors.fullName}</p>}
                                             </div>
                                                 
                                             <div className="form-floating mb-3">
                                                 <input className="form-control" type="email" name='email' onChange={onChange} placeholder="name@example.com" />
-                                                <label>Email address</label>
+                                                <label>Địa chỉ email</label>
                                                 {formErrors.email && <p style={{ color: 'red' }}>{formErrors.email}</p>}
                                             </div>
                                             <div className="row mb-3">
                                                 <div className="col-md-6">
                                                     <div className="form-floating mb-3 mb-md-0">
-                                                        <input className="form-control" type="password" name='password' onChange={onChange} placeholder="Create a password" />
-                                                        <label>Password</label>
+                                                        <input className="form-control" type="password" name='password' onChange={onChange} placeholder="Tạo một mật khẩu" />
+                                                        <label>Mật khẩu</label>
                                                         {formErrors.password && <p style={{ color: 'red' }}>{formErrors.password}</p>}
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6">
                                                     <div className="form-floating mb-3 mb-md-0">
-                                                        <input className="form-control" type="password" name='repeatPassword' onChange={onChange} placeholder="Confirm password" />
-                                                        <label>Repeat Password</label>
+                                                        <input className="form-control" type="password" name='repeatPassword' onChange={onChange} placeholder="Xác nhận mật khẩu" />
+                                                        <label>Nhập lại mật khẩu</label>
                                                         {formErrors.repeatPassword && <p style={{ color: 'red' }}>{formErrors.repeatPassword}</p>}
                                                     </div>
                                                 </div>
@@ -121,37 +121,31 @@ const Register = () => {
                                             <div className="row mb-3">
                                                 <div className="col-md-6">
                                                     <div className="form-floating mb-3 mb-md-0">
-                                                        <input className="form-control" type="phoneNumber" name='phoneNumber' onChange={onChange} placeholder="Create a phoneNumber" />
-                                                        <label>Phone number</label>
+                                                        <input className="form-control" type="phoneNumber" name='phoneNumber' onChange={onChange} placeholder="Nhập số điện thoại" />
+                                                        <label>Số điện thoại</label>
                                                         {formErrors.phoneNumber && <p style={{ color: 'red' }}>{formErrors.phoneNumber}</p>}
                                                     </div>
                                                 </div>
                                                 <div className="col-md-6">
                                                     <div className="form-floating mb-3 mb-md-0">
-                                                        <input className="form-control" type="roles" name='roles' onChange={onChange} placeholder="Roles" />
-                                                        <label>Roles</label>
+                                                        <input className="form-control" type="roles" name='roles' onChange={onChange} placeholder="Nhập quyền hạn" />
+                                                        <label>Quyền</label>
                                                         {formErrors.roles && <p style={{ color: 'red' }}>{formErrors.roles}</p>}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className="mt-4 mb-0">
                                                 <div className="d-grid">
-                                                    <button className="btn btn-primary " type='button' onClick={onSummit}>Create Account</button>
+                                                    <button className="btn btn-primary " type='button' onClick={onSummit}>Tạo tài khoản</button>
                                                 </div>
                                             </div>
-                                            <div className="mt-4 mb-0">
-                                                <div className="d-grid"><a className="btn btn-google btn-user btn-block" href="https://www.google.com.vn/?hl=vi"><i className="fab fa-google fa-fw">
-                                                </i> Register with Google </a></div>
-                                            </div>
-                                            <div className="mt-2 mb-0">
-                                                <div className="d-grid"><a className="btn btn-facebook btn-user btn-block" href="https://www.facebook.com/"><i className="fab fa-facebook-f fa-fw">
-                                                </i> Register with Facebook </a></div>
-                                            </div>
+                                            
+                                            
 
                                         </form>
                                     </div>
                                     <div className="card-footer text-center py-3">
-                                        <div className="small"><Link to='/login'>Have an account? Go to login</Link></div>
+                                        <div className="small"><Link to='/login'>Đã có tài khoản? Đi đến đăng nhập</Link></div>
                                     </div>
                                 </div>
                             </div>

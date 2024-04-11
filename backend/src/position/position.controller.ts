@@ -8,11 +8,14 @@ import { UpdatePositionDto } from './dto/update-position.dto';
 import { extname } from 'path';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { storageConfig } from 'helpers/config';
+import { Roles } from 'src/Auth/decorator/roles.decorator';
 
 @ApiTags('Position')
 @Controller('position')
 export class PositionController {
     constructor(private readonly positionService: PositionService) { }
+
+    @Roles('Admin')
 
     @Get()
     async findAll(@Query() query: FilterPositionDto): Promise<any> {
@@ -20,15 +23,21 @@ export class PositionController {
     }
 
 
+    @Roles('Admin')
+
     @Post('create')
     async create(@Body() CreatePositionDto: CreatePositionDto): Promise<Position> {
         return await this.positionService.create(CreatePositionDto)
     }
 
+    @Roles('Admin')
+
     @Put(':id')
     async updateCategory(@Param('id') id: string, @Body() UpdatePositionDto: UpdatePositionDto) {
         return await this.positionService.updateCategory(Number(id), UpdatePositionDto);
     }
+
+    @Roles('Admin')
 
     @Get(':id')
 
@@ -37,11 +46,15 @@ export class PositionController {
 
     }
 
+    @Roles('Admin')
+
     @Delete(':id')
 
     async deletePosition(@Param('id') id: string) {
         return await this.positionService.delete(Number(id));
     }
+
+    @Roles('Admin')
 
     @Post('cke-upload')
     @UseInterceptors(FileInterceptor('upload',{

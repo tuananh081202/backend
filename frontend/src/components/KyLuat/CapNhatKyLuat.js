@@ -49,7 +49,7 @@ const CapNhatKyLuat = () => {
         try {
             const renderData = async () => {
 
-                const ChiTietKyLuat = await requestApi(`/api/position/${params.id}`, 'GET');
+                const ChiTietKyLuat = await requestApi(`/api/kyluat/${params.id}`, 'GET');
                 console.log("Chi tiết kỷ luật=>", ChiTietKyLuat)
                 const fields = ['MaKyLuat', 'TenKyLuat', 'NgayQuyetDinh', 'HinhThuc', 'SoTien', 'NguoiTao', 'NgayKyLuat'];
                 fields.forEach(field => {

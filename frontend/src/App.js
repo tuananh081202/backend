@@ -46,6 +46,8 @@ import RewardUpdate from './components/Reward/RewardUpdate';
 import DanhSachKyLuat from './components/KyLuat/DanhSachKyLuat';
 import CapNhatKyLuat from './components/KyLuat/CapNhatKyLuat';
 import PageNotFound from './layouts/PageNotFound';
+import DanhSachChamCong from './components/ChamCong/DanhSachChamCong';
+import CapNhatChamCong from './components/ChamCong/CapNhatChamCong';
 // import ProtectedRoute from './layouts/ProtectedRoute';
 function App () {   
   return (
@@ -86,6 +88,9 @@ function App () {
           <Route path='/api/salary/add' element = {<SalaryAdd/>}/>
           <Route path='/api/salary/edit/:id' element = {<SalaryUpdate/>}/>
           <Route path='/api/salary/detail' element = {<SalaryDetail/>}/>
+          <Route path='/api/chamcong' element={<DanhSachChamCong/>}/>
+          <Route path='/api/chamcong/edit/:id' element = {<CapNhatChamCong/>}/>
+
 
           <Route path='/api/trip' element = {<TripList/>}/>
           <Route path='/api/trip/add' element = {<TripAdd/>}/>

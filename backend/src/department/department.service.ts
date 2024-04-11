@@ -20,12 +20,10 @@ export class DepartmentService {
 
     async delete(id: number): Promise<DeleteResult> {
         return await this.DepartmentRepository.softDelete(id);
-
     }
 
     async update(id: number, UpdateDepartmentDto: UpdateDepartmentDto): Promise<UpdateResult> {
         return await this.DepartmentRepository.update(id, UpdateDepartmentDto);
-
     }
 
     async findAll(query: FilterDepartmentDto): Promise<any> {

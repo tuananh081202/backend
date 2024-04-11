@@ -13,15 +13,13 @@ export class EmployeetypeController {
 
     constructor(private readonly employeeTypeService: EmployeetypeService) { }
     
-    // @Roles('Admin')
-    @SetMetadata('isPublic',true)
-
+ 
     @Get()
     async findAll(@Query() query: FilterEmployeetypeDto): Promise<any> {
         return await this.employeeTypeService.findAll(query)
     }
 
-
+    
     @Post('create')
     async create(@Body() CreateEmployeeTypeDto: CreateEmployeeTypeDto): Promise<EmployeeType> {
         return await this.employeeTypeService.create(CreateEmployeeTypeDto)

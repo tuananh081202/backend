@@ -7,7 +7,7 @@ import { Trip } from "src/trip/entities/trip.entity";
 import { Reward } from "src/reward/entities/reward.entity";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Kyluat } from "src/kyluat/entities/kyluat.entity";
-
+import { Chamcong } from "src/chamcong/entities/chamcong.entity";
 @Entity()
 export class User{
     @PrimaryGeneratedColumn()
@@ -81,6 +81,9 @@ export class User{
 
     @OneToMany(()=> Reward, (reward) => reward.user)
     reward: Reward[];
+
+    @OneToMany(()=> Chamcong, (chamcong) => chamcong.user)
+    chamcong: Chamcong[];
 
     @ManyToOne(() => Position, (position) => position.user,{
         onDelete:'CASCADE'

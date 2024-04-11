@@ -219,8 +219,14 @@ strong {
   font-weight: bolder;
 }
 
-small, .small {
+small {
   font-size: 0.875em;
+  color: #212529;
+}
+
+.small {
+  font-size: 0.875em;
+  color: #fff;
 }
 
 mark, .mark {
@@ -7900,7 +7906,7 @@ textarea.form-control-lg {
 }
 
 .ps-5 {
-  padding-left: 3rem !important;
+  padding-left: 50rem !important;
 }
 
 .gap-0 {
@@ -11005,6 +11011,7 @@ body {
 }
 .sb-sidenav .sb-sidenav-menu .nav .nav-link .sb-nav-link-icon {
   font-size: 0.9rem;
+  color: #212529;
 }
 .sb-sidenav .sb-sidenav-menu .nav .nav-link .sb-sidenav-collapse-arrow {
   display: inline-block;
@@ -11024,20 +11031,20 @@ body {
 }
 
 .sb-sidenav-dark {
-  background-color: #212529;
-  color: rgba(255, 255, 255, 0.5);
+  background-color: #f8f9fa;
+  color: #fff;
 }
 .sb-sidenav-dark .sb-sidenav-menu .sb-sidenav-menu-heading {
-  color: rgba(255, 255, 255, 0.25);
+  color: #212529;
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link {
-  color: #fff;
+  color: #212529;
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-nav-link-icon {
   color: #fff;
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-sidenav-collapse-arrow {
-  color: rgba(255, 255, 255, 0.25);
+  color: #212529;
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link:hover {
   color: #fff;
@@ -11286,7 +11293,7 @@ image {
 }
 
 footer {
-  background-color: #cfcac8;
+  background-color: #e9ecef;
   color: #fff;
   padding: 20px 0;
 }
@@ -11329,6 +11336,24 @@ footer {
 
 .custom-font {
   font-family: Arial, sans-serif;
+}
+
+.animate-bg {
+  animation: backgroundAnimation 10s linear infinite alternate;
+  background: linear-gradient(to right, #87CEEB, #FFA07A);
+  background-size: 200% 200%;
+}
+
+@keyframes backgroundAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 

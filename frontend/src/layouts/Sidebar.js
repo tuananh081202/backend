@@ -27,7 +27,7 @@ const Sidebar = () => {
                         <div className="sb-sidenav-menu-heading">Dữ liệu</div>
 
                         <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDashboard" aria-expanded="false" aria-controls="collapseDashboard">
-                            <div className="sb-nav-link-icon"><i className="fa-solid fa-gauge"></i></div>
+                            <div className="sb-nav-link-icon "><i className="fa-solid fa-gauge"></i></div>
                             Tổng quan
                             <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
                         </a>
@@ -93,6 +93,7 @@ const Sidebar = () => {
                         </a>
                         <div className="collapse" id="collapseSalary" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav className="sb-sidenav-menu-nested nav">
+                                <Link to='/api/chamcong' className='nav-link'>Danh sách chấm công</Link>
                                 <Link to='/api/salary' className='nav-link'>Bảng lương</Link>
                                 <Link to='/api/salary/add' className='nav-link'>Tính lương</Link>
 
@@ -156,7 +157,7 @@ const Sidebar = () => {
                     </div>
                 </div>
                 <div className="sb-sidenav-footer">
-                    <div className="small">Logged in as:</div>
+                    <div className="small">Logged in as :</div>
                     QLNS
                 </div>
             </nav>

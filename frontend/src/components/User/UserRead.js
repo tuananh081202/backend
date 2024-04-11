@@ -5,7 +5,6 @@ import axios from "axios";
 const UserRead = () => {
     const { id } = useParams();
     const [user, setUser] = useState([]);
-
     useEffect(() => {
         // Gọi API để lấy thông tin nhân viên theo ID
         axios.get(`http://localhost:5000/api/user/${id}`)

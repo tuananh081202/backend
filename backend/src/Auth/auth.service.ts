@@ -100,7 +100,7 @@ export class AuthService {
 
         const resetToken = await this.generateResetToken(account);
         
-        const resetLink = `${this.configService.get('APP_URL')}/reset-password?token=${resetToken}`;
+        const resetLink = `${this.configService.get('APP_URL')}reset-password?token=${resetToken}`;
 
         // Gửi email xác nhận
         await this.sendPasswordResetEmail(email, resetLink, resetToken);

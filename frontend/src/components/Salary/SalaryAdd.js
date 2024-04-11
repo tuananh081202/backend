@@ -23,7 +23,7 @@ const SalaryAdd = () => {
         const LuongGio = parseFloat(data.LuongGio);
         const PhuCap = parseFloat(data.PhuCap);
         const TamUng = parseFloat(data.TamUng);
-        const SoGioMuon = parseFloat(data.SoGioMuon); 
+        const SoGioMuon = parseFloat(data.SoGioMuon);
 
         // Kiểm tra xem các giá trị đã được chuyển đổi sang kiểu số chưa
         if (isNaN(SoGioLam) || isNaN(LuongGio) || isNaN(PhuCap) || isNaN(TamUng)) {
@@ -40,7 +40,7 @@ const SalaryAdd = () => {
 
         const SoGioLamThucTe = SoGioLam - SoGioNghi
         // Thực hiện tính toán
-        const totalSalary = LuongGio * SoGioLamThucTe + PhuCap - TamUng -latePenalty
+        const totalSalary = LuongGio * SoGioLamThucTe + PhuCap - TamUng - latePenalty
 
         // Kiểm tra xem kết quả có phải là số không
         if (isNaN(totalSalary)) {
@@ -121,7 +121,7 @@ const SalaryAdd = () => {
                             <div className='row mb-3'>
                                 <form>
                                     <div className='row '>
-                                        <div className='col-md-12'>
+                                        <div className='col-md-6'>
                                             <div className='mb-3 mt-3'>
                                                 <label className=' form-label'><strong>Mã lương:</strong></label>
                                                 <input  {...register('MaLuong', { required: 'Mã lương là bắt buộc.' })} type='text' className='form-control' placeholder='Nhập mã lương' />
@@ -175,6 +175,9 @@ const SalaryAdd = () => {
                                                 <input  {...register('PhuCap')} type='text' className='form-control' placeholder='Nhập phụ cấp' />
                                                 {errors.PhuCap && <p style={{ color: 'red' }}>{errors.PhuCap.message}</p>}
                                             </div>
+                                        </div>
+                                        <div className='col-md-6'>
+                                            
 
 
                                             <div className='mb-3 mt-3'>
@@ -197,7 +200,7 @@ const SalaryAdd = () => {
 
 
                                             <div className='mb-3 mt-3'>
-                                                <label className='form-label'>Mô tả:</label>
+                                                <strong><label className='form-label'>Mô tả:</label></strong>
                                                 <CKEditor
                                                     editor={ClassicEditor}
                                                     onReady={editor => {

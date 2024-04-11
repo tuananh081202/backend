@@ -123,7 +123,7 @@ const AccountUpdate = () => {
                                             <input {...register('email', { required: 'Email là bắt buộc' })} type='email' className='form-control' placeholder='Nhập địa chỉ email' />
                                             {errors.email && <p style={{ color: 'red' }}>{errors.email.message}</p>}
                                         </div>
-                                        <div className='mb-3 mt-3'>
+                                        {/* <div className='mb-3 mt-3'>
                                             <strong><label className='required'>Mật khẩu:</label></strong>
                                             <input {...register('password', { required: 'Mật khẩu là bắt buộc' })} type='password' className='form-control' placeholder='Nhập mật khẩu' />
                                             {errors.password && <p style={{ color: 'red' }}>{errors.password.message}</p>}
@@ -132,7 +132,7 @@ const AccountUpdate = () => {
                                             <strong><label className='required'>Nhập lại mật khẩu:</label></strong>
                                             <input {...register('repeatPassword', { required: 'Nhập lại mật khẩu là bắt buộc' })} type='password' className='form-control' placeholder='Nhập lại mật khẩu' />
                                             {errors.repeatPassword && <p style={{ color: 'red' }}>{errors.repeatPassword.message}</p>}
-                                        </div>
+                                        </div> */}
                                         <div className='mb-3 mt-3'>
                                             <strong><label className='form-label'>Số điện thoại:</label></strong>
                                             <input {...register('phoneNumber')} type='text' className='form-control' placeholder='Nhập số điện thoại' />

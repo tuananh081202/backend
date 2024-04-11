@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller,Delete,Get, Param, Post, Put, Query, Req, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller,Delete,Get, Param, Post, Put, Query, Req, SetMetadata, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { UserService } from './user.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { extname } from 'path';
@@ -14,7 +14,6 @@ import { Roles } from 'src/Auth/decorator/roles.decorator';
 @Controller('user')
 export class UserController {
     constructor(private userService:UserService){}
-
     @Post('create')
     @UseInterceptors(FileInterceptor('image', {
         storage: storageConfig('user'),
@@ -46,11 +45,12 @@ export class UserController {
         
     }
     
-    @Roles('Admin')
     @Get('')
     findAll(@Query() query:FilterUserDto):Promise<User>{
         return this.userService.findAll(query)
     }
+    
+    @SetMetadata('isPublic',true)
 
     @Get(':id')
     findOne(@Param('id') id:string):Promise<User>{
