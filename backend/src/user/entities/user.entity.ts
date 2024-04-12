@@ -86,8 +86,9 @@ export class User{
     @OneToMany(()=> Chamcong, (chamcong) => chamcong.user)
     chamcong: Chamcong[];
 
-    @OneToMany(()=> UserTrackLogin, (usertracklogin) => usertracklogin.user)
+    @OneToMany(() => UserTrackLogin, (usertracklogin) => usertracklogin.user)
     usertracklogin: UserTrackLogin[];
+   
 
     @ManyToOne(() => Position, (position) => position.user,{
         onDelete:'CASCADE'
