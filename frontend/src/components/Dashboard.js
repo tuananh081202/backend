@@ -213,7 +213,7 @@ const Dashboard = () => {
                             </div>
                         </div>
                         <div className="col-xl-3 col-md-6 custom-font">
-                            <div className="card bg-dark text-white mb-4 ">
+                            <div className="card bg-primary text-white mb-4 ">
                                 <div className="card-body"><i class="fa-solid fa-folder"></i> Tổng số công tác
                                     {DashboardData.totalTrip && (<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" >
                                         {DashboardData.totalTrip}

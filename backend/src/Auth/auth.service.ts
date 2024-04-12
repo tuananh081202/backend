@@ -45,7 +45,7 @@ export class AuthService {
     //generate access token and refresh token
     const payload = {id:account.id,email:account.email};
     return this.generateToken(payload)
-}
+}   
 
     async refreshToken(refresh_token:string):Promise<any>{
         try {

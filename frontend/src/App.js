@@ -82,8 +82,6 @@ function App () {
           <Route path='/api/employeetype/add' element={<EmployeeTypeAdd/>}/>
           <Route path='/api/employeetype/edit/:id' element={<EmployeeTypeUpdate/>}/>
          
-          
-          
           <Route path='/api/salary' element = {<SalaryList/>}/>
           <Route path='/api/salary/add' element = {<SalaryAdd/>}/>
           <Route path='/api/salary/edit/:id' element = {<SalaryUpdate/>}/>

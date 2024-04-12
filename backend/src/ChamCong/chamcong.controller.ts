@@ -32,11 +32,13 @@ export class ChamcongController {
     }
 
     @Put(':id')
+    @SetMetadata('isPublic',true)
     async update(@Param('id') id:string,@Body() UpdateChamCongDto:UpdateChamCongDto){
         return await this.ChamcongService.update(Number(id),UpdateChamCongDto)
     }
 
     @Delete(':id')
+    @SetMetadata('isPublic',true)
     async deleteChamCong(@Param('id') id:string){
         return await  this.ChamcongService.delete(Number(id))
     }

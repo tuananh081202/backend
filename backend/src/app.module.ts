@@ -22,6 +22,7 @@ import { Account } from './account/entities/account.entity';
 import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { ChamcongModule } from './chamcong/chamcong.module';
+import { UsertrackloginModule } from './UserTrackLogin/usertracklogin.module';
 
 
 @Module({
@@ -43,9 +44,10 @@ import { ChamcongModule } from './chamcong/chamcong.module';
     KyluatModule,
   TypeOrmModule.forFeature([Account]) ,
   PassportModule.register({session:true}),
-  ChamcongModule
+  ChamcongModule,
+  UsertrackloginModule,
   ],
-  controllers: [AppController, ],
+  controllers: [AppController,  ],
   providers: [AppService, 
     {
       provide: APP_GUARD,
@@ -55,6 +57,7 @@ import { ChamcongModule } from './chamcong/chamcong.module';
       provide:APP_GUARD,
       useClass: RolesGuard
     },
+   
   ],
 })
 export class AppModule {}

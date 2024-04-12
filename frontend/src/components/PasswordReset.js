@@ -12,7 +12,7 @@ const PasswordReset = () => {
             const response = await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
             console.log('Token đã gửi đến email !!!', response.data);
             toast.success('Token đã gửi đến email !!!', { position: 'top-center', autoClose: 2000 });
-            setTimeout(() => navigate('/login'), 1500);
+            setTimeout(() => navigate('/login'), 1000);
         } catch (error) {
             console.error('error', error);
             toast.error('Đã xảy ra lỗi. Vui lòng thử lại sau.');

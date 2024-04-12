@@ -5,9 +5,10 @@ import { Position } from "src/position/entities/position.entity";
 import { Salary } from "src/salary/entities/salary.entity";
 import { Trip } from "src/trip/entities/trip.entity";
 import { Reward } from "src/reward/entities/reward.entity";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Kyluat } from "src/kyluat/entities/kyluat.entity";
 import { Chamcong } from "src/chamcong/entities/chamcong.entity";
+import { UserTrackLogin } from "src/UserTrackLogin/entities/usertracklogin.entity";
 @Entity()
 export class User{
     @PrimaryGeneratedColumn()
@@ -85,6 +86,9 @@ export class User{
     @OneToMany(()=> Chamcong, (chamcong) => chamcong.user)
     chamcong: Chamcong[];
 
+    @OneToMany(()=> UserTrackLogin, (usertracklogin) => usertracklogin.user)
+    usertracklogin: UserTrackLogin[];
+
     @ManyToOne(() => Position, (position) => position.user,{
         onDelete:'CASCADE'
     })
@@ -97,6 +101,8 @@ export class User{
 
     @OneToMany(()=> Kyluat, (kyluat) => kyluat.user)
     kyluat: Kyluat[];
+
+    
 
     
 }

@@ -56,7 +56,20 @@ const UserList = () => {
         },
         {
             name: "Tình trạng",
-            element: row => row.status
+            element: row => {
+                let content;
+                switch (row.status) {
+                    case 'Đang làm việc':
+                        content = <span className='in-progress' >{row.status}</span>;
+                        break;
+                    case 'Đã nghỉ việc':
+                        content = <span className='completed'>{row.status}</span>
+                        break;
+                    default:
+                        content = row.status
+                }
+                return content;
+            }
         },
         {
             name: "Hành động",
