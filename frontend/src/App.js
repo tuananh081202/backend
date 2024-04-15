@@ -48,8 +48,11 @@ import CapNhatKyLuat from './components/KyLuat/CapNhatKyLuat';
 import PageNotFound from './layouts/PageNotFound';
 import DanhSachChamCong from './components/ChamCong/DanhSachChamCong';
 import CapNhatChamCong from './components/ChamCong/CapNhatChamCong';
+import LoginHistoryComponent from './components/UserTrackLogin/LoginHistoryList';
 // import ProtectedRoute from './layouts/ProtectedRoute';
 function App () {   
+  
+
   return (
     <Routes>
       <Route element={<Layout/>}>
@@ -105,6 +108,8 @@ function App () {
           <Route path='/api/kyluat' element = {<DanhSachKyLuat/>}/>
           <Route path='/api/kyluat/edit/:id' element ={<CapNhatKyLuat/>}/>
           
+          <Route path='/api/usertracklogin/login-history' element ={<LoginHistoryComponent/>}/>
+           
         </Route>
       </Route>
       <Route element={<PublicRoutes />}>

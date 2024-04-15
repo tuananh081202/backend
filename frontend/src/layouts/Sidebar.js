@@ -154,6 +154,18 @@ const Sidebar = () => {
                                 <Link to='/login' className='nav-link' onClick={onHandleLogout}> Đăng xuất </Link>
                             </nav>
                         </div>
+
+                        <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#CollapseLoginHistory" aria-expanded="false" aria-controls="CollapseLoginHistory">
+                        
+                            <div className="sb-nav-link-icon"><i class="fa-solid fa-signal"></i></div>
+                            Lịch sử đăng nhập
+                            <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                        </a>
+                        <div className="collapse" id="CollapseLoginHistory" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav className="sb-sidenav-menu-nested nav">
+                                 <Link to='/api/usertracklogin/login-history' className='nav-link'> Lịch sử đăng nhập</Link>
+                            </nav>
+                        </div>
                     </div>
                 </div>
                 <div className="sb-sidenav-footer">

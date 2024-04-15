@@ -1,4 +1,4 @@
-import { User } from "src/user/entities/user.entity";
+import { Account } from "src/account/entities/account.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
@@ -15,11 +15,11 @@ export class UserTrackLogin {
     @CreateDateColumn()
     created_at: Date
 
-    @UpdateDateColumn()
-    updated_at: Date
+    // @UpdateDateColumn()
+    // updated_at: Date
 
-    @ManyToOne(() => User, (user) => user.usertracklogin, {
+    @ManyToOne(() => Account, (account) => account.usertracklogin, {
         onDelete: 'CASCADE'
     })
-    user: User;
+    account: Account;
 }

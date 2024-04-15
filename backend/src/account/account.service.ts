@@ -148,6 +148,10 @@ export class AccountService {
     }
     
 
+    async findById(id: number): Promise<Account> {
+        return this.accountRepository.findOneBy({id});
+      }
+
 
 
 }

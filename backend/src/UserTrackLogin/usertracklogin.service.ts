@@ -15,7 +15,39 @@ export class UsertrackloginService {
         return await this.userTrackLoginRepository.save(newLoginHistory);
     }
 
-    async getUserLoginHistory(userId: number): Promise<UserTrackLogin[]> {
-        return await this.userTrackLoginRepository.find({ where: { user: { id: userId } } });
+    async getUserLoginHistory(id: number): Promise<UserTrackLogin> {
+        return await this.userTrackLoginRepository.findOne({ 
+            where:{id} ,
+            relations: {
+                account: true
+            },
+            select: {
+                id:true,
+                ip_address:true,
+                type:true,
+                created_at:true,
+                account: {
+                    id: true,
+                    avatar: true,
+                    fullName: true,
+                    email: true,
+                    phoneNumber: true,
+                    roles: true,
+                    status: true,
+                    created_at: true,
+                    updated_at: true,
+
+                }
+            }
+        
+        });
+    }
+
+    async getAllUserLoginHistory(): Promise<UserTrackLogin[]> {
+        return await this.userTrackLoginRepository.find({ relations: ['account'] });
+        // return await this.userTrackLoginRepository
+        // .createQueryBuilder('userTrackLogin')
+        // .leftJoinAndSelect('userTrackLogin.account', 'account')
+        // .getMany();
     }
 }

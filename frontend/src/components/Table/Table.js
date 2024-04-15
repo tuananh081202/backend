@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import LiveSearch from './LiveSearch'
-
 //sd props để gửi dữ liệu đến component 
 const Table = (props) => {
     const { name, data, columns, currentPage, numOfPage, onPageChange, onChangeItemsPerPage, onKeySearch, onSelectedRows } = props
@@ -17,15 +16,31 @@ const Table = (props) => {
 
 
 
+    // const renderData = () => {
+    //     const sortedData = data.sort((a,b) => a.id - b.id);
+    //     return (
+    //     sortedData.map((item, index) => (
+    //         <tr key={index}>
+    //             {columns.map((col, ind) => <td key={ind}>{col.element(item)}</td>)}
+    //         </tr>
+    //     ))
+    //   )
+    // };
     const renderData = () => {
-        const sortedData = data.sort((a,b) => a.id - b.id);
-        return (
-        sortedData.map((item, index) => (
-            <tr key={index}>
-                {columns.map((col, ind) => <td key={ind}>{col.element(item)}</td>)}
-            </tr>
-        ))
-      )
+        if (data.length === 0) {
+            return (
+                <tr>
+                    <td colSpan={columns.length}>No available</td>
+                </tr>
+            );
+        } else {
+            const sortedData = data.sort((a, b) => a.id - b.id);
+            return sortedData.map((item, index) => (
+                <tr key={index}>
+                    {columns.map((col, ind) => <td key={ind}>{col.element(item)}</td>)}
+                </tr>
+            ));
+        }
     };
 
     // const onClickCheckbox = (event) => {

@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "src/user/entities/user.entity";
+import { UserTrackLogin } from "src/UserTrackLogin/entities/usertracklogin.entity";
 @Entity()
 export class Account{
     @PrimaryGeneratedColumn()
@@ -39,6 +40,9 @@ export class Account{
         onDelete:'CASCADE'
     })
     user: User;
+
+    @OneToMany(() => UserTrackLogin, (usertracklogin) => usertracklogin.account)
+    usertracklogin: UserTrackLogin[];
 
     @CreateDateColumn()
     created_at:Date

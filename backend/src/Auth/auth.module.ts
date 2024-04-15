@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -10,6 +10,9 @@ import { join } from 'path';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { GoogleStrategy } from './utils/GoogleStrategy';
 import { SessionSerializer } from './utils/Serializer';
+import { UserLoginMiddleware } from 'src/UserTrackLogin/middleware/userlogin.middleware';
+import { UsertrackloginService } from 'src/UserTrackLogin/usertracklogin.service';
+import { AccountService } from 'src/account/account.service';
 
 
 @Module({
@@ -49,11 +52,22 @@ import { SessionSerializer } from './utils/Serializer';
     providers:[AuthService,
       GoogleStrategy,
       SessionSerializer,
+      // UsertrackloginService, // Đăng ký UsertrackloginService
+      // AccountService, // Đăng ký AccountService
+      
       {
         provide:'AUTH_SERVICE',
         useClass: AuthService,
       },
-    
+      
     ]
 })
-export class AuthModule {}
+export class AuthModule  {
+  // configure(consumer: MiddlewareConsumer) {
+  //   // Thêm middleware vào pipeline xử lý đăng nhập
+  //   consumer
+  //     .apply(UserLoginMiddleware)
+  //     .forRoutes('api/auth/login'); // Thay 'auth/login' bằng đường dẫn của endpoint xử lý đăng nhập
+  // }
+}
+// implements NestModule
